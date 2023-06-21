@@ -1,0 +1,7 @@
+<App> 
+	/ 👉 <Main>
+	/login 👉 <Login>
+	/join 👉 <Join>
+	/post 👉 <Post>
+	/post/:id 👉 <PostDetail>
+	/mypage 👉 <Mypage>
