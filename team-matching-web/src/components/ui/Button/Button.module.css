@@ -1,0 +1,24 @@
+.btn {
+	padding: 0.4rem 1.2rem;
+	margin: 0.5rem;
+	border: 1px solid var(--maincolor);
+	border-radius: 0.3rem;
+	background-color: white;
+	color: var(--maincolor);
+	font-size: 1rem;
+	text-align: center;
+}
+
+.fill {
+	background-color: var(--maincolor);
+	color: white;
+}
+
+
+.fill:hover {
+	background-color: rgba(0, 108, 140, 1.2);
+}
+
+.outline:hover {
+	background-color: rgba(0, 129, 167, 0.2);
+}
