@@ -1,0 +1,38 @@
+.wrap {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	width: 100vw;
+	height: 90vh;
+}
+
+.icon {
+	width: 15rem;
+	height: 15rem;
+	color: var(--main-red-color);
+}
+
+.title {
+	margin: 0;
+}
+
+.text {
+	font-size: 1.2rem;
+	text-align: center;
+}
+
+.btn {
+	padding: 1rem 3rem;
+	margin: 2rem;
+	border: none;
+	background-color: var(--main-red-color);
+	color: white;
+	font-weight: bold;
+	font-size: 1.3rem;
+	cursor: pointer;
+}
+
+.btn:hover {
+	filter: brightness(120%);
+}
