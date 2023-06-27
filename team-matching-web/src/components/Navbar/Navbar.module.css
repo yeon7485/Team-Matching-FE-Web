@@ -1,0 +1,35 @@
+.header {
+	display: flex;
+	align-items: center;
+	height: 5rem;
+	padding: 0 7.5rem;
+}
+
+.logo {
+	color: var(--main-color);
+	font-size: 1rem;
+	text-decoration: none;
+	flex-shrink: 0;
+}
+
+.nav {
+	display: flex;
+	justify-content: space-between;
+	width: 15rem;
+	margin: 0 4rem;
+	flex-shrink: 0;
+}
+
+.item {
+	width: 3.6rem;
+	color: var(--gray800);
+	font-weight: 700;
+	font-size: 1rem;
+	text-decoration: none;
+	text-align: center;
+}
+
+.btn {
+	margin-left: auto;
+	flex-shrink: 0;
+}
