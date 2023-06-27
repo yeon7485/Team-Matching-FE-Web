@@ -8,6 +8,7 @@ body {
 }
 
 :root {
-  --maincolor: #0081A7;
+  --main-color: #0081A7;
+  --main-red-color: #F07167;
   --gray800: #424242;
 }
