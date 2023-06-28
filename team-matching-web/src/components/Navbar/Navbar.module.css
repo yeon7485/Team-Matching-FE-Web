@@ -1,13 +1,13 @@
 .header {
 	display: flex;
 	align-items: center;
-	height: 5rem;
+	height: 4.5rem;
 	padding: 0 7.5rem;
 }
 
 .logo {
 	color: var(--main-color);
-	font-size: 1rem;
+	font-size: 0.9rem;
 	text-decoration: none;
 	flex-shrink: 0;
 }
@@ -24,7 +24,7 @@
 	width: 3.6rem;
 	color: var(--gray800);
 	font-weight: 700;
-	font-size: 1rem;
+	font-size: 0.9rem;
 	text-decoration: none;
 	text-align: center;
 }
