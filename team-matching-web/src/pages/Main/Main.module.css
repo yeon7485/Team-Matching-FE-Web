@@ -1,26 +1,23 @@
-.image {
+.banner {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
 	height: 30rem;
 	background-size: 100% 100%;
 	background-image: url(/src/images/banner.png);
 	background-repeat: no-repeat;
 }
 
-.unit {
-	display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
-	height: 100%;
-}
-
 .title {
 	margin: 0;
-	font-size: 3.5rem;
+	font-size: 3rem;
 }
 
 .text {
 	text-align: center;
 	opacity: 80%;
+	font-size: 1rem;
 }
 
 .btn {
@@ -30,4 +27,11 @@
 	background: var(--main-color);
 	color: white;
 	font-size: 1rem;
+	text-decoration: none;
+}
+
+.main {
+	width: auto;
+	height: 100%;
+	margin-bottom: 11rem;
 }
