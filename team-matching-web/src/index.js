@@ -6,13 +6,17 @@ import Main from './pages/Main/Main';
 import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import NotFound from './pages/NotFound/NotFound';
+import Join from './pages/Join/Join';
 
 const router = createBrowserRouter([
   {
     part: '/',
     element: <App />,
     errorElement: <NotFound />,
-    children: [{ index: true, path: '/', element: <Main /> }],
+    children: [
+      { index: true, path: '/', element: <Main /> },
+      { path: 'join', element: <Join /> },
+    ],
   },
 ]);
 

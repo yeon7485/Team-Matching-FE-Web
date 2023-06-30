@@ -21,7 +21,9 @@ export default function Navbar() {
         </Link>
       </nav>
       <div className={styles.btn}>
-        <Button text='회원가입' fill={false} />
+        <Link to='/join' className={styles.join}>
+          회원가입
+        </Link>
         <Button text='로그인' fill />
       </div>
     </header>
