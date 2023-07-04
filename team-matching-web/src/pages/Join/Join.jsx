@@ -8,15 +8,18 @@ export default function Join() {
     const { name, value } = e.target;
     setUser((user) => ({ ...user, [name]: value }));
   };
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
 
   return (
     <div className={styles.root}>
       <section className={styles.container}>
         <p1 className={styles.title}>Team-Matching</p1>
         <p3 className={styles.already}>
-          이미 회원이신가요? <Link to='/Login'>로그인</Link>
+          이미 회원이신가요? <Link to='/login'>로그인</Link>
         </p3>
-        <form className={styles.form}>
+        <form className={styles.form} onSubmit={handleSubmit}>
           <label htmlFor='id'>아이디</label>
           <input
             className={styles.inputBox}
