@@ -4,7 +4,7 @@ import Navbar from './components/Navbar/Navbar';
 
 function App() {
   const location = useLocation();
-  if (location.pathname === '/join')
+  if (location.pathname === '/join' || location.pathname === '/login')
     return (
       <>
         <Outlet />
