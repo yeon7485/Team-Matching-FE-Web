@@ -13,7 +13,7 @@ export default function Navbar() {
         <Link to='/' className={styles.item}>
           홈
         </Link>
-        <Link to='/post' className={styles.item}>
+        <Link to='/board' className={styles.item}>
           게시판
         </Link>
         <Link to='/' className={styles.item}>

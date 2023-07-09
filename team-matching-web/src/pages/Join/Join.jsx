@@ -15,10 +15,10 @@ export default function Join() {
   return (
     <div className={styles.root}>
       <section className={styles.container}>
-        <p1 className={styles.title}>Team-Matching</p1>
-        <p3 className={styles.already}>
+        <h1 className={styles.title}>Team-Matching</h1>
+        <p className={styles.already}>
           이미 회원이신가요? <Link to='/login'>로그인</Link>
-        </p3>
+        </p>
         <form className={styles.form} onSubmit={handleSubmit}>
           <label htmlFor='id'>아이디</label>
           <input
