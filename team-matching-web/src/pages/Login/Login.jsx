@@ -11,7 +11,7 @@ export default function Login() {
   return (
     <div className={styles.root}>
       <section className={styles.container}>
-        <p1 className={styles.title}>Team-Matching</p1>
+        <h1 className={styles.title}>Team-Matching</h1>
         <form className={styles.form} onSubmit={handleSubmit}>
           <label htmlFor='id'>아이디</label>
           <input
@@ -42,9 +42,9 @@ export default function Login() {
 
           <button className={styles.loginButton}>로그인</button>
         </form>
-        <p3>
+        <p>
           아직 회원이 아니신가요? <Link to='/join'>회원가입</Link>
-        </p3>
+        </p>
       </section>
     </div>
   );

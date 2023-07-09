@@ -1,0 +1,85 @@
+.root{
+  height: 67.8vh;
+  padding: 1.5rem 3rem;
+}
+
+.title{
+  color: var(--main-color);
+}
+
+.searchBox{
+  display: flex;
+  justify-content: flex-end;
+}
+
+.inputSearch{
+  height: 23px;
+}
+
+.searchBtn{
+  width: 23px;
+  height: 23px;
+  text-align: center;
+  padding: 0.2rem;
+  background-color: var(--main-color);
+  cursor: pointer;
+  color: #fff;
+  
+}
+
+.searchBtn:hover{
+  background-color: rgba(0, 108, 140, 1.2);
+}
+
+.boardHeader{
+  display: flex;
+	align-items: center;
+  height: 2rem;
+  margin-top: 1rem;
+  background: #E9E9E9;
+  border-top: 1px solid;
+}
+
+.item{
+  text-align: center;
+  flex-basis: 50px;
+}
+
+.boardHeader div:nth-child(1){
+  flex-grow: 0.5;
+}
+.boardHeader div:nth-child(2){
+  flex-grow: 7;
+
+}
+.boardHeader div:nth-child(3){
+  flex-grow: 1;
+}
+.boardHeader div:nth-child(4){
+  flex-grow: 1;
+}
+.boardHeader div:nth-child(5){
+  flex-grow: 1;
+}
+
+.writeLink{
+  float: right;
+  padding: 0.3rem 0.8rem;
+  border-radius: 0.3rem;
+  background-color: var(--main-color);
+  color: white;
+  font-size: 0.8rem;
+  text-decoration: none;
+}
+.writeLink:hover{
+  background-color: rgba(0, 108, 140, 1.2);
+}
+
+.boardUl{
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+  margin-bottom: 2rem;
+}
