@@ -19,11 +19,11 @@
 .searchBtn{
   width: 23px;
   height: 23px;
-  text-align: center;
   padding: 0.2rem;
   background-color: var(--main-color);
-  cursor: pointer;
   color: #fff;
+  text-align: center;
+  cursor: pointer;
   
 }
 
@@ -77,8 +77,8 @@
 
 .boardUl{
   display: flex;
-  flex-direction: column;
   list-style: none;
+  flex-direction: column;
   padding-left: 0;
   margin: 0;
   margin-bottom: 2rem;

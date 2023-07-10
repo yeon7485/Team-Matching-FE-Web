@@ -1,6 +1,6 @@
 .postLi{
   display: flex;
-
+  
   align-items: center;
   height: 2rem;
   border-bottom: 1px solid lightgray;
@@ -12,13 +12,13 @@
 }
 
 .item {
-  flex-basis: 50px;
   font-size: 0.9rem;
+  flex-basis: 50px;
 }
 
 .postLi .item:nth-child(1){
-  flex-grow: 0.5;
   text-align: center;
+  flex-grow: 0.5;
 }
 .postLi .item:nth-child(2){
   flex-grow: 7;
@@ -26,14 +26,14 @@
 
 }
 .postLi .item:nth-child(3){
-  flex-grow: 1;
   text-align: center;
+  flex-grow: 1;
 }
 .postLi .item:nth-child(4){
-  flex-grow: 1;
   text-align: center;
+  flex-grow: 1;
 }
 .postLi .item:nth-child(5){
-  flex-grow: 1;
   text-align: center;
+  flex-grow: 1;
 }
