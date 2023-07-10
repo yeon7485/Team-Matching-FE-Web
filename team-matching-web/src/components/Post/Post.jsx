@@ -1,8 +1,15 @@
 import React from 'react';
 import styles from './Post.module.css';
-export default function Post({ post: { num, title, tag, name, date } }) {
+import { useNavigate } from 'react-router-dom';
+export default function Post({ post, post: { num, title, tag, name, date } }) {
+  const navigate = useNavigate();
   return (
-    <li className={styles.postLi}>
+    <li
+      className={styles.postLi}
+      onClick={() => {
+        navigate(`/board/${num}`, { state: { post } });
+      }}
+    >
       <div className={styles.item}>{num}</div>
       <div className={styles.item}>
         {title}
