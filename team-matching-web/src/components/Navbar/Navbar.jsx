@@ -16,7 +16,7 @@ export default function Navbar() {
         <Link to='/board' className={styles.item}>
           게시판
         </Link>
-        <Link to='/' className={styles.item}>
+        <Link to='/findteam' className={styles.item}>
           팀 찾기
         </Link>
       </nav>

@@ -7,8 +7,17 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+p {
+  margin: 0;
+}
+
 :root {
   --main-color: #0081A7;
   --main-red-color: #F07167;
+  --gray500: #9E9E9E;
   --gray800: #424242;
+  --category-dev: #0045CB;
+  --category-hobby: #008B27;
+  --category-sports: #E72D21;
+  --category-game: #DC37A4;
 }
