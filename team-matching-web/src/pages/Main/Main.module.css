@@ -31,7 +31,5 @@
 }
 
 .main {
-	width: auto;
-	height: 100%;
-	margin-bottom: 11rem;
+	padding: 10%;
 }
