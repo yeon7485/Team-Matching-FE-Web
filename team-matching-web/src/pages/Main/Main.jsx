@@ -20,6 +20,20 @@ export default function Main() {
       </section>
       <div className={styles.main}>
         <p>팀 둘러보기 </p>
+        <p>팀 둘러보기 </p>
+        <p>팀 둘러보기 </p>
+        <p>팀 둘러보기 </p>
+        <p>팀 둘러보기 </p>
+        <p>팀 둘러보기 </p>
+        <p>팀 둘러보기 </p>
+        <p>팀 둘러보기 </p>
+        <p>팀 둘러보기 </p>
+        <p>팀 둘러보기 </p>
+        <p>팀 둘러보기 </p>
+        <p>팀 둘러보기 </p>
+        <p>팀 둘러보기 </p>
+        <p>팀 둘러보기 </p>
+        <p>팀 둘러보기 </p>
       </div>
     </div>
   );
