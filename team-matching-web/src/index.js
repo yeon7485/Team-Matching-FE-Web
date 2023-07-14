@@ -12,6 +12,7 @@ import Board from './pages/Board/Board';
 import PostDetail from './pages/PostDetail/PostDetail';
 import FindTeam from './pages/FindTeam/FindTeam';
 import TeamDetail from './pages/TeamDetail/TeamDetail';
+import MyPage from './pages/MyPage/MyPage';
 
 const router = createBrowserRouter([
   {
@@ -26,6 +27,7 @@ const router = createBrowserRouter([
       { path: 'board/:num', element: <PostDetail /> },
       { path: 'findteam', element: <FindTeam /> },
       { path: 'findteam/:num', element: <TeamDetail /> },
+      { path: 'mypage', element: <MyPage /> },
     ],
   },
 ]);
