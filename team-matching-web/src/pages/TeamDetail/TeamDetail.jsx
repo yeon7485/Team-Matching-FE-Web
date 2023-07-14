@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import styles from './TeamDetail.module.css';
 import classNames from 'classnames/bind';
@@ -10,18 +10,21 @@ export default function TeamDetail() {
     },
   } = useLocation();
 
-  const [color, useColor] = useState();
+  const [color, setColor] = useState();
 
   const cn = classNames.bind(styles);
-  if (category === '개발') {
-    useColor('dev');
-  } else if (category === '취미') {
-    useColor('hobby');
-  } else if (category === '스포츠') {
-    useColor('sports');
-  } else if (category === '게임') {
-    useColor('game');
-  }
+
+  useEffect(() => {
+    if (category === '개발') {
+      setColor('dev');
+    } else if (category === '취미') {
+      setColor('hobby');
+    } else if (category === '스포츠') {
+      setColor('sports');
+    } else if (category === '게임') {
+      setColor('game');
+    }
+  }, [category]);
 
   return (
     <div className={styles.root}>
