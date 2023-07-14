@@ -27,6 +27,7 @@ export default function Navbar() {
         <Link to='/login' className={styles.login}>
           로그인
         </Link>
+        <Link to='/mypage'>임시mypage</Link>
       </div>
     </header>
   );
