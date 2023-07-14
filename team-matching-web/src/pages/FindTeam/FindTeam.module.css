@@ -1,0 +1,125 @@
+.root {
+	width: auto;
+	height: 100vh;
+	margin: 2.5rem 10rem 11rem;
+}
+
+.topBar {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.category {
+	flex-shrink: 0;
+}
+
+.categoryBtn {
+	padding: 0.4rem 0.8rem;
+	margin: 0 0.3rem;
+	border: solid 1px var(--gray500);
+	border-radius: 20px;
+	background-color: white;
+	color: var(--gray800);
+	font-size: 1.1rem;
+	cursor: pointer;
+}
+
+.rightBox {
+	display: flex;
+	align-items: center;
+	height: 2.4rem;
+}
+
+.selectBox {
+	display: flex;
+	justify-content: stretch;
+}
+
+.searchSelect {
+	width: 7rem;
+	padding: 0.5rem;
+	font-size: 1rem;
+}
+
+form {
+	display: flex;
+}
+
+.inputSearch {
+	width: 15rem;
+	padding: 0.5rem;
+}
+
+.searchBtn {
+	width: 1.6rem;
+	height: 1.6rem;
+	padding: 0.4rem;
+	background-color: var(--main-color);
+	color: white;
+	text-align: center;
+	cursor: pointer;
+
+}
+
+.createBtn {
+	padding: 0.5rem 1.5rem;
+	margin-left: 1.5rem;
+	background-color: var(--main-color);
+	color: white;
+	text-decoration: none;
+	text-align: center;
+	flex-shrink: 0;
+}
+
+.teamList {
+	display: grid;
+	align-items: center;
+	margin-top: 3.5rem;
+	grid-template-columns: 1fr;
+	grid-template-rows: 3fr;
+	gap: 1.5rem;
+
+}
+
+.black {
+	color: black;
+	font-weight: bold;
+	border-color: black;
+}
+
+.blue {
+	color: var(--category-dev);
+	font-weight: bold;
+	border-color: var(--category-dev);
+}
+
+.green {
+	color: var(--category-hobby);
+	font-weight: bold;
+	border-color: var(--category-hobby);
+}
+
+.red {
+	color: var(--category-sports);
+	font-weight: bold;
+	border-color: var(--category-sports);
+}
+
+.pink {
+	color: var(--category-game);
+	font-weight: bold;
+	border-color: var(--category-game);
+}
+
+@media screen and (min-width: 768px) {
+	.teamList {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media screen and (min-width: 1024px) {
+	.teamList {
+		grid-template-columns: repeat(3, 1fr);
+	}
+}

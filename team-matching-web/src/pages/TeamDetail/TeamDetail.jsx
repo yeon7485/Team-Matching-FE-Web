@@ -1,0 +1,52 @@
+import React, { useState } from 'react';
+import { useLocation, Link } from 'react-router-dom';
+import styles from './TeamDetail.module.css';
+import classNames from 'classnames/bind';
+
+export default function TeamDetail() {
+  const {
+    state: {
+      team: { id, category, time, date, title, nickname, tag, count, contents },
+    },
+  } = useLocation();
+
+  const [color, useColor] = useState();
+
+  const cn = classNames.bind(styles);
+  if (category === '개발') {
+    useColor('dev');
+  } else if (category === '취미') {
+    useColor('hobby');
+  } else if (category === '스포츠') {
+    useColor('sports');
+  } else if (category === '게임') {
+    useColor('game');
+  }
+
+  return (
+    <div className={styles.root}>
+      <div className={styles.top}>
+        <div className={styles.left}>
+          <p className={cn('category', color)}>{category}</p>
+          <p className={styles.title}>{title}</p>
+          <p className={cn('nickname')}>{nickname}</p>
+          <div className={styles.times}>
+            <p>2023.07.05 20:13 작성</p>
+            <p>•</p>
+            <p>2023.07.05 20:30 수정</p>
+          </div>
+        </div>
+        <div className={cn('right')}>
+          <p className={cn('date')}>{`마감일  ~${date}`}</p>
+          <p className={cn('count')}>{`${count} 명`}</p>
+          <Link to='#' className={styles.apply}>
+            신청하기
+          </Link>
+        </div>
+      </div>
+      <hr />
+      <p className={styles.contents}>{contents}</p>
+      <div className={cn('tag', color)}>{`#${tag}  #고양이  #태그태그`}</div>
+    </div>
+  );
+}
