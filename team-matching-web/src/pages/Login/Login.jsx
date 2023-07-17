@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styles from './Login.module.css';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 
 export default function Login() {
   const [id, setId] = useState();
@@ -8,6 +9,14 @@ export default function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
   };
+  axios
+    .post('/login', {
+      userId: 'sy',
+      userPassword: 'sy',
+    })
+    .then((result) => {
+      console.log(result);
+    });
   return (
     <div className={styles.root}>
       <section className={styles.container}>
