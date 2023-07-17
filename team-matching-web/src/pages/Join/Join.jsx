@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Join.module.css';
 import { Link } from 'react-router-dom';
-
+import { signUp } from '../../API/TeamMon';
+import axios from 'axios';
 export default function Join() {
   const [user, setUser] = useState({});
   const handleChange = (e) => {
@@ -10,6 +11,7 @@ export default function Join() {
   };
   const handleSubmit = (e) => {
     e.preventDefault();
+    signUp({ user });
   };
 
   return (
