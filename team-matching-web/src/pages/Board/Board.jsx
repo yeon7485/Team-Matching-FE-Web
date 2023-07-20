@@ -124,7 +124,7 @@ export default function Board() {
           {post && post.map((post) => <Post key={post.number} post={post} />)}
         </ul>
       </section>
-      <Link to='#' className={styles.writeLink}>
+      <Link to='new' className={styles.writeLink}>
         글쓰기
       </Link>
     </div>
