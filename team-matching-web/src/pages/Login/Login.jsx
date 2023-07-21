@@ -1,22 +1,26 @@
 import React, { useState } from 'react';
 import styles from './Login.module.css';
-import { Link } from 'react-router-dom';
-import axios from 'axios';
-
+import { Link, useNavigate } from 'react-router-dom';
+import { logIn } from '../../API/TeamMon';
+import { userState } from '../../Recoil/state';
+import { useSetRecoilState } from 'recoil';
 export default function Login() {
   const [id, setId] = useState();
   const [password, setPassword] = useState();
+  const setUser = useSetRecoilState(userState);
+  //recoil 사용 선언부
+
+  const nav = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
-  };
-  axios
-    .post('/login', {
-      userId: 'sy',
-      userPassword: 'sy',
-    })
-    .then((result) => {
-      console.log(result);
+    logIn(id, password).then((result) => {
+      if (result.status === 200) {
+        setUser({ userId: id, token: result.headers.authorization });
+        nav('/');
+      }
     });
+  };
+
   return (
     <div className={styles.root}>
       <section className={styles.container}>

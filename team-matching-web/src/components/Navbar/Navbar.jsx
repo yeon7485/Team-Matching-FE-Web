@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Navbar.module.css';
 
+import Button from '../ui/Button/Button';
+import { useRecoilValue } from 'recoil';
+import { userState } from '../../Recoil/state';
+
+
 export default function Navbar() {
+  const user = useRecoilValue(userState);
   return (
     <header className={styles.header}>
       <Link to='/' className={styles.logo}>
@@ -20,13 +26,17 @@ export default function Navbar() {
         </Link>
       </nav>
       <div className={styles.btn}>
-        <Link to='/join' className={styles.join}>
-          회원가입
-        </Link>
-        <Link to='/login' className={styles.login}>
-          로그인
-        </Link>
-        <Link to='/mypage'>임시mypage</Link>
+        {!user.userId && (
+          <Link to='/join' className={styles.join}>
+            회원가입
+          </Link>
+        )}
+        {!user.userId && (
+          <Link to='/login' className={styles.login}>
+            로그인
+          </Link>
+        )}
+        {user.userId && <Link to='/mypage'>{user.userId}님 환영합니다</Link>}
       </div>
     </header>
   );

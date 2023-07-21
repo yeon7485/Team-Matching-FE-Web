@@ -1,6 +1,6 @@
 import axios from 'axios';
-export function signUp({ user }) {
-  axios
+export async function signUp({ user }) {
+  return axios
     .post('sign-up', {
       userId: user.id,
       userPassword: user.password,
@@ -8,9 +8,27 @@ export function signUp({ user }) {
       nickname: user.nickname,
     })
     .then((result) => {
-      prompt('회원가입 성공!');
+      alert('회원가입 성공!!');
+      return result.status;
     })
     .catch((error) => {
-      prompt(error.response.data.resultMessage);
+      alert(error.response.data.resultMessage);
+      return error.response.status;
+    });
+}
+
+export async function logIn(id, password) {
+  return axios
+    .post('/login', {
+      userId: id,
+      userPassword: password,
+    })
+    .then((result) => {
+      alert('로그인 성공!!');
+      return result;
+    })
+    .catch((error) => {
+      alert(error.response.data);
+      return error.response;
     });
 }
