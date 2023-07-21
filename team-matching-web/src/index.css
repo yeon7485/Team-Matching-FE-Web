@@ -19,6 +19,14 @@ p {
   min-height: 100vh;
 }
 
+input {
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+textarea {
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
 :root {
   --main-color: #0081A7;
   --main-red-color: #F07167;
