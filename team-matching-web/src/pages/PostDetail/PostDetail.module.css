@@ -7,7 +7,6 @@
 }
 
 .titleHeader {
-
   position: relative;
 }
 
@@ -19,12 +18,13 @@
   border: 1px solid var(--main-color);
   background-color: white;
   color: var(--main-color);
+  font-weight: bold;
   font-size: 0.8rem;
   text-decoration: none;
 }
 
 .boardLink:hover {
-  background-color: rgba(0, 129, 167, 0.2);
+  background-color: rgba(115, 115, 222, 0.2);
 }
 
 .titleBox {
@@ -61,7 +61,7 @@
 }
 
 .tag {
-  color: rgb(24, 206, 234);
+  color: var(--main-color);
   font-size: 0.8rem;
 }
 
@@ -84,8 +84,7 @@
   align-items: center;
   height: 3rem;
   padding: 1rem;
-  background-color: rgba(0, 98, 126, 0.1);
-
+  background-color: rgba(115, 115, 222, 0.08);
 }
 
 .form {
@@ -103,8 +102,10 @@
   border: 1px solid var(--main-color);
   background-color: var(--main-color);
   color: white;
+  font-weight: bold;
+  flex-shrink: 0;
 }
 
 .submitBtn:hover {
-  background-color: rgba(0, 108, 140, 1.2);
+  background-color: var(--main-color-dark);
 }

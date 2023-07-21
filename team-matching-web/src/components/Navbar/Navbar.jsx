@@ -12,7 +12,7 @@ export default function Navbar() {
   return (
     <header className={styles.header}>
       <Link to='/' className={styles.logo}>
-        <h2>Team-Matching</h2>
+        <h2>Team-Mon</h2>
       </Link>
       <nav className={styles.nav}>
         <Link to='/' className={styles.item}>
