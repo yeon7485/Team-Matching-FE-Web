@@ -11,7 +11,6 @@
   align-items: center;
   width: 50%;
   min-width: 500px;
-  /* height: 100%; */
   padding: 3rem;
 }
 
@@ -37,7 +36,7 @@
   height: auto;
   padding: 2rem;
   border-radius: 15px;
-  background-color: rgba(0, 175, 185, 0.08);
+  background-color: rgba(115, 115, 222, 0.08);
 }
 
 label {
@@ -58,20 +57,20 @@ label {
   margin-top: 3rem;
   margin-right: auto;
   margin-bottom: 1rem;
-  font-size: 0.8rem;
   margin-left: 1rem;
+  font-size: 0.8rem;
 }
 
 .joinButton {
-  padding: 0.6rem 1.2rem;
   width: 93%;
+  padding: 0.6rem 1.2rem;
   border: 1px solid var(--main-color);
   border-radius: 0.5rem;
   background-color: var(--main-color);
   color: white;
+  font-weight: 550;
   font-size: 1.1rem;
   text-align: center;
-  font-weight: 550;
 }
 
 .joinButton:hover {
@@ -83,19 +82,19 @@ label {
 }
 
 .checkBox+label::before {
-  content: "";
   display: inline-block;
   width: 17px;
   height: 17px;
   border: 2px solid #0081A7;
-  opacity: 0.66;
   border-radius: 50%;
+  content: "";
+  opacity: 0.66;
   vertical-align: middle;
 }
 
 .checkBox:checked+label::before {
-  content: "";
   background-color: #0081A7;
+  content: "";
   border-color: #0081A7;
   background-repeat: no-repeat;
   background-position: 50%;

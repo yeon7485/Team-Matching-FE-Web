@@ -1,6 +1,9 @@
 .root {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 	width: 80%;
-	margin: 2.5% 8% 11%;
+	margin: 2.5rem 9% 11%;
 }
 
 .topBar {
@@ -10,6 +13,7 @@
 }
 
 .category {
+	margin-right: 1rem;
 	flex-shrink: 0;
 }
 
@@ -46,7 +50,8 @@ form {
 }
 
 .inputSearch {
-	width: 15rem;
+	width: 100%;
+	min-width: 5rem;
 	padding: 0.5rem;
 }
 
@@ -58,7 +63,7 @@ form {
 	color: white;
 	text-align: center;
 	cursor: pointer;
-
+	flex-shrink: 0;
 }
 
 .createBtn {
@@ -73,11 +78,9 @@ form {
 
 .teamList {
 	display: grid;
-	align-items: center;
-	margin-top: 3.5rem;
-	grid-template-columns: 1fr;
-	grid-template-rows: 3fr;
-	gap: 1.5rem;
+	margin: 3rem 0;
+	place-items: center;
+	gap: 1.5rem 1rem;
 
 }
 
@@ -111,14 +114,30 @@ form {
 	border-color: var(--category-game);
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (max-width: 749px) {
+	.topBar {
+		flex-direction: column;
+	}
+
+	.category {
+		margin-bottom: 1rem;
+	}
+}
+
+@media screen and (min-width: 750px) {
 	.teamList {
 		grid-template-columns: repeat(2, 1fr);
 	}
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 1200px) {
 	.teamList {
 		grid-template-columns: repeat(3, 1fr);
+	}
+}
+
+@media screen and (min-width: 1650px) {
+	.teamList {
+		grid-template-columns: repeat(4, 1fr);
 	}
 }
