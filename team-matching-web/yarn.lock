@@ -6775,6 +6775,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"hamt_plus@npm:1.0.2":
+  version: 1.0.2
+  resolution: "hamt_plus@npm:1.0.2"
+  checksum: af26ea32db03009019cc83dfa9411521a2fa16079443de1a502c9be46d8b3c975acda8ed93fc5750ef08d3186d35901e2d8cfe717dd54bea67b358601fa74e4c
+  languageName: node
+  linkType: hard
+
 "handle-thing@npm:^2.0.0":
   version: 2.0.1
   resolution: "handle-thing@npm:2.0.1"
@@ -10934,6 +10941,31 @@ __metadata:
   languageName: node
   linkType: hard
 
+"recoil-persist@npm:^5.1.0":
+  version: 5.1.0
+  resolution: "recoil-persist@npm:5.1.0"
+  peerDependencies:
+    recoil: ^0.7.2
+  checksum: 03ee8417b9bfcb1e5d61af373a304437190da394bf42b0979cf54ec4edeb27e7577f76ae4f9348d131865b87b19dc8dedc158e2bacd3976d4b936be1ab005d18
+  languageName: node
+  linkType: hard
+
+"recoil@npm:^0.7.7":
+  version: 0.7.7
+  resolution: "recoil@npm:0.7.7"
+  dependencies:
+    hamt_plus: 1.0.2
+  peerDependencies:
+    react: ">=16.13.1"
+  peerDependenciesMeta:
+    react-dom:
+      optional: true
+    react-native:
+      optional: true
+  checksum: 65edecbcb8d2cde89bfd61ec679c200483472a6cd343c33e4e9142b6ce524fb17d1fecc2bfd8c392926aaa8178c81457f165b32abce2a9662f51f98822c0a9cc
+  languageName: node
+  linkType: hard
+
 "recursive-readdir@npm:^2.2.2":
   version: 2.2.3
   resolution: "recursive-readdir@npm:2.2.3"
@@ -12160,6 +12192,8 @@ __metadata:
     react-icons: ^4.10.1
     react-router-dom: ^6.13.0
     react-scripts: 5.0.1
+    recoil: ^0.7.7
+    recoil-persist: ^5.1.0
     web-vitals: ^2.1.0
   languageName: unknown
   linkType: soft
