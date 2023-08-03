@@ -27,20 +27,8 @@ export default function NewPost() {
     }
   };
 
-  const addPostClick = (e) => {
+  const handleSubmit = (e) => {
     console.log(e.target.text);
-    if (post.title.trim() === '') {
-      alert('제목을 입력해주세요.');
-      return;
-    }
-    if (post.contents.trim() === '') {
-      alert('내용을 입력해주세요.');
-      return;
-    }
-    if (post.tag.trim() === '') {
-      alert('태그를 입력해주세요.');
-      return;
-    }
     if (post.title.length > 40) {
       alert('제목은 30글자를 넘을 수 없습니다.');
       return;
@@ -61,7 +49,7 @@ export default function NewPost() {
         <button className={styles.list}>목록</button>
       </div>
       <hr />
-      <div className={styles.write}>
+      <form className={styles.write} onSubmit={handleSubmit}>
         <p className={styles.subTitle}>제목</p>
         <input
           type='text'
@@ -100,9 +88,9 @@ export default function NewPost() {
         <div className={styles.btnArea}>
           <RoundBtn text={'취소'} fill={false} onClick={cancelClick} />
           <div className={styles.space} />
-          <RoundBtn text={'등록'} fill={true} onClick={addPostClick} />
+          <RoundBtn text={'등록'} fill={true} />
         </div>
-      </div>
+      </form>
     </div>
   );
 }

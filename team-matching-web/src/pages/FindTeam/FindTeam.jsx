@@ -179,7 +179,7 @@ export default function FindTeam() {
             </form>
             <BiSearch className={styles.searchBtn} />
           </div>
-          <Link to='/#' className={styles.createBtn}>
+          <Link to='/newteam' className={styles.createBtn}>
             팀 만들기
           </Link>
         </div>
