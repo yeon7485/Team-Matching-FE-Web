@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export async function signUp({ user }) {
   return axios
-    .post('sign-up', {
+    .post('auth/sign-up', {
       userId: user.id,
       userPassword: user.password,
       email: user.email,
@@ -14,13 +14,14 @@ export async function signUp({ user }) {
     })
     .catch((error) => {
       alert(error.response.data.resultMessage);
+      console.log(error.response);
       return error.response.status;
     });
 }
 
 export async function logIn(id, password) {
   return axios
-    .post('/login', {
+    .post('auth/login', {
       userId: id,
       userPassword: password,
     })
@@ -29,6 +30,7 @@ export async function logIn(id, password) {
       return result;
     })
     .catch((error) => {
+      alert(error.response.data.resultMessage);
       console.log(error);
       alert(error.response.data);
       return error.response;
@@ -58,5 +60,33 @@ export async function createTeam({ team, token }) {
     .catch((error) => {
       alert(error.response.data);
       return error.response;
+    });
+}
+
+export async function myPageInfo(userId, token) {
+  return axios
+    .get(`/my-page/${userId}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    .then((result) => {
+      return result.data.resultData;
+    });
+}
+
+export function upDateMyPageInfo(userId, token, nickname, email, memo) {
+  axios
+    .patch(
+      `/my-page/${userId}`,
+      {
+        email: email,
+        nickname: nickname,
+        memo: memo,
+      },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    )
+    .then((result) => {
+      console.log(result);
     });
 }

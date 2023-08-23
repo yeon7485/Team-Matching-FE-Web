@@ -1,15 +1,15 @@
+import { useRecoilValue, useResetRecoilState } from 'recoil';
+import { userState } from '../../Recoil/state';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Navbar.module.css';
-import { useRecoilValue } from 'recoil';
-import { userState } from '../../Recoil/state';
 import SubMenu from '../SubMenu/SubMenu';
 import classNames from 'classnames/bind';
 
 export default function Navbar() {
   const user = useRecoilValue(userState);
   const [isHover, setIsHover] = useState(false);
-
+  const reset = useResetRecoilState(userState);
   const handleIsHover = () => {
     setIsHover(true);
   };
