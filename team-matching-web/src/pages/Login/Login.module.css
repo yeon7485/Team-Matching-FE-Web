@@ -1,15 +1,16 @@
-.root{
+.root {
   display: flex;
-	flex-direction: column;
-	justify-content: center;
-	align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   width: 100vw;
   height: 81.05vh;
 }
+
 .container {
   display: flex;
-	flex-direction: column;
-	align-items: center;
+  flex-direction: column;
+  align-items: center;
   width: 50%;
   min-width: 500px;
   height: 100%;
@@ -20,30 +21,30 @@
   margin-bottom: 2rem;
   color: var(--main-color);
   font-weight: bold;
-	font-size: 2.5rem;
-	text-decoration: none;
-	flex-shrink: 0;
+  font-size: 2.5rem;
+  text-decoration: none;
+  flex-shrink: 0;
 }
 
-.form{
+.form {
   display: flex;
-	flex-direction: column;
-	align-items: center;
+  flex-direction: column;
+  align-items: center;
   width: 70%;
   max-width: 500px;
   height: auto;
   padding: 2rem;
   margin-bottom: 1rem;
   border-radius: 15px;
-  background-color: rgba( 0, 175, 185, 0.08 );
+  background-color: rgba(115, 115, 222, 0.08);
 }
 
-label{
+label {
   margin-right: auto;
   margin-bottom: 1rem;
 }
 
-.inputBox{
+.inputBox {
   width: 93%;
   padding: 1rem;
   margin-bottom: 1rem;
@@ -52,19 +53,19 @@ label{
   outline: none;
 }
 
-.loginButton{
+.loginButton {
   width: 93%;
   padding: 0.6rem 1.2rem;
   margin-top: 3rem;
-	border: 1px solid var(--main-color);
-	border-radius: 0.5rem;
-	background-color: var(--main-color);
-	color: white;
+  border: 1px solid var(--main-color);
+  border-radius: 0.5rem;
+  background-color: var(--main-color);
+  color: white;
   font-weight: 550;
-	font-size: 1.1rem;
-	text-align: center;
+  font-size: 1.1rem;
+  text-align: center;
 }
 
-.loginButton:hover{
-  background-color: rgba(0, 108, 140, 1.2);
+.loginButton:hover {
+  background-color: var(--main-color-dark);
 }
