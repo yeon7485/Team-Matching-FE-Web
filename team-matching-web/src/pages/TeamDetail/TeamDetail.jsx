@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useLocation, Link } from 'react-router-dom';
 import styles from './TeamDetail.module.css';
 import classNames from 'classnames/bind';
+import ApplyModal from '../../components/ApplyModal/ApplyModal';
 
 export default function TeamDetail() {
   const {
@@ -11,7 +12,7 @@ export default function TeamDetail() {
   } = useLocation();
 
   const [color, setColor] = useState();
-
+  const [applyModalOpen, setApplyModalOpen] = useState(false);
   const cn = classNames.bind(styles);
 
   useEffect(() => {
@@ -25,6 +26,10 @@ export default function TeamDetail() {
       setColor('game');
     }
   }, [category]);
+
+  const showApplyModal = () => {
+    setApplyModalOpen(true);
+  };
 
   return (
     <div className={styles.root}>
@@ -42,9 +47,10 @@ export default function TeamDetail() {
         <div className={cn('right')}>
           <p className={cn('date')}>{`마감일  ~${date}`}</p>
           <p className={cn('count')}>{`${count} 명`}</p>
-          <Link to='#' className={styles.apply}>
+          <button className={styles.apply} onClick={showApplyModal}>
             신청하기
-          </Link>
+          </button>
+          {applyModalOpen && <ApplyModal setModalOpen={setApplyModalOpen} />}
         </div>
       </div>
       <hr />

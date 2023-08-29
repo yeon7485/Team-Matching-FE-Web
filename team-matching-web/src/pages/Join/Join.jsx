@@ -13,6 +13,7 @@ export default function Join() {
   const handleSubmit = (e) => {
     e.preventDefault();
     signUp({ user }).then((result) => {
+      console.log(result);
       if (result === 200) {
         navigate('/login');
       }
