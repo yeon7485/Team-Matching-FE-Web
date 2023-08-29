@@ -4,34 +4,33 @@
 	justify-content: center;
 	align-items: center;
 	height: 30rem;
-	background-size: 100% 100%;
-	background-image: url(/src/images/banner.png);
-	background-repeat: no-repeat;
+	background-color: rgba(115, 115, 222, 0.3);
+	;
 }
 
 .title {
-	margin: 0;
+	margin-top: 0;
+	margin-bottom: 2rem;
+	color: var(--main-color-dark);
 	font-size: 3rem;
 }
 
 .text {
+	font-size: 1rem;
 	text-align: center;
 	opacity: 80%;
-	font-size: 1rem;
 }
 
 .btn {
 	padding: 0.8rem 3rem;
 	margin: 1.5rem;
 	border: none;
-	background: var(--main-color);
+	background: var(--main-color-dark);
 	color: white;
 	font-size: 1rem;
 	text-decoration: none;
 }
 
 .main {
-	width: auto;
-	height: 100%;
-	margin-bottom: 11rem;
+	padding: 10%;
 }

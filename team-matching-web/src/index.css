@@ -1,8 +1,11 @@
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 
 body {
+  width: 100%;
+  height: 100%;
   margin: 0;
   font-family: 'Noto Sans KR', sans-serif;
+  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -11,9 +14,24 @@ p {
   margin: 0;
 }
 
+#root {
+  width: 100vw;
+  min-height: 100vh;
+}
+
+input {
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
+textarea {
+  font-family: 'Noto Sans KR', sans-serif;
+}
+
 :root {
-  --main-color: #0081A7;
-  --main-red-color: #F07167;
+  --main-color: #7373DE;
+  --main-color-dark: #52529E;
+  --main-color-red: #E679AD;
+  --gray300: #E0E0E0;
   --gray500: #9E9E9E;
   --gray800: #424242;
   --category-dev: #0045CB;

@@ -1,24 +1,38 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styles from './Main.module.css';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 export default function Main() {
   return (
     <div>
       <section>
         <div className={styles.banner}>
-          <h1 className={styles.title}>팀 매칭 서비스</h1>
+          <h1 className={styles.title}>팀 매칭은 Team Mon에서!</h1>
           <p className={styles.text}>
-            Team-Matching 서비스는 다양한 방면에서
+            개발, 취미, 스포츠 등 다양한 방면에서
             <br />
-            그룹을 쉽게 만들 수 있게 도와주는 서비스입니다.
+            Team Mon 서비스를 통해 팀을 모집해보세요!
           </p>
-          <Link to='/' className={styles.btn}>
+          <Link to='/findteam' className={styles.btn}>
             지금 시작하기
           </Link>
         </div>
       </section>
       <div className={styles.main}>
+        <p>팀 둘러보기 </p>
+        <p>팀 둘러보기 </p>
+        <p>팀 둘러보기 </p>
+        <p>팀 둘러보기 </p>
+        <p>팀 둘러보기 </p>
+        <p>팀 둘러보기 </p>
+        <p>팀 둘러보기 </p>
+        <p>팀 둘러보기 </p>
+        <p>팀 둘러보기 </p>
+        <p>팀 둘러보기 </p>
+        <p>팀 둘러보기 </p>
+        <p>팀 둘러보기 </p>
+        <p>팀 둘러보기 </p>
+        <p>팀 둘러보기 </p>
         <p>팀 둘러보기 </p>
       </div>
     </div>
