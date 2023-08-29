@@ -71,6 +71,7 @@
 	font-size: 1.5rem;
 	text-decoration: none;
 	cursor: pointer;
+	white-space: nowrap;
 }
 
 .apply:hover {
