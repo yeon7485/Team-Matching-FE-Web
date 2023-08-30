@@ -54,7 +54,7 @@ export async function createTeam({ team, token }) {
       }
     )
     .then((result) => {
-      alert('로그인 성공!!');
+      console.log('팀 생성 성공');
       return result;
     })
     .catch((error) => {

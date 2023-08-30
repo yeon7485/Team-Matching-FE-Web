@@ -40,6 +40,7 @@ export default function NewTeam() {
     console.log(name);
     if (name === 'date') {
       const date = new Date(e.target.value).toISOString();
+      console.log(date);
       setTeam((team) => ({ ...team, deadline: date }));
       return;
     }
@@ -116,10 +117,10 @@ export default function NewTeam() {
             type='button'
             className={cn(
               'categoryBtn',
-              `${team.category === 'SPORTS' ? 'red' : ''}`
+              `${team.category === 'SPORT' ? 'red' : ''}`
             )}
             onClick={() => {
-              setTeam((team) => ({ ...team, category: 'SPORTS' }));
+              setTeam((team) => ({ ...team, category: 'SPORT' }));
             }}
           >
             스포츠
