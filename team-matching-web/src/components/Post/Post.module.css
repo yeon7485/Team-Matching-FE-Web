@@ -36,3 +36,7 @@
   text-align: center;
   flex-grow: 1;
 }
+.commentsCount{
+  color: #E679AD;
+  margin-left: 0.4rem;
+}

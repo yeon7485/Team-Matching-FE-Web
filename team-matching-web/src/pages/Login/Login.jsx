@@ -14,6 +14,7 @@ export default function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     logIn(id, password).then((result) => {
+      console.log(result);
       if (result.status === 200) {
         setUser({ userId: id, token: result.headers.authorization });
         nav('/');

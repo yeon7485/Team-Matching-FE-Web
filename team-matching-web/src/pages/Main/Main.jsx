@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react';
 import styles from './Main.module.css';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 export default function Main() {
   return (

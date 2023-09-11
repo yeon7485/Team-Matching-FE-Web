@@ -67,8 +67,7 @@
 
 .commentHeader {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  align-items: center;
   height: 2rem;
   padding: 0.2rem;
   padding-left: 1.5rem;
@@ -77,6 +76,11 @@
   font-size: 0.9rem;
   border-bottom: 1px solid #bcbcbc;
   border-top: 1px solid #bcbcbc;
+}
+
+.commentsLength{
+  margin-left: 0.4rem;
+  color: #E679AD;
 }
 
 .newComment {
@@ -108,4 +112,9 @@
 
 .submitBtn:hover {
   background-color: var(--main-color-dark);
+}
+
+.commentUl{
+  list-style: none;
+  padding: 0;
 }
