@@ -2,12 +2,13 @@
 	display: flex;
 	align-items: center;
 	height: 4.5rem;
-	padding: 0 7.5rem;
+	padding: 0 8%;
+	box-shadow: 0px 1px 10px 0px rgba(0, 0, 0, 0.17);
 }
 
 .logo {
 	color: var(--main-color);
-	font-size: 0.9rem;
+	font-size: 1.1rem;
 	text-decoration: none;
 	flex-shrink: 0;
 }
@@ -15,8 +16,10 @@
 .nav {
 	display: flex;
 	justify-content: space-between;
-	width: 15rem;
-	margin: 0 4rem;
+	width: 12%;
+	max-width: 10rem;
+	min-width: 8rem;
+	margin: 0 4%;
 	flex-shrink: 0;
 }
 
@@ -29,12 +32,20 @@
 	text-align: center;
 }
 
+.item:hover {
+	color: var(--main-color);
+}
+
+.select {
+	color: var(--main-color);
+}
+
 .btn {
 	margin-left: auto;
 	flex-shrink: 0;
 }
 
-.join{
+.join {
 	padding: 0.4rem 1.2rem;
 	margin: 0.5rem;
 	border: 1px solid var(--main-color);
@@ -46,11 +57,11 @@
 	text-align: center;
 }
 
-.join:hover{
-	background-color: rgba(0, 129, 167, 0.2);
+.join:hover {
+	background-color: rgba(115, 115, 222, 0.2);
 }
 
-.login{
+.login {
 	padding: 0.4rem 1.2rem;
 	margin: 0.5rem;
 	border: 1px solid var(--main-color);
@@ -64,4 +75,14 @@
 
 .login:hover {
 	background-color: rgba(0, 108, 140, 1.2);
+}
+
+.dropdown {
+	cursor: pointer;
+}
+
+.user {
+	font-size: 1rem;
+	padding: 1.8rem 0;
+	cursor: pointer;
 }

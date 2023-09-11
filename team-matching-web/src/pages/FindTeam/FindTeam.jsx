@@ -58,11 +58,40 @@ export default function FindTeam() {
       tag: '롤',
       count: '1 / 2',
     },
+    {
+      id: 5,
+      category: '게임',
+      time: '16시간 전',
+      date: '6.28',
+      title: '롤 다이아큐 듀오할 사람',
+      nickname: '닉네임123',
+      tag: '롤',
+      count: '1 / 2',
+    },
+    {
+      id: 6,
+      category: '게임',
+      time: '16시간 전',
+      date: '6.28',
+      title: '롤 다이아큐 듀오할 사람',
+      nickname: '닉네임123',
+      tag: '롤',
+      count: '1 / 2',
+    },
+    {
+      id: 7,
+      category: '게임',
+      time: '16시간 전',
+      date: '6.28',
+      title: '롤 다이아큐 듀오할 사람',
+      nickname: '닉네임123',
+      tag: '롤',
+      count: '1 / 2',
+    },
   ];
 
   const [search, setSearch] = useState();
   const [current, setCurrent] = useState('전체');
-  console.log(search);
   const handleChange = (e) => {
     setSearch(e.target.value);
   };
@@ -150,7 +179,7 @@ export default function FindTeam() {
             </form>
             <BiSearch className={styles.searchBtn} />
           </div>
-          <Link to='/#' className={styles.createBtn}>
+          <Link to='/newteam' className={styles.createBtn}>
             팀 만들기
           </Link>
         </div>

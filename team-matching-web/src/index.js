@@ -10,9 +10,15 @@ import Join from './pages/Join/Join';
 import Login from './pages/Login/Login';
 import Board from './pages/Board/Board';
 import PostDetail from './pages/PostDetail/PostDetail';
+import MyPage from './pages/MyPage/MyPage';
 import FindTeam from './pages/FindTeam/FindTeam';
 import TeamDetail from './pages/TeamDetail/TeamDetail';
+<<<<<<< HEAD
 import MyPage from './pages/MyPage/MyPage';
+=======
+import NewPost from './pages/NewPost/NewPost';
+import NewTeam from './pages/NewTeam/NewTeam';
+>>>>>>> main
 
 const router = createBrowserRouter([
   {
@@ -25,9 +31,15 @@ const router = createBrowserRouter([
       { path: 'login', element: <Login /> },
       { path: 'board', element: <Board /> },
       { path: 'board/:num', element: <PostDetail /> },
+      { path: 'board/new', element: <NewPost /> },
+      { path: 'mypage', element: <MyPage /> },
       { path: 'findteam', element: <FindTeam /> },
       { path: 'findteam/:num', element: <TeamDetail /> },
+<<<<<<< HEAD
       { path: 'mypage', element: <MyPage /> },
+=======
+      { path: 'newteam', element: <NewTeam /> },
+>>>>>>> main
     ],
   },
 ]);

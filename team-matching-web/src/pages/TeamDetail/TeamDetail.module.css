@@ -57,7 +57,7 @@
 
 .count {
 	margin-bottom: 1rem;
-	color: var(--main-red-color);
+	color: var(--main-color-red);
 	font-weight: bold;
 	font-size: 1.5rem;
 }
@@ -71,11 +71,13 @@
 	font-size: 1.5rem;
 	text-decoration: none;
 	cursor: pointer;
+	white-space: nowrap;
 }
 
 .apply:hover {
 	background-color: var(--main-color);
 	color: white;
+
 }
 
 .contents {

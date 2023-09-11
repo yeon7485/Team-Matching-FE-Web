@@ -1,15 +1,23 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Join.module.css';
-import { Link } from 'react-router-dom';
-
+import { Link, useNavigate } from 'react-router-dom';
+import { signUp } from '../../API/TeamMon';
 export default function Join() {
   const [user, setUser] = useState({});
+  const [message, setMessage] = useState('');
+  const navigate = useNavigate();
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUser((user) => ({ ...user, [name]: value }));
   };
   const handleSubmit = (e) => {
     e.preventDefault();
+    signUp({ user }).then((result) => {
+      console.log(result);
+      if (result === 200) {
+        navigate('/login');
+      }
+    });
   };
 
   return (
@@ -67,7 +75,7 @@ export default function Join() {
             required
             onChange={handleChange}
           />
-
+          {/* <p className={styles.message}>{message}</p> */}
           <div className={styles.agreeBox}>
             <input
               type='checkbox'

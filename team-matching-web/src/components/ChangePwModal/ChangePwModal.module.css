@@ -8,30 +8,52 @@
   height: 550px;
   z-index: 999;
   border-radius: 1rem;
+<<<<<<< HEAD
   transform: translate(-50%, -50%);
   background-color: white;
+=======
+  background-color: white;
+  transform: translate(-50%, -50%);
+>>>>>>> main
   box-shadow : rgba(0,0,0,0.5) 0 0 0 9999px;
 }
 
 .header{
   display: flex;
   padding: 1rem;
+<<<<<<< HEAD
   text-align: center;
   border-bottom: 1px solid #bcbcbc;
   font-weight: 500;
+=======
+  font-weight: 500;
+  text-align: center;
+  border-bottom: 1px solid #bcbcbc;
+>>>>>>> main
 }
 
 .closeBtn{
   margin-left: auto;
+<<<<<<< HEAD
   background-color: rgba(0,0,0,0);
   border: none;
+=======
+  border: none;
+  background-color: rgba(0,0,0,0);
+>>>>>>> main
   cursor: pointer;
 }
 
 .form{
+<<<<<<< HEAD
   height: 100%;
   display: flex;
   flex-direction: column;
+=======
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+>>>>>>> main
   padding: 1.5rem;
 }
 
@@ -39,8 +61,13 @@
   width: 93%;
   padding: 1rem;
   margin-bottom: 1rem;
+<<<<<<< HEAD
   border-radius: 8px;
   border: 1px solid #bcbcbc;
+=======
+  border: 1px solid #bcbcbc;
+  border-radius: 8px;
+>>>>>>> main
 }
 
 .saveBtn{

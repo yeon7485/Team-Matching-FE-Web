@@ -1,31 +1,33 @@
-.root{
-  height: 68.8vh;
+.root {
   padding: 1.5rem 10rem;
 }
 
-.title{
+.title {
   color: var(--main-color);
 }
-.titleHeader{
 
+.titleHeader {
   position: relative;
 }
-.boardLink{
+
+.boardLink {
   position: absolute;
   top: 57%;
   right: 2%;
-  padding: 0.3rem 1.2rem;	
+  padding: 0.3rem 1.2rem;
   border: 1px solid var(--main-color);
   background-color: white;
-  color:  var(--main-color);
+  color: var(--main-color);
+  font-weight: bold;
   font-size: 0.8rem;
   text-decoration: none;
 }
 
-.boardLink:hover{
-  background-color: rgba(0, 129, 167, 0.2);
+.boardLink:hover {
+  background-color: rgba(115, 115, 222, 0.2);
 }
-.titleBox{
+
+.titleBox {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -39,30 +41,31 @@
   border-bottom: 1px solid #bcbcbc;
 }
 
-.infoBox{
+.infoBox {
   display: flex;
   padding: 0.2rem 1.7rem;
   font-size: 0.8rem;
   border-bottom: 1px solid #bcbcbc;
 }
 
-.date{
+.date {
   margin-left: auto;
 }
 
-.post{
+.post {
   padding: 2rem;
 }
 
-.content{
+.content {
   margin-bottom: 2rem;
 }
-.tag{
-  color: rgb(24, 206, 234);
+
+.tag {
+  color: var(--main-color);
   font-size: 0.8rem;
 }
 
-.commentHeader{
+.commentHeader {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -76,30 +79,33 @@
   border-top: 1px solid #bcbcbc;
 }
 
-.newComment{
+.newComment {
   display: flex;
   align-items: center;
   height: 3rem;
   padding: 1rem;
-  background-color: rgba(0, 98, 126, 0.1) ;
-
+  background-color: rgba(115, 115, 222, 0.08);
 }
 
-.form{
+.form {
   width: 100%;
 }
-.commentInput{
+
+.commentInput {
   width: 90%;
   height: 3rem;
 }
 
-.submitBtn{
+.submitBtn {
   padding: 1rem;
   margin-left: 1rem;
   border: 1px solid var(--main-color);
   background-color: var(--main-color);
-	color: white;
+  color: white;
+  font-weight: bold;
+  flex-shrink: 0;
 }
 
-.submitBtn:hover{	background-color: rgba(0, 108, 140, 1.2);}
-
+.submitBtn:hover {
+  background-color: var(--main-color-dark);
+}
