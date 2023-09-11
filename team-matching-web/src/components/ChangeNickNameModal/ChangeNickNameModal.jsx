@@ -22,17 +22,10 @@ export default function ChangeNickNameModal({
     setModalOpen(false);
   };
   const [fixName, setFixName] = useState();
-  console.log(fixName);
   const handleSubmit = (e) => {
     e.preventDefault();
     setUserInfo({ ...userInfo, nickname: fixName });
-    upDateMyPageInfo(
-      user.userId,
-      user.token,
-      fixName,
-      userInfo.email,
-      userInfo.memo
-    );
+    upDateMyPageInfo(user.userId, user.token, fixName, userInfo.memo);
     alert('변경되었습니다.');
     closeModal();
   };

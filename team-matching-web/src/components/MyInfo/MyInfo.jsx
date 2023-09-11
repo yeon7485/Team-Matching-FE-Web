@@ -32,13 +32,7 @@ export default function MyInfo() {
   const user = useRecoilValue(userState);
   const handleSubmit = (e) => {
     e.preventDefault();
-    upDateMyPageInfo(
-      user.userId,
-      user.token,
-      userInfo.nickname,
-      userInfo.email,
-      userInfo.memo
-    );
+    upDateMyPageInfo(user.userId, user.token, userInfo.nickname, userInfo.memo);
   };
   useEffect(() => {
     myPageInfo(user.userId, user.token).then((result) => {
