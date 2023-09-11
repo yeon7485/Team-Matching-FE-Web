@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+//회원가입
 export async function signUp({ user }) {
   return axios
     .post('auth/sign-up', {
@@ -19,6 +20,7 @@ export async function signUp({ user }) {
     });
 }
 
+//로그인
 export async function logIn(id, password) {
   return axios
     .post('auth/login', {
@@ -27,6 +29,25 @@ export async function logIn(id, password) {
     })
     .then((result) => {
       alert('로그인 성공!!');
+      return result;
+    })
+    .catch((error) => {
+      alert(error.response.data.resultMessage);
+      console.log(error);
+      alert(error.response.data);
+      return error.response;
+    });
+}
+
+//로그아웃
+export async function logOut(id, token) {
+  return axios
+    .post('auth/logout', {
+      userId: id,
+      accessToken: token,
+    })
+    .then((result) => {
+      alert('로그아웃 성공!!');
       return result;
     })
     .catch((error) => {
@@ -63,6 +84,7 @@ export async function createTeam({ team, token }) {
     });
 }
 
+//마이페이지 정보 받아오기
 export async function myPageInfo(userId, token) {
   return axios
     .get(`/my-page/${userId}`, {
@@ -73,12 +95,12 @@ export async function myPageInfo(userId, token) {
     });
 }
 
-export function upDateMyPageInfo(userId, token, nickname, email, memo) {
+//마이페이지 정보 수정하기
+export function upDateMyPageInfo(userId, token, nickname, memo) {
   axios
     .patch(
-      `/my-page/${userId}`,
+      `/my-page/${userId}/info`,
       {
-        email: email,
         nickname: nickname,
         memo: memo,
       },
@@ -88,5 +110,133 @@ export function upDateMyPageInfo(userId, token, nickname, email, memo) {
     )
     .then((result) => {
       console.log(result);
+    });
+}
+
+//글 작성하기
+export async function writePost(post, token) {
+  return axios
+    .post(
+      '/posts',
+      {
+        title: post.title,
+        content: post.contents,
+        hashtag: post.tag,
+      },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    )
+    .then((result) => {
+      alert('글쓰기 성공!!');
+      return result;
+    })
+    .catch((error) => {
+      alert(error.response.data.resultMessage);
+      console.log(error);
+      alert(error.response.data);
+      return error.response;
+    });
+}
+
+//간단한 게시글 정보 받아오기
+export async function getPosts(page, size) {
+  return axios
+    .get(`/posts?page=${page}&size=${size}`)
+    .then((result) => {
+      return result;
+    })
+    .catch((error) => {
+      console.log(error);
+      return error.response;
+    });
+}
+
+//자세한 게시글 정보 받아오기
+export async function getPostsDetail(id) {
+  return axios
+    .get(`/posts/${id}`)
+    .then((result) => {
+      console.log(result);
+      return result.data.resultData;
+    })
+    .catch((error) => {
+      console.log(error);
+      return error.response;
+    });
+}
+
+//글 삭제하기
+export async function deletePost(id, token) {
+  return axios
+    .delete(`/posts/${id}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    .then((result) => {
+      return result;
+    });
+}
+//댓글 쓰기
+export async function writeComment(content, id, token) {
+  return axios
+    .post(
+      `/posts/${id}/comments`,
+      {
+        content: content,
+      },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    )
+    .then((result) => {
+      alert('댓글 쓰기 성공!!');
+      return result;
+    })
+    .catch((error) => {
+      alert(error.response.data.resultMessage);
+      console.log(error);
+      alert(error.response.data);
+      return error.response;
+    });
+}
+
+//내가 쓴 게시글 조회
+export async function getMyPosts(id, token) {
+  return axios
+    .get(`my-page/${id}/posts`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    .then((result) => {
+      return result.data.resultData.content;
+    })
+    .catch((error) => {
+      alert(error.response.data.error);
+      return error.response;
+    });
+}
+
+//게시글 수정하기
+export async function editPost(id, post, token) {
+  return axios
+    .patch(
+      `/posts/${id}`,
+      {
+        title: post.title,
+        content: post.contents,
+        hashtag: post.tag,
+      },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    )
+    .then((result) => {
+      alert('글 수정 성공!!');
+      return result;
+    })
+    .catch((error) => {
+      alert(error.response.data.resultMessage);
+      console.log(error);
+      alert(error.response.data);
+      return error.response;
     });
 }

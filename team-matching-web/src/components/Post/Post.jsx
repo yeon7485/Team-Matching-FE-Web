@@ -1,23 +1,32 @@
 import React from 'react';
 import styles from './Post.module.css';
 import { useNavigate } from 'react-router-dom';
-export default function Post({ post, post: { num, title, tag, name, date } }) {
+export default function Post({
+  post,
+  post: { id, title, hashtag, createdAt, commentsCount },
+}) {
   const navigate = useNavigate();
+
   return (
     <li
       className={styles.postLi}
       onClick={() => {
-        navigate(`/board/${num}`, { state: { post } });
+        navigate(`/board/${id}`, { state: { post } });
       }}
     >
-      <div className={styles.item}>{num}</div>
+      <div className={styles.item}>{id}</div>
       <div className={styles.item}>
         {title}
-        {num && `[${num}]`}
+        <span className={styles.commentsCount}>
+          {commentsCount !== 0 && `[${commentsCount}]`}
+        </span>
       </div>
-      <div className={styles.item}>{tag}</div>
-      <div className={styles.item}>{name}</div>
-      <div className={styles.item}>{date}</div>
+      <div className={styles.item}>{hashtag}</div>
+      {post.userAccountDto && (
+        <div className={styles.item}>{post.userAccountDto.nickname}</div>
+      )}
+
+      <div className={styles.item}>{createdAt}</div>
     </li>
   );
 }
