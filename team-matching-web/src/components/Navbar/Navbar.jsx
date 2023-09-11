@@ -43,6 +43,15 @@ export default function Navbar() {
         </Link>
       </nav>
       <div className={styles.btn}>
+<<<<<<< HEAD
+        <Link to='/join' className={styles.join}>
+          회원가입
+        </Link>
+        <Link to='/login' className={styles.login}>
+          로그인
+        </Link>
+        <Link to='/mypage'>임시mypage</Link>
+=======
         {!user.userId && (
           <Link to='/join' className={styles.join}>
             회원가입
@@ -63,6 +72,7 @@ export default function Navbar() {
             {isHover && <SubMenu user={user} />}
           </div>
         )}
+>>>>>>> main
       </div>
     </header>
   );

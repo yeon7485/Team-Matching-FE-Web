@@ -1,6 +1,19 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './WritePost.module.css';
+import { useRecoilValue } from 'recoil';
+import { userState } from '../../Recoil/state';
+import { getMyPosts } from '../../API/TeamMon';
+import Post from '../Post/Post';
 export default function WritePost() {
+  const user = useRecoilValue(userState);
+  const [myPost, setMyPost] = useState();
+  useEffect(() => {
+    getMyPosts(user.userId, user.token).then((result) => {
+      result.map((result) => (result.userAccountDto = null));
+      setMyPost(result);
+    });
+  }, []);
+
   return (
     <>
       <h3>작성한 글</h3>
@@ -13,9 +26,8 @@ export default function WritePost() {
           <div className={styles.item}>날짜</div>
         </header>
         <ul className={styles.ul}>
-          <li>나중에 추가 할 것</li>
-          <li>나중에 추가 할 것</li>
-          <li>나중에 추가 할 것</li>
+          {myPost &&
+            myPost.map((myPost) => <Post key={myPost.id} post={myPost} />)}
         </ul>
       </div>
     </>

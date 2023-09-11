@@ -13,8 +13,12 @@ import PostDetail from './pages/PostDetail/PostDetail';
 import MyPage from './pages/MyPage/MyPage';
 import FindTeam from './pages/FindTeam/FindTeam';
 import TeamDetail from './pages/TeamDetail/TeamDetail';
+<<<<<<< HEAD
+import MyPage from './pages/MyPage/MyPage';
+=======
 import NewPost from './pages/NewPost/NewPost';
 import NewTeam from './pages/NewTeam/NewTeam';
+>>>>>>> main
 
 const router = createBrowserRouter([
   {
@@ -31,7 +35,11 @@ const router = createBrowserRouter([
       { path: 'mypage', element: <MyPage /> },
       { path: 'findteam', element: <FindTeam /> },
       { path: 'findteam/:num', element: <TeamDetail /> },
+<<<<<<< HEAD
+      { path: 'mypage', element: <MyPage /> },
+=======
       { path: 'newteam', element: <NewTeam /> },
+>>>>>>> main
     ],
   },
 ]);
