@@ -1,0 +1,85 @@
+.root {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 20rem;
+	height: 12rem;
+	padding: 1.6rem 1.9rem;
+	border: 1px solid var(--gray500);
+	border-radius: 1rem;
+	cursor: pointer;
+	filter: brightness(1);
+}
+
+.root:hover {
+	background-color: var(--gray300);
+}
+
+.top {
+	display: flex;
+	justify-content: space-between;
+}
+
+.left {
+	display: flex;
+	align-items: center;
+}
+
+.category {
+	font-weight: bold;
+}
+
+.time {
+	margin-left: 0.7rem;
+	color: var(--gray800);
+	font-size: 0.8rem;
+}
+
+.date {
+	margin-right: 0.2rem;
+	color: var(--gray800);
+}
+
+.title {
+	margin-top: 1rem;
+	margin-bottom: 0.5rem;
+}
+
+.bot {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 3.7rem;
+}
+
+.tag {
+	font-size: 0.9rem;
+}
+
+.count {
+	padding: 0.3rem 0.6rem;
+	border: 1px solid var(--main-color-red);
+	border-radius: 20px;
+	color: var(--main-color-red);
+	font-weight: bold;
+}
+
+.black {
+	color: black;
+}
+
+.dev {
+	color: var(--category-dev);
+}
+
+.hobby {
+	color: var(--category-hobby);
+}
+
+.sports {
+	color: var(--category-sports);
+}
+
+.game {
+	color: var(--category-game);
+}

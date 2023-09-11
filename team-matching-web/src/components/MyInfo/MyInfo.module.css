@@ -1,0 +1,92 @@
+.infoBox{
+  display: grid;
+  padding: 2rem;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-column-gap: 0.5fr;
+}
+
+.idBox{
+  display: flex;
+  width: 100%;
+  max-width: 500px;
+}
+.pwBox{
+  display: flex;
+  width: 100%;
+  max-width: 500px;
+}
+
+.nicknameBox{
+  display: flex;
+  width: 100%;
+  max-width: 500px;
+}
+
+.emailBox{
+  display: flex;
+  width: 100%;
+  max-width: 500px;
+}
+
+
+.user{
+  margin: 2rem;
+  opacity: 60%; 
+}
+
+.title{
+  margin: 2rem;
+  font-weight: 500; 
+}
+
+.infoBtn{
+  height: 27px;
+  margin: 2rem;
+  border: 1px solid;
+  border-radius: 0.3rem; 
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.selfBox{
+  display: flex;
+  padding: 2rem;
+  
+}
+
+.selfTitle{
+  width: 10%;
+  margin: 2rem;
+  margin-top: 0;
+  font-weight: 500;
+}
+
+.selfForm{
+  display: flex;
+  flex-direction: column;
+  width: 80%;
+
+}
+
+.textarea{
+  height: 7rem;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  resize: none;
+}
+
+.saveBtn{
+  padding: 0.3rem 0.8rem;
+  margin-left: auto;
+  border: 1px solid var(--main-color);
+  border-radius: 0.2rem;
+  background-color: var(--main-color);
+  color: white;
+  font-size: 0.8rem;
+  cursor: pointer;
+}
+
+.saveBtn:hover{
+  background-color: rgba(0, 108, 140, 1.2);
+}
