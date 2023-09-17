@@ -1,36 +1,30 @@
 import React, { useState } from 'react';
 import styles from './NewTeam.module.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import RoundBtn from '../../components/ui/RoundBtn/RoundBtn';
 import classNames from 'classnames/bind';
 import { AiOutlinePlusCircle, AiOutlineMinusCircle } from 'react-icons/ai';
-import { createTeam } from '../../API/TeamMon';
+import { createTeam, editTeam } from '../../API/TeamMon';
 import { useRecoilValue } from 'recoil';
 import { userState } from '../../Recoil/state';
 
 export default function NewTeam() {
-  const [team, setTeam] = useState({
-    category: 'DEV',
-    title: '',
-    description: '',
-    tag: '',
-    deadline: '',
-    capacity: 1,
+  const {
+    state: { team },
+  } = useLocation();
+  const [newTeam, setNewTeam] = useState({
+    category: (team && team.category) || '',
+    title: (team && team.name) || '',
+    description: (team && team.description) || '',
+    tag: (team && team.hashtag) || '',
+    deadline: (team && team.deadline.replace('T', ' ')) || '',
+    capacity: (team && team.capacity) || 1,
     total: 1,
   });
 
   const navigate = useNavigate();
   const cn = classNames.bind(styles);
   const user = useRecoilValue(userState);
-  const token = user.token;
-
-  // 오늘 날짜 string type으로
-  const dateToString = (date) => {
-    const year = date.getFullYear();
-    const month = ('0' + (date.getMonth() + 1)).slice(-2);
-    const day = ('0' + date.getDate()).slice(-2);
-    return year + '-' + month + '-' + day;
-  };
 
   const today = dateToString(new Date());
 
@@ -39,19 +33,21 @@ export default function NewTeam() {
     const { name, value } = e.target;
     console.log(name);
     if (name === 'date') {
-      const date = new Date(e.target.value).toISOString();
+      var date = new Date(e.target.value);
+      date.setHours(date.getHours() + 23);
+      date = date.toISOString().replace('T', ' ').substring(0, 16);
       console.log(date);
-      setTeam((team) => ({ ...team, deadline: date }));
+      setNewTeam((team) => ({ ...team, deadline: date }));
       return;
     }
-    setTeam((team) => ({ ...team, [name]: value }));
+    setNewTeam((team) => ({ ...team, [name]: value }));
   };
 
   // 취소 버튼
   const cancelClick = () => {
     if (
       window.confirm(
-        '팀 새로 만들기를 취소하시겠습니까? \n확인 선택 시, 작성된 내용은 저장되지 않습니다.'
+        '취소하시겠습니까? \n확인 선택 시, 작성된 내용은 저장되지 않습니다.'
       ) === true
     ) {
       navigate(-1);
@@ -61,22 +57,27 @@ export default function NewTeam() {
   // 등록 버튼
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (team.title.length > 40) {
-      alert('제목은 30글자를 넘을 수 없습니다.');
-      return;
+    if (checkForm(newTeam)) {
+      createTeam(newTeam, user.token).then((result) => {
+        if (result === 200) {
+          navigate('/findteam');
+        }
+      });
+      console.log(newTeam);
+      alert('등록되었습니다.');
+      navigate(`/findteam`);
     }
-    if (team.tag.length > 10) {
-      alert('태그는 10글자를 넘을 수 없습니다.');
-      return;
+  };
+
+  const onEditTeam = () => {
+    console.log(checkForm(newTeam));
+    if (checkForm(newTeam)) {
+      console.log(newTeam.deadline);
+      console.log(newTeam);
+      editTeam(team.id, newTeam, user.token).then((result) => {
+        console.log(result);
+      });
     }
-    createTeam({ team, token }).then((result) => {
-      if (result === 200) {
-        navigate('/findteam');
-      }
-    });
-    console.log(team);
-    alert('등록되었습니다.');
-    navigate(`/findteam`);
   };
 
   return (
@@ -93,10 +94,10 @@ export default function NewTeam() {
             type='button'
             className={cn(
               'categoryBtn',
-              `${team.category === 'DEVELOPMENT' ? 'blue' : ''}`
+              `${newTeam.category === 'DEVELOPMENT' ? 'blue' : ''}`
             )}
             onClick={() => {
-              setTeam((team) => ({ ...team, category: 'DEVELOPMENT' }));
+              setNewTeam((team) => ({ ...team, category: 'DEVELOPMENT' }));
             }}
           >
             개발
@@ -105,10 +106,10 @@ export default function NewTeam() {
             type='button'
             className={cn(
               'categoryBtn',
-              `${team.category === 'HOBBY' ? 'green' : ''}`
+              `${newTeam.category === 'HOBBY' ? 'green' : ''}`
             )}
             onClick={() => {
-              setTeam((team) => ({ ...team, category: 'HOBBY' }));
+              setNewTeam((team) => ({ ...team, category: 'HOBBY' }));
             }}
           >
             취미
@@ -117,10 +118,10 @@ export default function NewTeam() {
             type='button'
             className={cn(
               'categoryBtn',
-              `${team.category === 'SPORT' ? 'red' : ''}`
+              `${newTeam.category === 'SPORT' ? 'red' : ''}`
             )}
             onClick={() => {
-              setTeam((team) => ({ ...team, category: 'SPORT' }));
+              setNewTeam((team) => ({ ...team, category: 'SPORT' }));
             }}
           >
             스포츠
@@ -129,10 +130,10 @@ export default function NewTeam() {
             type='button'
             className={cn(
               'categoryBtn',
-              `${team.category === 'GAME' ? 'pink' : ''}`
+              `${newTeam.category === 'GAME' ? 'pink' : ''}`
             )}
             onClick={() => {
-              setTeam((team) => ({ ...team, category: 'GAME' }));
+              setNewTeam((team) => ({ ...team, category: 'GAME' }));
             }}
           >
             게임
@@ -149,6 +150,7 @@ export default function NewTeam() {
               min={today}
               onChange={handleChange}
               className={styles.date}
+              value={team && dateToString(new Date(newTeam.deadline))}
             />
           </div>
           <div className={styles.total}>
@@ -157,14 +159,20 @@ export default function NewTeam() {
               <AiOutlineMinusCircle
                 className={styles.btn}
                 onClick={() => {
-                  setTeam((team) => ({ ...team, capacity: team.capacity - 1 }));
+                  setNewTeam((team) => ({
+                    ...team,
+                    capacity: team.capacity - 1,
+                  }));
                 }}
               />
-              <p className={styles.num}>{team.capacity}</p>
+              <p className={styles.num}>{newTeam.capacity}</p>
               <AiOutlinePlusCircle
                 className={styles.btn}
                 onClick={() => {
-                  setTeam((team) => ({ ...team, capacity: team.capacity + 1 }));
+                  setNewTeam((team) => ({
+                    ...team,
+                    capacity: team.capacity + 1,
+                  }));
                 }}
               />
             </div>
@@ -174,7 +182,7 @@ export default function NewTeam() {
         <input
           type='text'
           name='title'
-          value={team.title ?? ''}
+          value={newTeam.title ?? ''}
           placeholder='제목을 입력해주세요.'
           required
           className={styles.input}
@@ -184,7 +192,7 @@ export default function NewTeam() {
         <textarea
           name='description'
           wrap='hard'
-          value={team.description ?? ''}
+          value={newTeam.description ?? ''}
           placeholder='내용을 입력해주세요.'
           required
           className={`${styles.input} ${styles.textArea}`}
@@ -194,7 +202,7 @@ export default function NewTeam() {
         <input
           type='text'
           name='tag'
-          value={team.tag ?? ''}
+          value={newTeam.tag ?? ''}
           placeholder='태그를 입력해주세요.'
           required
           className={styles.input}
@@ -208,9 +216,40 @@ export default function NewTeam() {
             onClick={cancelClick}
           />
           <div className={styles.space} />
-          <RoundBtn type={'submit'} text={'등록'} fill={true} />
+          {!team && <RoundBtn type={'submit'} text={'등록'} fill={true} />}
+          {team && (
+            <RoundBtn
+              type={'button'}
+              text={'수정'}
+              fill={true}
+              onClick={onEditTeam}
+            />
+          )}
         </div>
       </form>
     </div>
   );
+}
+
+function dateToString(date) {
+  const year = date.getFullYear();
+  const month = ('0' + (date.getMonth() + 1)).slice(-2);
+  const day = ('0' + date.getDate()).slice(-2);
+  return year + '-' + month + '-' + day;
+}
+
+function checkForm(team) {
+  if (team.category === '') {
+    alert('카테고리를 선택하세요.');
+    return false;
+  }
+  if (team.title.length > 40) {
+    alert('제목은 30글자를 넘을 수 없습니다.');
+    return false;
+  }
+  if (team.tag.length > 10) {
+    alert('태그는 10글자를 넘을 수 없습니다.');
+    return false;
+  }
+  return true;
 }
