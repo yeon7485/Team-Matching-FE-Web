@@ -1,153 +1,126 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './FindTeam.module.css';
-import { useState } from 'react';
 import { BiSearch } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
+import { getTeamList } from '../../API/TeamMon';
 import TeamCard from '../../components/TeamCard/TeamCard';
 import classNames from 'classnames/bind';
+import Paging from '../../components/ui/Paging/Paging';
+import Loading from '../../components/ui/Loading/Loading';
+import NotFound from '../NotFound/NotFound';
 
 export default function FindTeam() {
-  const team = [
-    {
-      id: 1,
-      category: '개발',
-      time: '5분 전',
-      date: '6.30',
-      title: '사이드 프로젝트 팀원 찾아요',
-      nickname: '닉네임',
-      tag: '프로젝트',
-      count: '1 / 5',
-      contents: `안녕하세요! 같이 사이드 프로젝트 할 팀원 찾아요
-        스터디 주제 : 고양이를 모시는 집사들을 위한 고양이 울음소리를 분석하는 서비스 
-        스터디 목표 : 먀먀먀먀먀먀먀먀먀먀
-        예상 커리큘럼 간략히 : 개발 7주
-        
-        대면으로 모여서 모각코도 하고 고양이 자랑 타임도 가져봐요!
-        귀여운 제 고양이 사진 보고 가세요
-        https://open.kakao.com/cuttycat
-        
-        프론트 2명, 백엔드 2명 모집합니다`,
-    },
-    {
-      id: 2,
-      category: '취미',
-      time: '17분 전',
-      date: '7.15',
-      title: '뜨개모임 구해요',
-      nickname: '닉네임123',
-      tag: '뜨개질',
-      count: '2 / 4',
-    },
-    {
-      id: 3,
-      category: '스포츠',
-      time: '1시간 전',
-      date: '7.4',
-      title: '6대6 풋살할 사람 구해요',
-      nickname: '닉네임닉네임',
-      tag: '풋살',
-      count: '5 / 12',
-    },
-    {
-      id: 4,
-      category: '게임',
-      time: '16시간 전',
-      date: '6.28',
-      title: '롤 다이아큐 듀오할 사람',
-      nickname: '닉네임123',
-      tag: '롤',
-      count: '1 / 2',
-    },
-    {
-      id: 5,
-      category: '게임',
-      time: '16시간 전',
-      date: '6.28',
-      title: '롤 다이아큐 듀오할 사람',
-      nickname: '닉네임123',
-      tag: '롤',
-      count: '1 / 2',
-    },
-    {
-      id: 6,
-      category: '게임',
-      time: '16시간 전',
-      date: '6.28',
-      title: '롤 다이아큐 듀오할 사람',
-      nickname: '닉네임123',
-      tag: '롤',
-      count: '1 / 2',
-    },
-    {
-      id: 7,
-      category: '게임',
-      time: '16시간 전',
-      date: '6.28',
-      title: '롤 다이아큐 듀오할 사람',
-      nickname: '닉네임123',
-      tag: '롤',
-      count: '1 / 2',
-    },
-  ];
+  const [team, setTeam] = useState([]);
 
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState();
   const [search, setSearch] = useState();
-  const [current, setCurrent] = useState('전체');
+  const [category, setCategory] = useState('ALL');
+  const [page, setPage] = useState(1);
+  const [size, setSize] = useState(0);
+  const [totalElements, setTotalElements] = useState(-1);
+  const [total, setTotal] = useState(0);
+  const cn = classNames.bind(styles);
   const handleChange = (e) => {
     setSearch(e.target.value);
   };
 
-  const cn = classNames.bind(styles);
+  useEffect(() => {
+    setLoading(true);
+    getTeamList(page - 1)
+      .then((result) => {
+        console.log(result);
+        setTeam(result.content);
+        setSize(result.size);
+        setTotalElements(result.totalElements);
+      })
+      .catch((e) => setError(e))
+      .finally(() => {
+        setLoading(false);
+        setTotal(totalElements);
+      });
+    return () => {
+      console.log('clean');
+    };
+  }, [page]);
+
+  // useEffect(() => {
+  //   if (category !== 'ALL') {
+  //     const newTeam = team.filter((team) => team.category == category);
+  //     setTotal(newTeam.length);
+  //   } else {
+  //     setTotal(totalElements);
+  //   }
+  //   console.log(total);
+  // }, [category]);
+
+  const onCategoryClick = (e) => {
+    const cat = e.target.value;
+    setCategory(cat);
+    setPage(1);
+    if (category !== 'ALL') {
+      const newTeam = team.filter((team) => team.category == cat);
+      setTotal(newTeam.length);
+    } else {
+      setTotal(totalElements);
+    }
+    console.log(total);
+  };
+
+  if (loading) return <Loading />;
+  if (error) return <NotFound />;
 
   return (
     <div className={styles.root}>
       <section className={styles.topBar}>
         <div className={styles.category}>
           <button
+            value='ALL'
             className={cn(
               'categoryBtn',
-              `${current === '전체' ? 'black' : ''}`
+              `${category === 'ALL' ? 'black' : ''}`
             )}
-            onClick={() => {
-              setCurrent('전체');
-            }}
+            onClick={onCategoryClick}
           >
             전체
           </button>
           <button
-            className={cn('categoryBtn', `${current === '개발' ? 'blue' : ''}`)}
-            onClick={() => {
-              setCurrent('개발');
-            }}
+            value='DEVELOPMENT'
+            className={cn(
+              'categoryBtn',
+              `${category === 'DEVELOPMENT' ? 'blue' : ''}`
+            )}
+            onClick={onCategoryClick}
           >
             개발
           </button>
           <button
+            value='HOBBY'
             className={cn(
               'categoryBtn',
-              `${current === '취미' ? 'green' : ''}`
+              `${category === 'HOBBY' ? 'green' : ''}`
             )}
-            onClick={() => {
-              setCurrent('취미');
-            }}
+            onClick={onCategoryClick}
           >
             취미
           </button>
           <button
+            value='SPORT'
             className={cn(
               'categoryBtn',
-              `${current === '스포츠' ? 'red' : ''}`
+              `${category === 'SPORT' ? 'red' : ''}`
             )}
-            onClick={() => {
-              setCurrent('스포츠');
-            }}
+            onClick={onCategoryClick}
           >
             스포츠
           </button>
           <button
-            className={cn('categoryBtn', `${current === '게임' ? 'pink' : ''}`)}
-            onClick={() => {
-              setCurrent('게임');
-            }}
+            value='GAME'
+            className={cn(
+              'categoryBtn',
+              `${category === 'GAME' ? 'pink' : ''}`
+            )}
+            onClick={onCategoryClick}
           >
             게임
           </button>
@@ -179,14 +152,39 @@ export default function FindTeam() {
             </form>
             <BiSearch className={styles.searchBtn} />
           </div>
-          <Link to='/newteam' className={styles.createBtn}>
+          <Link to='/newteam' className={styles.createBtn} state={{}}>
             팀 만들기
           </Link>
         </div>
       </section>
       <section className={styles.teamList}>
-        {team && team.map((team) => <TeamCard key={team.key} team={team} />)}
+        {team &&
+          getFilteredItems(team, category).map((team) => (
+            <TeamCard key={team.id} team={team} />
+          ))}
+        {team && totalElements === 0 && (
+          <p className={styles.empty}>팀이 존재하지 않습니다.</p>
+        )}
+        {category !== 'ALL' &&
+          getFilteredItems(team, category).length === 0 && (
+            <p className={styles.empty}>팀이 존재하지 않습니다.</p>
+          )}
       </section>
+      <div className={styles.pageArea}>
+        <Paging
+          page={page}
+          totalElements={category === 'ALL' ? totalElements : total}
+          size={size}
+          setPage={setPage}
+        />
+      </div>
     </div>
   );
+}
+
+function getFilteredItems(team, filter) {
+  if (filter === 'ALL') {
+    return team;
+  }
+  return team.filter((team) => team.category === filter);
 }
