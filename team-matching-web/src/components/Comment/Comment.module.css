@@ -1,0 +1,25 @@
+.list{
+  list-style: none;
+
+}
+.comment{
+  padding: 0.5rem;
+}
+.header{
+  display: flex;
+  align-items: center;
+}
+
+.nickname{
+  font-weight: 700;
+}
+
+.date{
+  margin-left: 2rem;
+  font-weight: 300;
+  font-size: small;
+}
+
+.content{
+  margin-top: 1rem;
+}
