@@ -3,9 +3,12 @@ import { useLocation, Link, useNavigate } from 'react-router-dom';
 import styles from './PostDetail.module.css';
 import { deletePost, getPostsDetail, writeComment } from '../../API/TeamMon';
 import { useRecoilValue } from 'recoil';
+import { useQuery } from '@tanstack/react-query';
 import { userState } from '../../Recoil/state';
 import Comment from '../../components/Comment/Comment';
 import RoundBtn from '../../components/ui/RoundBtn/RoundBtn';
+import Loading from '../../components/ui/Loading/Loading';
+import NotFound from '../NotFound/NotFound';
 export default function PostDetail() {
   const {
     state: {
@@ -22,6 +25,22 @@ export default function PostDetail() {
   const editClickListner = () => {
     nav('/board/new', { state: { postInfo } });
   };
+  const { isLoading, error, data } = useQuery(
+    ['getPost', id],
+    () => {
+      return getPostsDetail(id);
+    },
+    {
+      onSuccess: (data) => {
+        setPostInfo(data.data.resultData);
+        setComments(data.data.resultData.commentDtos);
+        if (data.data.resultData.userAccountDto.userId === user.userId) {
+          setIsMine(true);
+        }
+      },
+    }
+  );
+
   const deleteClickListner = () => {
     deletePost(postInfo.id, user.token).then((result) => {
       if (result.status === 200) {
@@ -30,28 +49,19 @@ export default function PostDetail() {
       }
     });
   };
-  useEffect(() => {
-    getPostsDetail(id).then((result) => {
-      setPostInfo(result);
-      setComments(result.commentDtos);
-      if (result.userAccountDto.userId === user.userId) {
-        setIsMine(true);
-      }
-    });
-  }, []);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     writeComment(content, id, user.token).then((result) => {
+      setContent('');
       if (result.status === 401) {
         alert('로그인 후 이용해 주세요!!');
         return;
       }
     });
-    getPostsDetail(id).then((result) => {
-      setPostInfo(result);
-      setComments(result.commentDtos);
-    });
   };
+  if (isLoading) return <Loading />;
+  if (error) return <NotFound />;
   return (
     <div className={styles.root}>
       <div className={styles.titleHeader}>
