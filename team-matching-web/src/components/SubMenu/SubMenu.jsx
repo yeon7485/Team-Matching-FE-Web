@@ -17,6 +17,7 @@ export default function SubMenu({ onMouseEnter, onMouseLeave, user }) {
       }
     });
   };
+
   return (
     <ul
       className={styles.submenu}

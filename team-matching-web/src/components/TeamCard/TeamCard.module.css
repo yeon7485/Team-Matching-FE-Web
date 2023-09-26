@@ -29,13 +29,13 @@
 	font-weight: bold;
 }
 
-.time {
+.createdAt {
 	margin-left: 0.7rem;
 	color: var(--gray800);
-	font-size: 0.8rem;
+	font-size: 0.75rem;
 }
 
-.date {
+.deadline {
 	margin-right: 0.2rem;
 	color: var(--gray800);
 }
@@ -43,6 +43,12 @@
 .title {
 	margin-top: 1rem;
 	margin-bottom: 0.5rem;
+	font-weight: 600;
+}
+
+.nickname {
+	font-size: 0.9rem;
+	color: var(--gray800);
 }
 
 .bot {
@@ -52,7 +58,7 @@
 	margin-top: 3.7rem;
 }
 
-.tag {
+.hashtag {
 	font-size: 0.9rem;
 }
 
@@ -68,18 +74,23 @@
 	color: black;
 }
 
-.dev {
+.closed {
+	color: var(--gray500);
+	border-color: var(--gray500);
+}
+
+.개발 {
 	color: var(--category-dev);
 }
 
-.hobby {
+.취미 {
 	color: var(--category-hobby);
 }
 
-.sports {
+.스포츠 {
 	color: var(--category-sports);
 }
 
-.game {
+.게임 {
 	color: var(--category-game);
 }
