@@ -243,16 +243,7 @@ export async function getPosts(page, size) {
 
 //자세한 게시글 정보 받아오기
 export async function getPostsDetail(id) {
-  return axios
-    .get(`/posts/${id}`)
-    .then((result) => {
-      console.log(result);
-      return result.data.resultData;
-    })
-    .catch((error) => {
-      console.log(error);
-      return error.response;
-    });
+  return axios.get(`/posts/${id}`);
 }
 
 //글 삭제하기
@@ -263,6 +254,19 @@ export async function deletePost(id, token) {
     })
     .then((result) => {
       return result;
+    });
+}
+
+//검색어로 글 검색하기
+export async function getSearchPost(keyword, page, size) {
+  return axios
+    .get(`/posts/search?keyword=${keyword}&page=${page}&size=${size}`)
+    .then((result) => {
+      return result;
+    })
+    .catch((error) => {
+      console.log(error);
+      return error.response;
     });
 }
 //댓글 쓰기
@@ -304,6 +308,21 @@ export async function getMyPosts(id, token) {
     });
 }
 
+//내가 쓴 댓글 조회
+export async function getMyComments(id, token) {
+  return axios
+    .get(`/my-page/${id}/comments`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    .then((result) => {
+      return result.data.resultData.content;
+    })
+    .catch((error) => {
+      alert(error.response.data.error);
+      return error.response;
+    });
+}
+
 //게시글 수정하기
 export async function editPost(id, post, token) {
   return axios
@@ -327,5 +346,47 @@ export async function editPost(id, post, token) {
       console.log(error);
       alert(error.response.data);
       return error.response;
+    });
+}
+
+//비밀번호 변경하기
+export async function changePassword(userId, token, password, checkPw) {
+  return axios
+    .patch(
+      `/my-page/${userId}/password`,
+      {
+        password: password,
+        passwordCheck: checkPw,
+      },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    )
+    .then((result) => {
+      alert('비번 수정 성공!');
+      return result;
+    })
+    .catch((error) => {
+      alert(error.response.data.resultMessage);
+      console.log(error);
+      alert(error.response.data);
+      return error.response;
+    });
+}
+
+//비밀번호 검증하기
+export async function checkPassword(userId, token, password) {
+  return axios
+    .post(
+      `/my-page/${userId}/password`,
+      {
+        password: password,
+      },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    )
+    .then((result) => {
+      return result;
     });
 }

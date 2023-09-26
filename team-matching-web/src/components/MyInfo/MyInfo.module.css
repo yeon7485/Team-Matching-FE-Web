@@ -31,15 +31,6 @@
 
 
 .user{
-<<<<<<< HEAD
-  opacity: 60%;
-  margin: 2rem; 
-}
-
-.title{
-  font-weight: 500;
-  margin: 2rem; 
-=======
   margin: 2rem;
   opacity: 60%; 
 }
@@ -47,7 +38,6 @@
 .title{
   margin: 2rem;
   font-weight: 500; 
->>>>>>> main
 }
 
 .infoBtn{
