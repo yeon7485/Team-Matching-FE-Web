@@ -1,8 +1,9 @@
 .root {
-	width: auto;
 	min-width: 30rem;
+	max-width: 120rem;
 	padding: 3.4rem 4rem;
-	margin: 3.7rem 9% 4rem;
+	min-zoom: 67%;
+	margin: 3.7rem 8%;
 	border: 1px solid var(--gray800);
 	border-radius: 20px;
 }
@@ -62,16 +63,16 @@
 	margin-bottom: 1rem;
 	color: var(--main-color-red);
 	font-weight: bold;
-	font-size: 1.5rem;
+	font-size: 1.3rem;
 }
 
 .apply {
-	padding: 0.8rem 1.4rem;
+	padding: 0.6rem 1.2rem;
 	border: 2px solid var(--main-color);
 	border-radius: 40px;
 	color: var(--main-color);
 	font-weight: bold;
-	font-size: 1.5rem;
+	font-size: 1.3rem;
 	text-decoration: none;
 	cursor: pointer;
 	white-space: nowrap;
@@ -80,7 +81,17 @@
 .apply:hover {
 	background-color: var(--main-color);
 	color: white;
+}
 
+.closed {
+	padding: 0.6rem 1.2rem;
+	border: 2px solid var(--gray500);
+	border-radius: 40px;
+	color: var(--gray500);
+	font-weight: bold;
+	font-size: 1.3rem;
+	text-decoration: none;
+	white-space: nowrap;
 }
 
 .description {

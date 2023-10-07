@@ -37,7 +37,7 @@ export default function TeamCard({
     <li
       className={styles.root}
       onClick={() => {
-        navigate(`/findteam/${id}`, { state: { team } });
+        navigate(`/teams/${id}`, { state: { team } });
       }}
     >
       <div className={styles.top}>

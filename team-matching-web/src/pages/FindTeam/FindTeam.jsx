@@ -19,7 +19,7 @@ export default function FindTeam() {
   const [page, setPage] = useState(1);
   const [size, setSize] = useState(0);
   const [totalElements, setTotalElements] = useState(-1);
-  const [total, setTotal] = useState(0);
+  const [total, setTotal] = useState(-1);
   const cn = classNames.bind(styles);
   const handleChange = (e) => {
     setSearch(e.target.value);
@@ -29,15 +29,14 @@ export default function FindTeam() {
     setLoading(true);
     getTeamList(page - 1)
       .then((result) => {
-        console.log(result);
         setTeam(result.content);
         setSize(result.size);
         setTotalElements(result.totalElements);
+        setTotal(result.totalElements);
       })
       .catch((e) => setError(e))
       .finally(() => {
         setLoading(false);
-        setTotal(totalElements);
       });
     return () => {
       console.log('clean');
@@ -45,6 +44,8 @@ export default function FindTeam() {
   }, [page]);
 
   // useEffect(() => {
+  //   setPage(1);
+  //   console.log('categ');
   //   if (category !== 'ALL') {
   //     const newTeam = team.filter((team) => team.category == category);
   //     setTotal(newTeam.length);
@@ -58,13 +59,12 @@ export default function FindTeam() {
     const cat = e.target.value;
     setCategory(cat);
     setPage(1);
-    if (category !== 'ALL') {
+    if (cat !== 'ALL') {
       const newTeam = team.filter((team) => team.category == cat);
       setTotal(newTeam.length);
     } else {
       setTotal(totalElements);
     }
-    console.log(total);
   };
 
   if (loading) return <Loading />;
@@ -152,7 +152,7 @@ export default function FindTeam() {
             </form>
             <BiSearch className={styles.searchBtn} />
           </div>
-          <Link to='/newteam' className={styles.createBtn} state={{}}>
+          <Link to='/teams/new' className={styles.createBtn} state={{}}>
             팀 만들기
           </Link>
         </div>
@@ -165,18 +165,22 @@ export default function FindTeam() {
         {team && totalElements === 0 && (
           <p className={styles.empty}>팀이 존재하지 않습니다.</p>
         )}
-        {category !== 'ALL' &&
+        {totalElements > 0 &&
+          category !== 'ALL' &&
           getFilteredItems(team, category).length === 0 && (
             <p className={styles.empty}>팀이 존재하지 않습니다.</p>
           )}
       </section>
-      <div className={styles.pageArea}>
-        <Paging
-          page={page}
-          totalElements={category === 'ALL' ? totalElements : total}
-          size={size}
-          setPage={setPage}
-        />
+      <div>
+        {console.log('total', total)}
+        {total > 0 && (
+          <Paging
+            page={page}
+            totalElements={category === 'ALL' ? totalElements : total}
+            size={size}
+            setPage={setPage}
+          />
+        )}
       </div>
     </div>
   );

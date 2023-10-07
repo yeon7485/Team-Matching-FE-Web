@@ -33,10 +33,10 @@ export default function Navbar() {
           게시판
         </Link>
         <Link
-          to='/findteam'
+          to='/teams'
           className={cn(
             'item',
-            `${window.location.pathname === '/findteam' ? 'select' : ''}`
+            `${window.location.pathname === '/teams' ? 'select' : ''}`
           )}
         >
           팀 찾기

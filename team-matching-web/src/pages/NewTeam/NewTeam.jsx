@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './NewTeam.module.css';
 import { useNavigate, useLocation } from 'react-router-dom';
 import RoundBtn from '../../components/ui/RoundBtn/RoundBtn';
@@ -13,20 +13,33 @@ export default function NewTeam() {
     state: { team },
   } = useLocation();
   const [newTeam, setNewTeam] = useState({
-    category: (team && team.category) || '',
-    title: (team && team.name) || '',
-    description: (team && team.description) || '',
-    tag: (team && team.hashtag) || '',
-    deadline: (team && team.deadline.replace('T', ' ')) || '',
-    capacity: (team && team.capacity) || 1,
+    category: '',
+    title: '',
+    description: '',
+    tag: '',
+    deadline: '',
+    capacity: 1,
     total: 1,
   });
-
-  const navigate = useNavigate();
+  const nav = useNavigate();
   const cn = classNames.bind(styles);
   const user = useRecoilValue(userState);
 
   const today = dateToString(new Date());
+
+  useEffect(() => {
+    if (team) {
+      setNewTeam((newTeam) => ({
+        ...newTeam,
+        category: team.category,
+        title: team.name,
+        description: team.description,
+        tag: team.hashtag,
+        deadline: team.deadline.replace('T', ' ').substring(0, 16),
+        capacity: team.capacity,
+      }));
+    }
+  }, []);
 
   // input onChange
   const handleChange = (e) => {
@@ -50,7 +63,7 @@ export default function NewTeam() {
         '취소하시겠습니까? \n확인 선택 시, 작성된 내용은 저장되지 않습니다.'
       ) === true
     ) {
-      navigate(-1);
+      nav(-1);
     }
   };
 
@@ -60,22 +73,20 @@ export default function NewTeam() {
     if (checkForm(newTeam)) {
       createTeam(newTeam, user.token).then((result) => {
         if (result === 200) {
-          navigate('/findteam');
+          nav('/teams');
         }
       });
-      console.log(newTeam);
       alert('등록되었습니다.');
-      navigate(`/findteam`);
+      nav(`/teams`);
     }
   };
 
   const onEditTeam = () => {
-    console.log(checkForm(newTeam));
     if (checkForm(newTeam)) {
-      console.log(newTeam.deadline);
       console.log(newTeam);
       editTeam(team.id, newTeam, user.token).then((result) => {
         console.log(result);
+        nav(`/teams/${team.Id}`, { state: { team } });
       });
     }
   };
@@ -84,7 +95,16 @@ export default function NewTeam() {
     <div className={styles.container}>
       <div className={styles.top}>
         <h1 className={styles.title}>팀 새로 만들기</h1>
-        <button className={styles.list}>목록</button>
+        {!team && (
+          <button
+            className={styles.list}
+            onClick={() => {
+              nav(`/teams`);
+            }}
+          >
+            목록
+          </button>
+        )}
       </div>
       <hr />
       <form className={styles.write} onSubmit={handleSubmit}>
@@ -182,7 +202,7 @@ export default function NewTeam() {
         <input
           type='text'
           name='title'
-          value={newTeam.title ?? ''}
+          value={newTeam.title || ''}
           placeholder='제목을 입력해주세요.'
           required
           className={styles.input}
@@ -192,7 +212,7 @@ export default function NewTeam() {
         <textarea
           name='description'
           wrap='hard'
-          value={newTeam.description ?? ''}
+          value={newTeam.description || ''}
           placeholder='내용을 입력해주세요.'
           required
           className={`${styles.input} ${styles.textArea}`}

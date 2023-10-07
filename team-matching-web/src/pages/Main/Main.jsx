@@ -12,7 +12,7 @@ export default function Main() {
             <br />
             Team Mon 서비스를 통해 팀을 모집해보세요!
           </p>
-          <Link to='/findteam' className={styles.btn}>
+          <Link to='/teams' className={styles.btn}>
             지금 시작하기
           </Link>
         </div>

@@ -81,12 +81,13 @@ form {
 	margin: 3rem 0;
 	place-items: center;
 	gap: 1.5rem 1rem;
-
+	grid-template-columns: repeat(auto-fit, minmax(25%, auto));
 }
 
 
 .empty {
-	margin: 3rem 2rem;
+	margin: 2rem 0;
+	grid-column: 1 / span 4;
 }
 
 .black {

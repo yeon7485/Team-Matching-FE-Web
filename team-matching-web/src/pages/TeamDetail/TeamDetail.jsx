@@ -21,10 +21,12 @@ export default function TeamDetail() {
   const [error, setError] = useState(undefined);
   const [team, setTeam] = useState({});
   const [applyModalOpen, setApplyModalOpen] = useState(false);
+  const [applyListModalOpen, setApplyListModalOpen] = useState(false);
   const [isMine, setIsMine] = useState(false);
   const [closed, setClosed] = useState(false);
   const user = useRecoilValue(userState);
   const nav = useNavigate();
+  const today = new Date();
 
   useEffect(() => {
     setLoading(true);
@@ -34,9 +36,17 @@ export default function TeamDetail() {
         if (result.adminUserAccountDto.userId === user.userId) {
           setIsMine(true);
         }
+        if (
+          result.capacity === result.total ||
+          today > new Date(result.deadline)
+        ) {
+          setClosed(true);
+        }
       })
       .catch((e) => setError(e))
-      .finally(() => setLoading(false));
+      .finally(() => {
+        setLoading(false);
+      });
     return () => {
       console.log('clean');
     };
@@ -45,22 +55,14 @@ export default function TeamDetail() {
   const cn = classNames.bind(styles);
   const cat = useCategory(team ? team.category : '');
 
-  useEffect(() => {
-    if (team.capacity === team.total || new Date() > new Date(team.deadline)) {
-      setClosed(true);
-    }
-  }, [team.capacity, team.total, team.deadline]);
-
-  const showApplyModal = () => {
-    if (isMine) {
-      alert('자신의 팀에 신청할 수 없습니다.');
-      return;
-    }
-    setApplyModalOpen(true);
+  const showModal = () => {
+    isMine
+      ? nav(`/teams/${id}/admission`, { state: { team } })
+      : setApplyModalOpen(true);
   };
 
   const onEditTeam = () => {
-    nav('/newteam', { state: { team } });
+    nav('/teams/new', { state: { team } });
   };
 
   const onDeleteTeam = () => {
@@ -72,15 +74,14 @@ export default function TeamDetail() {
       deleteTeam(id, user.token).then((result) => {
         alert('삭제되었습니다.');
         if (result.status === 200) {
-          nav('/findteam');
+          nav('/teams');
         }
       });
     }
   };
-
-  if (loading) return <Loading />;
+  console.log(team);
+  if (loading || !team) return <Loading />;
   if (error) return <NotFound />;
-
   return (
     <>
       <div className={styles.root}>
@@ -106,20 +107,14 @@ export default function TeamDetail() {
             <p
               className={cn('count')}
             >{`${team.total} / ${team.capacity} 명`}</p>
-            {console.log(closed)}
             {closed && (
-              <button
-                className={styles.apply}
-                onClick={() => {
-                  alert('모집 완료되었습니다.');
-                }}
-              >
+              <button className={styles.closed} disabled>
                 모집완료
               </button>
             )}
             {!closed && (
-              <button className={styles.apply} onClick={showApplyModal}>
-                신청하기
+              <button className={styles.apply} onClick={showModal}>
+                {isMine ? '신청 확인하기' : '신청하기'}
               </button>
             )}
 

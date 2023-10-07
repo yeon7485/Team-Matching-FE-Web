@@ -7,8 +7,6 @@ export default function ApplyModal({ setModalOpen, id, token }) {
   const [message, setMessage] = useState();
   const nav = useNavigate();
 
-  console.log(id, token);
-
   const closeModal = () => {
     setModalOpen(false);
   };
@@ -21,9 +19,12 @@ export default function ApplyModal({ setModalOpen, id, token }) {
     console.log(id);
     console.log(token);
     admissionTeam(id, message, token).then((result) => {
+      console.log(result);
       if (result.status === 200) {
         alert('신청이 완료되었습니다.');
-        nav('/findteam');
+        nav('/teams');
+      } else if (result.status === 409) {
+        alert('이미 신청한 내역이 있습니다.');
       }
     });
     closeModal();
@@ -32,15 +33,15 @@ export default function ApplyModal({ setModalOpen, id, token }) {
   return (
     <div className={styles.container}>
       <header className={styles.header}>
-        <span>신청하기</span>
+        <p className={styles.title}>신청하기</p>
         <button type='button' onClick={closeModal} className={styles.closeBtn}>
           X
         </button>
       </header>
       <form className={styles.form} onSubmit={handleSubmit}>
-        <label htmlFor='nowPw'>가입 신청 메시지</label>
+        <label htmlFor='message'>가입 신청 메시지</label>
         <textarea
-          name='contents'
+          name='message'
           wrap='hard'
           placeholder='메시지를 입력해주세요.'
           required
