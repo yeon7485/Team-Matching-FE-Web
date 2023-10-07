@@ -15,6 +15,8 @@ import FindTeam from './pages/FindTeam/FindTeam';
 import TeamDetail from './pages/TeamDetail/TeamDetail';
 import NewPost from './pages/NewPost/NewPost';
 import NewTeam from './pages/NewTeam/NewTeam';
+import ApplyList from './pages/ApplyList/ApplyList';
+import TeamOnly from './pages/TeamOnly/TeamOnly';
 
 const router = createBrowserRouter([
   {
@@ -29,9 +31,12 @@ const router = createBrowserRouter([
       { path: 'board/:num', element: <PostDetail /> },
       { path: 'board/new', element: <NewPost /> },
       { path: 'mypage', element: <MyPage /> },
-      { path: 'findteam', element: <FindTeam /> },
-      { path: 'findteam/:num', element: <TeamDetail /> },
-      { path: 'newteam', element: <NewTeam /> },
+      { path: 'teams', element: <FindTeam /> },
+      { path: 'teams/:num', element: <TeamDetail /> },
+      { path: 'mypage', element: <MyPage /> },
+      { path: 'teams/new', element: <NewTeam /> },
+      { path: 'teams/:num/admission', element: <ApplyList /> },
+      { path: 'myteam/:num', element: <TeamOnly /> },
     ],
   },
 ]);
