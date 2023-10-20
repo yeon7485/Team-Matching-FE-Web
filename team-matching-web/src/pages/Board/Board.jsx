@@ -55,7 +55,9 @@ export default function Board() {
         </header>
         <ul className={styles.boardUl}>
           {post &&
-            post.content.map((post) => <Post key={post.id} post={post} />)}
+            post.content.map((post) => (
+              <Post key={post.id} post={post} teamOnly={false} onClick />
+            ))}
         </ul>
       </section>
       <Link to='new' state={{}} className={styles.writeLink}>

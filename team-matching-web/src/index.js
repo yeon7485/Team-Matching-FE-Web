@@ -16,7 +16,11 @@ import TeamDetail from './pages/TeamDetail/TeamDetail';
 import NewPost from './pages/NewPost/NewPost';
 import NewTeam from './pages/NewTeam/NewTeam';
 import ApplyList from './pages/ApplyList/ApplyList';
-import TeamOnly from './pages/TeamOnly/TeamOnly';
+import TeamBoard from './pages/TeamOnly/TeamBoard/TeamBoard';
+import TeamPostDetail from './pages/TeamOnly/TeamPostDetail/TeamPostDetail';
+import LeaveTeam from './pages/TeamOnly/LeaveTeam/LeaveTeam';
+import TeamInfo from './pages/TeamOnly/TeamInfo/TeamInfo';
+import NewTeamPost from './pages/TeamOnly/NewTeamPost/NewTeamPost';
 
 const router = createBrowserRouter([
   {
@@ -36,7 +40,11 @@ const router = createBrowserRouter([
       { path: 'mypage', element: <MyPage /> },
       { path: 'teams/new', element: <NewTeam /> },
       { path: 'teams/:num/admission', element: <ApplyList /> },
-      { path: 'myteam/:num', element: <TeamOnly /> },
+      { path: 'myteam/:num/board', element: <TeamBoard /> },
+      { path: 'myteam/:num/board/:num', element: <TeamPostDetail /> },
+      { path: 'myteam/:num/board/new', element: <NewTeamPost /> },
+      { path: 'myteam/:num/info', element: <TeamInfo /> },
+      { path: 'myteam/:num/leave', element: <LeaveTeam /> },
     ],
   },
 ]);

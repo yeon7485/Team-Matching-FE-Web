@@ -17,11 +17,11 @@ export default function TeamDetail() {
       team: { id },
     },
   } = useLocation();
+
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(undefined);
   const [team, setTeam] = useState({});
   const [applyModalOpen, setApplyModalOpen] = useState(false);
-  const [applyListModalOpen, setApplyListModalOpen] = useState(false);
   const [isMine, setIsMine] = useState(false);
   const [closed, setClosed] = useState(false);
   const user = useRecoilValue(userState);
@@ -158,7 +158,11 @@ function formatDeadline(deadline) {
 
 function formatDate(date) {
   const newDate = new Date(date);
-  return `${newDate.getFullYear()}.${
-    newDate.getMonth() + 1
-  }.${newDate.getDate()} ${newDate.getHours()}:${newDate.getMinutes()}`;
+  let year = newDate.getFullYear();
+  let month = ('0' + (newDate.getMonth() + 1)).slice(-2);
+  let day = ('0' + newDate.getDate()).slice(-2);
+  let hours = newDate.getHours();
+  let minutes = newDate.getMinutes();
+
+  return year + '-' + month + '-' + day + ' ' + hours + ':' + minutes;
 }

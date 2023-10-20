@@ -18,7 +18,7 @@ export default function NewTeam() {
     description: '',
     tag: '',
     deadline: '',
-    capacity: 1,
+    capacity: 2,
     total: 1,
   });
   const nav = useNavigate();
@@ -54,6 +54,21 @@ export default function NewTeam() {
       return;
     }
     setNewTeam((team) => ({ ...team, [name]: value }));
+  };
+
+  const handleCounter = (type) => {
+    if (type === 'minus' && newTeam.capacity > 2) {
+      setNewTeam((team) => ({
+        ...team,
+        capacity: team.capacity - 1,
+      }));
+    }
+    if (type === 'plus') {
+      setNewTeam((team) => ({
+        ...team,
+        capacity: team.capacity + 1,
+      }));
+    }
   };
 
   // 취소 버튼
@@ -179,20 +194,14 @@ export default function NewTeam() {
               <AiOutlineMinusCircle
                 className={styles.btn}
                 onClick={() => {
-                  setNewTeam((team) => ({
-                    ...team,
-                    capacity: team.capacity - 1,
-                  }));
+                  handleCounter('minus');
                 }}
               />
               <p className={styles.num}>{newTeam.capacity}</p>
               <AiOutlinePlusCircle
                 className={styles.btn}
                 onClick={() => {
-                  setNewTeam((team) => ({
-                    ...team,
-                    capacity: team.capacity + 1,
-                  }));
+                  handleCounter('plus');
                 }}
               />
             </div>

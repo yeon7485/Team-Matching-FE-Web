@@ -1,0 +1,23 @@
+.sidebar {
+	float: left;
+	min-width: 3rem;
+	max-height: 8.4rem;
+	padding: 1rem 3rem 1rem 2.5rem;
+	border: 1px solid var(--gray500);
+	border-radius: 1rem;
+}
+
+.list {
+	list-style-type: disc;
+}
+
+.listItem {
+	margin: 1rem 0;
+	cursor: pointer;
+	flex-shrink: 1;
+}
+
+.listItem:hover {
+	color: var(--main-color);
+	font-weight: 600;
+}

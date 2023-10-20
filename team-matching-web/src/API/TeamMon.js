@@ -169,6 +169,19 @@ export async function getTeamList(page) {
     });
 }
 
+// 카테고리별 팀 리스트 간단 조회
+export async function getCategoryTeamList(page, category) {
+  return axios
+    .get(`/teams/category?category=${category}&page=${page}`)
+    .then((result) => {
+      return result.data.resultData;
+    })
+    .catch((error) => {
+      console.log(error);
+      return error.response;
+    });
+}
+
 // 팀 상세조회
 export async function getTeamDetail(id) {
   return axios
@@ -394,9 +407,9 @@ export async function checkPassword(userId, token, password) {
 }
 
 // 팀 가입 신청 간단 조회 (팀 관리자)
-export async function getApplyList(id, token) {
+export async function getApplyList(teamId, token) {
   return axios
-    .get(`/teams/${id}/admission`, {
+    .get(`/teams/${teamId}/admission`, {
       headers: { Authorization: `Bearer ${token}` },
     })
     .then((result) => {
@@ -423,9 +436,13 @@ export async function getApplyDetail(teamId, applyId, token) {
 export async function rejectApply(teamId, userId, token) {
   console.log(teamId, userId, token);
   return axios
-    .post(`/teams/${teamId}/admission/reject/${userId}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    })
+    .post(
+      `/teams/${teamId}/admission/reject/${userId}`,
+      {},
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    )
     .then((result) => {
       return result;
     })
@@ -437,9 +454,13 @@ export async function rejectApply(teamId, userId, token) {
 // 팀 가입 승인
 export async function approvalApply(teamId, userId, token) {
   return axios
-    .post(`/teams/${teamId}/admission/approval/${userId}`, {
-      headers: { Authorization: `Bearer ${token}` },
-    })
+    .post(
+      `/teams/${teamId}/admission/approval/${userId}`,
+      {},
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    )
     .then((result) => {
       return result;
     })
