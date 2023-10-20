@@ -4,10 +4,14 @@
 
 .title {
   color: var(--main-color);
+  font-weight: 600;
+  font-size: xx-large;
+  text-decoration: none;
 }
 
 .titleHeader {
   position: relative;
+  margin-bottom: 2rem;
 }
 
 .boardLink {
@@ -118,3 +122,12 @@
   list-style: none;
   padding: 0;
 }
+
+.buttonDiv{
+  width: 140px;
+  display: flex;
+  padding: 1rem;
+  justify-content: space-between;
+  float: right;
+}
+

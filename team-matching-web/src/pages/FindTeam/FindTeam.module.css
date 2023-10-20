@@ -50,9 +50,14 @@ form {
 }
 
 .inputSearch {
-	width: 100%;
+	height: 27px;
+  width: 300px;
+  padding: 0.2rem 1rem;
+  border: #E9E9E9;
+  border-radius: 0.8rem;
+  background-color: #E9E9E9;
 	min-width: 5rem;
-	padding: 0.5rem;
+	
 }
 
 .searchBtn {

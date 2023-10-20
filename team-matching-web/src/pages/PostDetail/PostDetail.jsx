@@ -65,7 +65,9 @@ export default function PostDetail() {
   return (
     <div className={styles.root}>
       <div className={styles.titleHeader}>
-        <h1 className={styles.title}>자유게시판</h1>
+        <Link to='/board' className={styles.title}>
+          자유게시판
+        </Link>
         <Link className={styles.boardLink} to='/board'>
           목록
         </Link>
@@ -77,7 +79,9 @@ export default function PostDetail() {
         <span className={styles.name}>
           {postInfo && postInfo.userAccountDto.nickname}
         </span>
-        <span className={styles.date}>{postInfo && postInfo.createdAt}</span>
+        <span className={styles.date}>
+          {postInfo && postInfo.createdAt.substr(0, 16).replace('T', ' ')}
+        </span>
       </div>
       <article className={styles.post}>
         <div className={styles.content}>{postInfo && postInfo.content}</div>
@@ -108,22 +112,24 @@ export default function PostDetail() {
           </form>
         </div>
       </section>
-      {isMine && (
-        <RoundBtn
-          type={'button'}
-          text={'수정'}
-          fill={false}
-          onClick={editClickListner}
-        ></RoundBtn>
-      )}
-      {isMine && (
-        <RoundBtn
-          type={'button'}
-          text={'삭제'}
-          fill={true}
-          onClick={deleteClickListner}
-        ></RoundBtn>
-      )}
+      <div className={styles.buttonDiv}>
+        {isMine && (
+          <RoundBtn
+            type={'button'}
+            text={'수정'}
+            fill={false}
+            onClick={editClickListner}
+          ></RoundBtn>
+        )}
+        {isMine && (
+          <RoundBtn
+            type={'button'}
+            text={'삭제'}
+            fill={true}
+            onClick={deleteClickListner}
+          ></RoundBtn>
+        )}
+      </div>
     </div>
   );
 }

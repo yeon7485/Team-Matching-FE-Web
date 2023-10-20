@@ -32,5 +32,38 @@
 }
 
 .main {
-	padding: 10%;
+	padding: 5%;
+}
+.newTeam{
+	margin-left: 1.2rem;
+}
+
+.more{
+	margin-left: 2rem;
+font-size: 1rem;text-decoration: none;font-weight: 500;}
+
+.teamList {
+	display: grid;
+	margin: 3rem 0;
+	place-items: center;
+	gap: 1.5rem 1rem;
+	grid-template-columns: repeat(auto-fit, minmax(25%, auto));
+}
+
+@media screen and (min-width: 750px) {
+	.teamList {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media screen and (min-width: 1200px) {
+	.teamList {
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
+
+@media screen and (min-width: 1650px) {
+	.teamList {
+		grid-template-columns: repeat(4, 1fr);
+	}
 }

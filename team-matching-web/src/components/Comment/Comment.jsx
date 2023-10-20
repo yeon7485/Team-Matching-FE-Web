@@ -8,7 +8,9 @@ export default function Comment({ comment }) {
           <span className={styles.nickname}>
             {comment.userAccountDto.nickname}
           </span>
-          <span className={styles.date}>{comment.modifiedAt}</span>
+          <span className={styles.date}>
+            {comment.modifiedAt.substr(0, 16).replace('T', ' ')}
+          </span>
         </div>
         <article className={styles.content}>{comment.content}</article>
       </section>
