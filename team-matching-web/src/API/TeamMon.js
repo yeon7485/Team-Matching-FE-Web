@@ -157,9 +157,9 @@ export function upDateMyPageInfo(userId, token, nickname, memo) {
 }
 
 // 팀 리스트 간단 조회
-export async function getTeamList(page) {
+export async function getTeamList(page, size) {
   return axios
-    .get(`/teams?page=${page}`)
+    .get(`/teams?page=${page}&size=${size}`)
     .then((result) => {
       return result.data.resultData;
     })
@@ -186,6 +186,19 @@ export async function getCategoryTeamList(page, category) {
 export async function getTeamDetail(id) {
   return axios
     .get(`/teams/${id}`)
+    .then((result) => {
+      return result.data.resultData;
+    })
+    .catch((error) => {
+      console.log(error);
+      return error.response;
+    });
+}
+
+//검색어를 포함한 팀 리스트 간단 조회
+export async function getSearchTeamList(keyword, page, size) {
+  return axios
+    .get(`/teams/search?keyword=${keyword}&page=${page}&size=${size}`)
     .then((result) => {
       return result.data.resultData;
     })
@@ -320,6 +333,17 @@ export async function getMyPosts(id, token) {
     .catch((error) => {
       alert(error.response.data.error);
       return error.response;
+    });
+}
+
+//마이페이지 팀 조회
+export async function getMyTeamList(userId, token) {
+  return axios
+    .get(`my-page/${userId}/teams`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    .then((result) => {
+      return result.data.resultData;
     });
 }
 

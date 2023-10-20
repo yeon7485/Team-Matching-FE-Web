@@ -24,7 +24,6 @@ export default function Board() {
     getSearchPost(search, 0, 15).then((result) => {
       setPost(result.data.resultData);
       setTotalElements(result.data.resultData.totalElements);
-      setSearch('');
     });
   };
   return (
@@ -32,7 +31,7 @@ export default function Board() {
       <h1 className={styles.title}>자유게시판</h1>
       <hr />
       <div className={styles.searchBox}>
-        <form onSubmit={handleSubmit}>
+        <form className={styles.searchForm} onSubmit={handleSubmit}>
           <input
             type='text'
             name='search'
@@ -43,7 +42,6 @@ export default function Board() {
             onChange={handleChange}
           />
         </form>
-        <BiSearch className={styles.searchBtn} onClick={handleSubmit} />
       </div>
       <section className={styles.boardList}>
         <header className={styles.boardHeader}>
