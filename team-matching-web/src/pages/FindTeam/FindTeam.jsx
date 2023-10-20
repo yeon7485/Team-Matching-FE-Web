@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styles from './FindTeam.module.css';
 import { BiSearch } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
-import { getTeamList } from '../../API/TeamMon';
+import { getCategoryTeamList, getTeamList } from '../../API/TeamMon';
 import TeamCard from '../../components/TeamCard/TeamCard';
 import classNames from 'classnames/bind';
 import Paging from '../../components/ui/Paging/Paging';
@@ -11,60 +11,102 @@ import NotFound from '../NotFound/NotFound';
 
 export default function FindTeam() {
   const [team, setTeam] = useState([]);
-
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState();
   const [search, setSearch] = useState();
   const [category, setCategory] = useState('ALL');
   const [page, setPage] = useState(1);
-  const [size, setSize] = useState(0);
+  const [size, setSize] = useState(9);
   const [totalElements, setTotalElements] = useState(-1);
   const [total, setTotal] = useState(-1);
+
   const cn = classNames.bind(styles);
+
   const handleChange = (e) => {
     setSearch(e.target.value);
   };
 
   useEffect(() => {
     setLoading(true);
-    getTeamList(page - 1)
-      .then((result) => {
-        setTeam(result.content);
-        setSize(result.size);
-        setTotalElements(result.totalElements);
-        setTotal(result.totalElements);
-      })
-      .catch((e) => setError(e))
-      .finally(() => {
-        setLoading(false);
-      });
-    return () => {
-      console.log('clean');
-    };
+    if (category === 'ALL') {
+      getTeamList(page - 1)
+        .then((result) => {
+          setTeam(result.content);
+          setSize(result.size);
+          setTotalElements(result.totalElements);
+          setTotal(result.totalElements);
+        })
+        .catch((e) => setError(e))
+        .finally(() => {
+          setLoading(false);
+        });
+      return () => {
+        console.log('clean');
+      };
+    } else {
+      getCategoryTeamList(page - 1, category)
+        .then((result) => {
+          setTeam(result.content);
+          setSize(result.size);
+          setTotalElements(result.totalElements);
+          setTotal(result.totalElements);
+        })
+        .catch((e) => setError(e))
+        .finally(() => {
+          setLoading(false);
+        });
+      return () => {
+        console.log('clean');
+      };
+    }
   }, [page]);
 
-  // useEffect(() => {
-  //   setPage(1);
-  //   console.log('categ');
-  //   if (category !== 'ALL') {
-  //     const newTeam = team.filter((team) => team.category == category);
-  //     setTotal(newTeam.length);
-  //   } else {
-  //     setTotal(totalElements);
-  //   }
-  //   console.log(total);
-  // }, [category]);
+  useEffect(() => {
+    console.log(category);
+    console.log('page', page);
+    if (category === 'ALL') {
+      getTeamList(page - 1)
+        .then((result) => {
+          setTeam(result.content);
+          setSize(result.size);
+          setTotalElements(result.totalElements);
+          setTotal(result.totalElements);
+        })
+        .catch((e) => setError(e))
+        .finally(() => {
+          setLoading(false);
+        });
+      return () => {
+        console.log('clean');
+      };
+    } else {
+      getCategoryTeamList(page - 1, category)
+        .then((result) => {
+          setTeam(result.content);
+          setSize(result.size);
+          setTotalElements(result.totalElements);
+          setTotal(result.totalElements);
+        })
+        .catch((e) => setError(e))
+        .finally(() => {
+          setLoading(false);
+        });
+    }
+  }, [category]);
 
   const onCategoryClick = (e) => {
     const cat = e.target.value;
     setCategory(cat);
     setPage(1);
-    if (cat !== 'ALL') {
-      const newTeam = team.filter((team) => team.category == cat);
-      setTotal(newTeam.length);
-    } else {
-      setTotal(totalElements);
-    }
+    setLoading(true);
+    // if (cat !== 'ALL') {
+    //   const newTeam = team.filter((team) => team.category == cat);
+    //   console.log('team len', team.length);
+    //   console.log(newTeam.length);
+    //   setTotal(newTeam.length);
+    // } else {
+    //   setTotal(totalElements);
+    // }
   };
 
   if (loading) return <Loading />;
@@ -127,15 +169,7 @@ export default function FindTeam() {
         </div>
 
         <div className={styles.rightBox}>
-          <div className={styles.selectBox}>
-            <select className={styles.searchSelect}>
-              <option value='title'>카테고리</option>
-              <option value='content'>제목</option>
-              <option value='content'>내용</option>
-              <option value='name'>작성자</option>
-              <option value='tag'>태그</option>
-            </select>
-
+          <div className={styles.searchBox}>
             <form
               onSubmit={(e) => {
                 e.preventDefault();
@@ -149,8 +183,8 @@ export default function FindTeam() {
                 className={styles.inputSearch}
                 onChange={handleChange}
               />
+              <BiSearch className={styles.searchBtn} />
             </form>
-            <BiSearch className={styles.searchBtn} />
           </div>
           <Link to='/teams/new' className={styles.createBtn} state={{}}>
             팀 만들기
@@ -158,10 +192,12 @@ export default function FindTeam() {
         </div>
       </section>
       <section className={styles.teamList}>
-        {team &&
-          getFilteredItems(team, category).map((team) => (
-            <TeamCard key={team.id} team={team} />
-          ))}
+        {
+          team && team.map((team) => <TeamCard key={team.id} team={team} />)
+          // getFilteredItems(team, category).map((team) => (
+          //   <TeamCard key={team.id} team={team} />
+          // ))
+        }
         {team && totalElements === 0 && (
           <p className={styles.empty}>팀이 존재하지 않습니다.</p>
         )}
@@ -176,7 +212,7 @@ export default function FindTeam() {
         {total > 0 && (
           <Paging
             page={page}
-            totalElements={category === 'ALL' ? totalElements : total}
+            totalElements={totalElements}
             size={size}
             setPage={setPage}
           />

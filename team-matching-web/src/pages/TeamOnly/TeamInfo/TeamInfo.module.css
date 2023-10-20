@@ -1,0 +1,74 @@
+.root {
+	width: 100%;
+	min-width: 550px;
+	padding: 1rem 3rem;
+	display: flex;
+	white-space: nowrap;
+	overflow: auto;
+}
+
+.infoBox {
+	width: 40%;
+	max-width: 20rem;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: repeat(5, 1fr);
+	column-gap: 3rem;
+	row-gap: 1.3rem;
+}
+
+.subTitle {
+	font-weight: bold;
+}
+
+
+.memberBox {
+	width: 40%;
+	display: flex;
+	flex-direction: column;
+	margin-left: 10%;
+}
+
+.total {
+	color: var(--main-color-pink);
+	margin-left: 1rem;
+}
+
+.userList {
+	max-width: 18rem;
+	height: 7rem;
+	margin-top: 1rem;
+	border: 1px solid var(--gray500);
+	padding: 1rem 1.2rem;
+	border-radius: 5px;
+	overflow-y: auto;
+}
+
+.user {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	column-gap: 1.5rem;
+	margin-bottom: 0.2rem;
+}
+
+.userId {
+	color: var(--gray600);
+}
+
+.saveBox {
+	display: flex;
+	justify-content: end;
+	margin-top: 1rem;
+}
+
+
+@media only screen and (max-width: 680px) {
+	.root {
+		flex-direction: column;
+	}
+
+	.memberBox {
+		margin-left: 0;
+		margin-top: 1.5rem;
+	}
+}

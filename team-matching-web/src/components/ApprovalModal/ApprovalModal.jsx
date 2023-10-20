@@ -17,6 +17,7 @@ export default function ApprovalModal({
 
   useEffect(() => {
     setLoading(true);
+    console.log(token);
     getApplyDetail(teamId, applyId, token)
       .then((result) => {
         console.log(result);
@@ -32,11 +33,13 @@ export default function ApprovalModal({
   }, []);
 
   const closeModal = () => {
+    window.location.reload();
     setModalOpen(false);
   };
 
   const onApprovalClick = () => {
-    approvalApply(teamId, applyDetail.userId, token).then((result) => {
+    approvalApply(teamId, applyId, token).then((result) => {
+      alert('가입 신청이 승인되었습니다.');
       console.log(result);
       closeModal();
     });
@@ -44,7 +47,7 @@ export default function ApprovalModal({
 
   const onRejectClick = () => {
     if (window.confirm('팀 가입 신청을 거절하시겠습니까?') === true) {
-      rejectApply(teamId, applyDetail.userId, token).then((result) => {
+      rejectApply(teamId, applyId, token).then((result) => {
         console.log(result);
         closeModal();
       });

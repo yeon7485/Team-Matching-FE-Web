@@ -6,7 +6,7 @@ export default function Main() {
     <div>
       <section>
         <div className={styles.banner}>
-          <h1 className={styles.title}>팀 매칭은 Team Mon에서!</h1>
+          <h1 className={styles.title}>TEAMMON</h1>
           <p className={styles.text}>
             개발, 취미, 스포츠 등 다양한 방면에서
             <br />

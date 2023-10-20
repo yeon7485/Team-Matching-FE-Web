@@ -6,6 +6,7 @@ import { userState } from '../../Recoil/state';
 import { getApplyList } from '../../API/TeamMon';
 import { useLocation } from 'react-router-dom';
 import ApprovalModal from '../../components/ApprovalModal/ApprovalModal';
+import Loading from '../../components/ui/Loading/Loading';
 
 export default function ApplyList() {
   const {
@@ -18,38 +19,6 @@ export default function ApplyList() {
   const [loading, setLoading] = useState(false);
   const [approvalModalOpen, setApprovalModalOpen] = useState(false);
   const [applyId, setApplyId] = useState(null);
-  const data = [
-    {
-      id: 0,
-      nickname: '닉네임',
-      userId: '아이디',
-      memo: '마이페이지에서 등록한 자기소개가 여기에 표시돼요!',
-    },
-    {
-      id: 1,
-      nickname: '닉네임',
-      userId: '아이디',
-      memo: '마이페이지에서 등록한 자기소개가 여기에 표시돼요!',
-    },
-    {
-      id: 2,
-      nickname: '닉네임',
-      userId: '아이디',
-      memo: '마이페이지에서 등록한 자기소개가 여기에 표시돼요!',
-    },
-    {
-      id: 3,
-      nickname: '닉네임',
-      userId: '아이디',
-      memo: '마이페이지에서 등록한 자기소개가 여기에 표시돼요!',
-    },
-    {
-      id: 4,
-      nickname: '닉네임',
-      userId: '아이디',
-      memo: '마이페이지에서 등록한 자기소개가 여기에 표시돼요!',
-    },
-  ];
 
   const user = useRecoilValue(userState);
 
@@ -57,19 +26,22 @@ export default function ApplyList() {
     setLoading(true);
     getApplyList(id, user.token)
       .then((result) => {
+        console.log('applyList', result.content);
         setApplyList(result.content);
         setTotalElements(result.totalElements);
       })
       .catch((e) => console.log(e))
       .finally(() => setLoading(false));
   }, []);
-  console.log(applyList);
 
-  const handleClick = (params, e) => {
+  console.log('applyList', user.token);
+
+  const handleClick = (params) => {
     setApplyId(params);
     setApprovalModalOpen(true);
   };
 
+  if (loading) return <Loading />;
   return (
     <div className={styles.root}>
       <div className={styles.header}>
@@ -84,8 +56,8 @@ export default function ApplyList() {
               nickname={apply.userAccountDto.nickname}
               userId={apply.userAccountDto.userId}
               memo={apply.userAccountDto.memo}
-              onClick={(e) => {
-                handleClick(apply.id, e);
+              onClick={() => {
+                handleClick(apply.id);
               }}
             />
           ))}

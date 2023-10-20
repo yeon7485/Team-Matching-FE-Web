@@ -64,9 +64,9 @@
 
 .count {
 	padding: 0.3rem 0.6rem;
-	border: 1px solid var(--main-color-red);
+	border: 1px solid var(--main-color-pink);
 	border-radius: 20px;
-	color: var(--main-color-red);
+	color: var(--main-color-pink);
 	font-weight: bold;
 }
 
