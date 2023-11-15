@@ -4,13 +4,14 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import RoundBtn from '../../components/ui/RoundBtn/RoundBtn';
 import classNames from 'classnames/bind';
 import { AiOutlinePlusCircle, AiOutlineMinusCircle } from 'react-icons/ai';
-import { createTeam, editTeam } from '../../API/TeamMon';
+import { createTeam, updateTeam } from '../../API/TeamMon';
 import { useRecoilValue } from 'recoil';
 import { userState } from '../../Recoil/state';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 export default function NewTeam() {
   const {
-    state: { team },
+    state: { team, prev },
   } = useLocation();
   const [newTeam, setNewTeam] = useState({
     category: '',
@@ -23,10 +24,25 @@ export default function NewTeam() {
   });
   const nav = useNavigate();
   const cn = classNames.bind(styles);
-  const user = useRecoilValue(userState);
-
+  const userToken = useRecoilValue(userState).token;
   const today = dateToString(new Date());
+  console.log(prev);
+  const queryClient = useQueryClient();
+  const addTeam = useMutation(
+    ({ newTeam, userToken }) => createTeam(newTeam, userToken),
+    {
+      onSuccess: () => queryClient.invalidateQueries(['teams', 0]),
+    }
+  );
 
+  const editTeam = useMutation(
+    ({ newTeam, userToken }) => updateTeam(team.id, newTeam, userToken),
+    {
+      onSuccess: () => queryClient.invalidateQueries(['teamDetail', team.id]),
+    }
+  );
+
+  // [TeamDeatil -> 수정]일 떄
   useEffect(() => {
     if (team) {
       setNewTeam((newTeam) => ({
@@ -72,13 +88,14 @@ export default function NewTeam() {
   };
 
   // 취소 버튼
-  const cancelClick = () => {
+  const handleCancelClick = () => {
     if (
       window.confirm(
         '취소하시겠습니까? \n확인 선택 시, 작성된 내용은 저장되지 않습니다.'
       ) === true
     ) {
-      nav(-1);
+      if (prev) nav(`/myteam/${team.id}/info`);
+      else nav(-1);
     }
   };
 
@@ -86,23 +103,30 @@ export default function NewTeam() {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (checkForm(newTeam)) {
-      createTeam(newTeam, user.token).then((result) => {
-        if (result === 200) {
-          nav('/teams');
+      addTeam.mutate(
+        { newTeam, userToken },
+        {
+          onSuccess: () => {
+            alert('등록되었습니다.');
+            nav('/teams');
+          },
         }
-      });
-      alert('등록되었습니다.');
-      nav(`/teams`);
+      );
     }
   };
 
-  const onEditTeam = () => {
+  const handleEditClick = () => {
     if (checkForm(newTeam)) {
-      console.log(newTeam);
-      editTeam(team.id, newTeam, user.token).then((result) => {
-        console.log(result);
-        nav(`/teams/${team.Id}`, { state: { team } });
-      });
+      editTeam.mutate(
+        { newTeam, userToken },
+        {
+          onSuccess: () => {
+            alert('수정되었습니다.');
+            if (prev) nav(`/myteam/${team.id}/info`);
+            else nav(`/teams/${team.Id}`, { state: { team } });
+          },
+        }
+      );
     }
   };
 
@@ -242,7 +266,7 @@ export default function NewTeam() {
             type={'button'}
             text={'취소'}
             fill={false}
-            onClick={cancelClick}
+            onClick={handleCancelClick}
           />
           <div className={styles.space} />
           {!team && <RoundBtn type={'submit'} text={'등록'} fill={true} />}
@@ -251,7 +275,7 @@ export default function NewTeam() {
               type={'button'}
               text={'수정'}
               fill={true}
-              onClick={onEditTeam}
+              onClick={handleEditClick}
             />
           )}
         </div>
