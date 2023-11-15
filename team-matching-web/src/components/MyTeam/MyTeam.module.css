@@ -1,0 +1,36 @@
+.teamLi{
+  display: flex;
+  align-items: center;
+  height: 2rem;
+  padding: 0.4rem;
+  border-bottom: 1px solid lightgray;
+}
+
+.teamLi:hover{
+  background: #E9E9E9;
+  cursor: pointer;
+}
+
+.item {
+  font-size: 0.9rem;
+  flex-basis: 50px;
+}
+
+.teamLi .item:nth-child(1){
+  text-align: center;
+  flex-grow: 0.5;
+}
+.teamLi .item:nth-child(2){
+  flex-grow: 7;
+  flex-shrink: 0;
+  margin-left: 2rem;
+
+}
+.teamLi .item:nth-child(3){
+  text-align: center;
+  flex-grow: 1;
+}
+.teamLi .item:nth-child(4){
+  text-align: center;
+  flex-grow: 1;
+}

@@ -1,7 +1,14 @@
 import styles from './Main.module.css';
 import { Link } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
+import { getTeamList } from '../../API/TeamMon';
+import TeamCard from '../../components/TeamCard/TeamCard';
 
 export default function Main() {
+  const { isLoading, error, data } = useQuery(['getTeamList'], () => {
+    return getTeamList(0, 6);
+  });
+
   return (
     <div>
       <section>
@@ -18,21 +25,15 @@ export default function Main() {
         </div>
       </section>
       <div className={styles.main}>
-        <p>팀 둘러보기 </p>
-        <p>팀 둘러보기 </p>
-        <p>팀 둘러보기 </p>
-        <p>팀 둘러보기 </p>
-        <p>팀 둘러보기 </p>
-        <p>팀 둘러보기 </p>
-        <p>팀 둘러보기 </p>
-        <p>팀 둘러보기 </p>
-        <p>팀 둘러보기 </p>
-        <p>팀 둘러보기 </p>
-        <p>팀 둘러보기 </p>
-        <p>팀 둘러보기 </p>
-        <p>팀 둘러보기 </p>
-        <p>팀 둘러보기 </p>
-        <p>팀 둘러보기 </p>
+        <h2 className={styles.newTeam}>
+          새로 올라온 팀을 확인해보세요!{' '}
+          <Link className={styles.more} to='/teams'>{`더보기 >`}</Link>
+        </h2>
+
+        <section className={styles.teamList}>
+          {data &&
+            data.content.map((team) => <TeamCard key={team.id} team={team} />)}
+        </section>
       </div>
     </div>
   );

@@ -47,7 +47,7 @@ export default function MyPage() {
                 setIndex('TeamAct');
               }}
             >
-              팀 활동
+              참여 중인 팀
             </span>
           </li>
         </ul>

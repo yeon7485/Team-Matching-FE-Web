@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styles from './FindTeam.module.css';
 import { BiSearch } from 'react-icons/bi';
 import { Link } from 'react-router-dom';
+import { getSearchTeamList, getTeamList } from '../../API/TeamMon';
 import { getCategoryTeamList, getTeamList } from '../../API/TeamMon';
 import TeamCard from '../../components/TeamCard/TeamCard';
 import classNames from 'classnames/bind';
@@ -24,6 +25,21 @@ export default function FindTeam() {
 
   const handleChange = (e) => {
     setSearch(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    setLoading(true);
+    e.preventDefault();
+    getSearchTeamList(search, 0, 9)
+      .then((result) => {
+        setTeam(result.content);
+        setSize(result.size);
+        setTotalElements(result.totalElements);
+        setTotal(result.totalElements);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   useEffect(() => {
@@ -170,11 +186,7 @@ export default function FindTeam() {
 
         <div className={styles.rightBox}>
           <div className={styles.searchBox}>
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-              }}
-            >
+            <form onSubmit={handleSubmit}>
               <input
                 type='text'
                 name='search'
@@ -182,6 +194,7 @@ export default function FindTeam() {
                 value={search}
                 className={styles.inputSearch}
                 onChange={handleChange}
+                placeholder='제목, 내용, 태그 검색...'
               />
               <BiSearch className={styles.searchBtn} />
             </form>
