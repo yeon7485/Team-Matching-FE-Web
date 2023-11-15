@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { deleteTeam, getTeamDetail } from '../../API/TeamMon';
 import styles from './TeamDetail.module.css';
@@ -10,6 +10,7 @@ import Loading from '../../components/ui/Loading/Loading';
 import NotFound from './../NotFound/NotFound';
 import { userState } from './../../Recoil/state';
 import { useRecoilValue } from 'recoil';
+import { useQuery } from '@tanstack/react-query';
 
 export default function TeamDetail() {
   const {
@@ -18,9 +19,6 @@ export default function TeamDetail() {
     },
   } = useLocation();
 
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(undefined);
-  const [team, setTeam] = useState({});
   const [applyModalOpen, setApplyModalOpen] = useState(false);
   const [isMine, setIsMine] = useState(false);
   const [closed, setClosed] = useState(false);
@@ -28,29 +26,21 @@ export default function TeamDetail() {
   const nav = useNavigate();
   const today = new Date();
 
-  useEffect(() => {
-    setLoading(true);
-    getTeamDetail(id)
-      .then((result) => {
-        setTeam(result);
-        if (result.adminUserAccountDto.userId === user.userId) {
-          setIsMine(true);
-        }
-        if (
-          result.capacity === result.total ||
-          today > new Date(result.deadline)
-        ) {
-          setClosed(true);
-        }
-      })
-      .catch((e) => setError(e))
-      .finally(() => {
-        setLoading(false);
-      });
-    return () => {
-      console.log('clean');
-    };
-  }, [id]);
+  const {
+    isLoading,
+    error,
+    data: team,
+  } = useQuery(['teamDetail', id], () => {
+    return getTeamDetail(id).then((data) => {
+      if (data.adminUserAccountDto.userId == user.userId) {
+        setIsMine(true);
+      }
+      if (data.capacity === data.total || today > new Date(data.deadline)) {
+        setClosed(true);
+      }
+      return data;
+    });
+  });
 
   const cn = classNames.bind(styles);
   const cat = useCategory(team ? team.category : '');
@@ -80,7 +70,7 @@ export default function TeamDetail() {
     }
   };
   console.log(team);
-  if (loading || !team) return <Loading />;
+  if (isLoading || !team) return <Loading />;
   if (error) return <NotFound />;
   return (
     <>
@@ -94,13 +84,13 @@ export default function TeamDetail() {
             </p>
             <div className={styles.times}>
               <p>{formatDate(team.createdAt)} 작성</p>
-              <p className={cn('dot')}>•</p>
+              <p className={styles.dot}>•</p>
               {team.createdAt !== team.modifiedAt && (
                 <p>{formatDate(team.modifiedAt)} 수정</p>
               )}
             </div>
           </div>
-          <div className={cn('right')}>
+          <div className={styles.right}>
             <p className={styles.deadline}>{`마감일  ${formatDeadline(
               new Date(team.deadline)
             )}`}</p>
