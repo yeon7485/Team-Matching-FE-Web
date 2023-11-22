@@ -3,16 +3,13 @@
 	justify-content: space-between;
 	font-weight: bold;
 	align-items: end;
-	padding: 0 0.5rem 0.5rem;
+	padding: 0 1rem 0.5rem;
 	white-space: nowrap;
 	border-bottom: 1px solid var(--gray500);
 	margin-bottom: 1rem;
+	min-width: 730px;
 }
 
-.title {
-	display: flex;
-	align-items: end;
-}
 
 .name {
 	font-size: 1.8rem;
@@ -21,5 +18,5 @@
 
 .Dday {
 	font-size: 1.5rem;
-	color: var(--main-color-red);
+	color: var(--main-color-pink);
 }

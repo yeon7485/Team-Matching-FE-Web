@@ -86,7 +86,7 @@ export async function createTeam(team, token) {
 }
 
 // 팀 수정
-export async function editTeam(id, team, token) {
+export async function updateTeam(id, team, token) {
   console.log('id', id);
   console.log('team', team);
   console.log('token', token);
@@ -106,7 +106,7 @@ export async function editTeam(id, team, token) {
       }
     )
     .then((result) => {
-      alert('팀 수정 성공');
+      console.log('팀 수정 성공');
       return result;
     })
     .catch((error) => {
@@ -171,6 +171,7 @@ export async function getTeamList(page, size) {
 
 // 카테고리별 팀 리스트 간단 조회
 export async function getCategoryTeamList(page, category) {
+  console.log(category);
   return axios
     .get(`/teams/category?category=${category}&page=${page}`)
     .then((result) => {
