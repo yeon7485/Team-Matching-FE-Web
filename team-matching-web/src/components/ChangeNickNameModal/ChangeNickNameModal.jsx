@@ -1,11 +1,3 @@
-<<<<<<< HEAD
-import React from 'react';
-import styles from './ChangeNickNameModal.module.css';
-export default function ChangeNickNameModal({ setModalOpen }) {
-  const closeModal = () => {
-    setModalOpen(false);
-  };
-=======
 import React, { useState } from 'react';
 import styles from './ChangeNickNameModal.module.css';
 import { userState } from '../../Recoil/state';
@@ -29,7 +21,6 @@ export default function ChangeNickNameModal({
     alert('변경되었습니다.');
     closeModal();
   };
->>>>>>> main
   return (
     <div className={styles.root}>
       <header className={styles.header}>
@@ -38,21 +29,15 @@ export default function ChangeNickNameModal({
           X
         </button>
       </header>
-<<<<<<< HEAD
-      <form className={styles.form}>
-=======
       <form className={styles.form} onSubmit={handleSubmit}>
->>>>>>> main
         <label htmlFor='changeNn'>변경할 닉네임</label>
         <input
           type='text'
           name='chageNn'
           className={styles.inputBox}
-<<<<<<< HEAD
-=======
           value={fixName}
+          required
           onChange={(e) => [setFixName(e.target.value)]}
->>>>>>> main
           placeholder='변경할 닉네임을 입력해주세요.'
         />
         <button className={styles.saveBtn}>저장</button>

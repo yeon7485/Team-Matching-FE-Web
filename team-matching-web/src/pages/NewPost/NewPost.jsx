@@ -1,16 +1,22 @@
 import React, { useState } from 'react';
 import styles from './NewPost.module.css';
 import RoundBtn from '../../components/ui/RoundBtn/RoundBtn';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { editPost, writePost } from '../../API/TeamMon';
+import { useRecoilValue } from 'recoil';
+import { userState } from '../../Recoil/state';
 
 export default function NewPost() {
+  const {
+    state: { postInfo },
+  } = useLocation();
   const [post, setPost] = useState({
-    title: '',
-    contents: '',
-    tag: '',
+    title: (postInfo && postInfo.title) || '',
+    contents: (postInfo && postInfo.content) || '',
+    tag: (postInfo && postInfo.hashtag) || '',
     team: '',
   });
-
+  const user = useRecoilValue(userState);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -21,14 +27,14 @@ export default function NewPost() {
     if (
       window.confirm(
         '작성 중인 글을 취소하시겠습니까? \n확인 선택 시, 작성된 글은 저장되지 않습니다.'
-      ) == true
+      ) === true
     ) {
       navigate(-1);
     }
   };
 
   const handleSubmit = (e) => {
-    console.log(e.target.text);
+    e.preventDefault();
     if (post.title.length > 40) {
       alert('제목은 30글자를 넘을 수 없습니다.');
       return;
@@ -37,9 +43,27 @@ export default function NewPost() {
       alert('태그는 10글자를 넘을 수 없습니다.');
       return;
     }
-    console.log(post);
-    alert('등록되었습니다.');
-    navigate(`/board`);
+    writePost(post, user.token).then((result) => {
+      if (result.status === 200) {
+        navigate('/board');
+      }
+    });
+  };
+
+  const editClick = () => {
+    if (post.title.length > 40) {
+      alert('제목은 30글자를 넘을 수 없습니다.');
+      return;
+    }
+    if (post.tag.length > 10) {
+      alert('태그는 10글자를 넘을 수 없습니다.');
+      return;
+    }
+    editPost(postInfo.id, post, user.token).then((result) => {
+      if (result.status === 200) {
+        navigate('/board');
+      }
+    });
   };
 
   return (
@@ -55,6 +79,7 @@ export default function NewPost() {
           type='text'
           name='title'
           placeholder='제목을 입력해주세요.'
+          value={post.title}
           required
           onChange={handleChange}
           className={styles.input}
@@ -64,6 +89,7 @@ export default function NewPost() {
           name='contents'
           wrap='hard'
           placeholder='내용을 입력해주세요.'
+          value={post.contents}
           required
           onChange={handleChange}
           className={`${styles.input} ${styles.textArea}`}
@@ -73,6 +99,7 @@ export default function NewPost() {
           type='text'
           name='tag'
           placeholder='태그를 입력해주세요.'
+          value={post.tag}
           required
           onChange={handleChange}
           className={styles.input}
@@ -86,9 +113,22 @@ export default function NewPost() {
           className={styles.input}
         ></input>
         <div className={styles.btnArea}>
-          <RoundBtn text={'취소'} fill={false} onClick={cancelClick} />
+          <RoundBtn
+            type={'button'}
+            text={'취소'}
+            fill={false}
+            onClick={cancelClick}
+          />
           <div className={styles.space} />
-          <RoundBtn text={'등록'} fill={true} />
+          {!postInfo && <RoundBtn text={'등록'} fill={true} />}
+          {postInfo && (
+            <RoundBtn
+              type={'button'}
+              text={'수정'}
+              fill={true}
+              onClick={editClick}
+            />
+          )}
         </div>
       </form>
     </div>

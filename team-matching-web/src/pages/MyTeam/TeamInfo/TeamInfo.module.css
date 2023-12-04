@@ -1,0 +1,49 @@
+.root {
+	width: 70%;
+	min-width: 550px;
+	padding: 1rem 3rem;
+	display: flex;
+	flex-direction: column;
+}
+
+.mainBox {
+	display: flex;
+	justify-content: space-between;
+	white-space: nowrap;
+}
+
+.infoBox {
+	width: 40%;
+	max-width: 20rem;
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-template-rows: repeat(5, 1fr);
+	column-gap: 3rem;
+	row-gap: 1.4rem;
+}
+
+.input {
+	height: 1.6rem;
+	padding: 0.2rem 0.5rem;
+	border: 1px solid var(--gray500);
+	font-size: 1rem;
+	resize: none;
+}
+
+.subTitle {
+	font-weight: bold;
+}
+
+.total {
+	color: var(--main-color-pink);
+	margin-left: 1rem;
+}
+
+.userId {
+	color: var(--gray600);
+}
+
+.saveBox {
+	align-self: flex-end;
+	margin-top: 1rem;
+}

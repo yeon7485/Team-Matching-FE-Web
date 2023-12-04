@@ -1,6 +1,18 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './WriteComment.module.css';
+import { useRecoilValue } from 'recoil';
+import { userState } from '../../Recoil/state';
+import { getMyComments } from '../../API/TeamMon';
+import MyComment from '../MyComment/MyComment';
 export default function WriteComment() {
+  const user = useRecoilValue(userState);
+  const [myComments, setMyComments] = useState();
+
+  useEffect(() => {
+    getMyComments(user.userId, user.token).then((result) => {
+      setMyComments(result);
+    });
+  }, []);
   return (
     <>
       <h3>작성한 댓글</h3>
@@ -10,9 +22,10 @@ export default function WriteComment() {
           <div className={styles.item}>댓글</div>
         </header>
         <ul className={styles.ul}>
-          <li>나중에 추가 할 것</li>
-          <li>나중에 추가 할 것</li>
-          <li>나중에 추가 할 것</li>
+          {myComments &&
+            myComments.map((myComments) => (
+              <MyComment key={myComments.id} comment={myComments}></MyComment>
+            ))}
         </ul>
       </div>
     </>

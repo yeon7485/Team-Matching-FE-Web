@@ -5,7 +5,7 @@ body {
   height: 100%;
   margin: 0;
   font-family: 'Noto Sans KR', sans-serif;
-  overflow-x: hidden;
+  overflow-x: auto;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -15,8 +15,8 @@ p {
 }
 
 #root {
-  width: 100vw;
-  min-height: 100vh;
+  width: 100%;
+  min-height: 100%;
 }
 
 input {
@@ -30,9 +30,12 @@ textarea {
 :root {
   --main-color: #7373DE;
   --main-color-dark: #52529E;
-  --main-color-red: #E679AD;
+  --main-color-pink: #E679AD;
+  --gray100: #F5F5F5;
+  --gray200: #EEEEEE;
   --gray300: #E0E0E0;
   --gray500: #9E9E9E;
+  --gray600: #757575;
   --gray800: #424242;
   --category-dev: #0045CB;
   --category-hobby: #008B27;

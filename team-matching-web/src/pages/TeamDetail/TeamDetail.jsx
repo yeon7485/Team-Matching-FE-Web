@@ -1,61 +1,170 @@
-import React, { useEffect, useState } from 'react';
-import { useLocation, Link } from 'react-router-dom';
+import React, { useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { deleteTeam, getTeamDetail } from '../../API/TeamMon';
 import styles from './TeamDetail.module.css';
 import classNames from 'classnames/bind';
 import ApplyModal from '../../components/ApplyModal/ApplyModal';
+import RoundBtn from '../../components/ui/RoundBtn/RoundBtn';
+import useCategory from '../../hooks/useCategory';
+import Loading from '../../components/ui/Loading/Loading';
+import NotFound from './../NotFound/NotFound';
+import { userState } from './../../Recoil/state';
+import { useRecoilValue } from 'recoil';
+import {
+  useQuery,
+  QueryClient,
+  useMutation,
+  useQueryClient,
+} from '@tanstack/react-query';
 
 export default function TeamDetail() {
-  const {
-    state: {
-      team: { id, category, time, date, title, nickname, tag, count, contents },
-    },
-  } = useLocation();
-
-  const [color, setColor] = useState();
+  const { teamId } = useParams();
   const [applyModalOpen, setApplyModalOpen] = useState(false);
-  const cn = classNames.bind(styles);
+  const [isMine, setIsMine] = useState(false);
+  const [closed, setClosed] = useState(false);
+  const user = useRecoilValue(userState);
+  const userToken = user.token;
+  const nav = useNavigate();
+  const today = new Date();
+  const queryClient = useQueryClient();
 
-  useEffect(() => {
-    if (category === '개발') {
-      setColor('dev');
-    } else if (category === '취미') {
-      setColor('hobby');
-    } else if (category === '스포츠') {
-      setColor('sports');
-    } else if (category === '게임') {
-      setColor('game');
+  const {
+    isLoading,
+    error,
+    data: team,
+  } = useQuery(['teamDetail', teamId], () => {
+    return getTeamDetail(teamId).then((data) => {
+      if (data.adminUserAccountDto.userId == user.userId) {
+        setIsMine(true);
+      }
+      if (data.capacity === data.total || today > new Date(data.deadline)) {
+        setClosed(true);
+      }
+      console.log(data);
+      return data;
+    });
+  });
+
+  const removeTeam = useMutation(
+    ({ teamId, userToken }) => deleteTeam(teamId, userToken),
+    {
+      onSuccess: () => queryClient.invalidateQueries(['teams', 0]),
     }
-  }, [category]);
+  );
 
-  const showApplyModal = () => {
-    setApplyModalOpen(true);
+  const cn = classNames.bind(styles);
+  const cat = useCategory(team ? team.category : '');
+  const showModal = () => {
+    isMine
+      ? nav(`/teams/${team.id}/admission`, { state: { team } })
+      : setApplyModalOpen(true);
   };
 
+  const handleEdit = () => {
+    nav('/teams/new', { state: { team } });
+  };
+
+  const handleDelete = () => {
+    if (
+      window.confirm(
+        '삭제하시겠습니까? \n팀 삭제 시 팀 관련 정보가 모두 삭제됩니다.'
+      ) === true
+    ) {
+      removeTeam.mutate(
+        { teamId, userToken },
+        {
+          onSuccess: () => {
+            alert('삭제되었습니다.');
+            nav('/teams', { replace: true });
+          },
+        }
+      );
+    }
+  };
+
+  if (isLoading || !team) return <Loading />;
+  if (error) return <NotFound />;
   return (
-    <div className={styles.root}>
-      <div className={styles.top}>
-        <div className={styles.left}>
-          <p className={cn('category', color)}>{category}</p>
-          <p className={styles.title}>{title}</p>
-          <p className={cn('nickname')}>{nickname}</p>
-          <div className={styles.times}>
-            <p>2023.07.05 20:13 작성</p>
-            <p>•</p>
-            <p>2023.07.05 20:30 수정</p>
+    <>
+      <div className={styles.root}>
+        <div className={styles.top}>
+          <div className={styles.left}>
+            <p className={cn('category', cat)}>{cat}</p>
+            <p className={styles.title}>{team.name}</p>
+            <p className={styles.nickname}>
+              {team.adminUserAccountDto && team.adminUserAccountDto.nickname}
+            </p>
+            <div className={styles.times}>
+              <p>{formatDate(team.createdAt)} 작성</p>
+              <p className={styles.dot}>•</p>
+              {team.createdAt !== team.modifiedAt && (
+                <p>{formatDate(team.modifiedAt)} 수정</p>
+              )}
+            </div>
+          </div>
+          <div className={styles.right}>
+            <p className={styles.deadline}>{`마감일  ${formatDeadline(
+              new Date(team.deadline)
+            )}`}</p>
+            <p
+              className={cn('count')}
+            >{`${team.total} / ${team.capacity} 명`}</p>
+            {closed && (
+              <button className={styles.closed} disabled>
+                모집완료
+              </button>
+            )}
+            {!closed && (
+              <button className={styles.apply} onClick={showModal}>
+                {isMine ? '신청 확인하기' : '신청하기'}
+              </button>
+            )}
+
+            {applyModalOpen && (
+              <ApplyModal
+                setModalOpen={setApplyModalOpen}
+                id={teamId}
+                token={user.token}
+              />
+            )}
           </div>
         </div>
-        <div className={cn('right')}>
-          <p className={cn('date')}>{`마감일  ~${date}`}</p>
-          <p className={cn('count')}>{`${count} 명`}</p>
-          <button className={styles.apply} onClick={showApplyModal}>
-            신청하기
-          </button>
-          {applyModalOpen && <ApplyModal setModalOpen={setApplyModalOpen} />}
-        </div>
+        <hr />
+        <p className={styles.description}>{team.description}</p>
+        <div className={cn('tag', cat)}>{`#${team.hashtag}`}</div>
       </div>
-      <hr />
-      <p className={styles.contents}>{contents}</p>
-      <div className={cn('tag', color)}>{`#${tag}  #고양이  #태그태그`}</div>
-    </div>
+      {isMine && (
+        <div className={styles.btnArea}>
+          <RoundBtn
+            type={'button'}
+            text={'수정'}
+            fill={false}
+            onClick={handleEdit}
+          />
+          <div className={styles.space} />
+          <RoundBtn
+            type={'button'}
+            text={'삭제'}
+            fill={true}
+            onClick={handleDelete}
+          />
+        </div>
+      )}
+    </>
   );
+}
+
+function formatDeadline(deadline) {
+  return `~${deadline.getMonth() + 1}.${deadline.getDate()}`;
+}
+
+function formatDate(date) {
+  const newDate = new Date(date);
+  let year = newDate.getFullYear();
+  let month = ('0' + (newDate.getMonth() + 1)).slice(-2);
+  let day = ('0' + newDate.getDate()).slice(-2);
+  let hours = newDate.getHours();
+  let minutes = newDate.getMinutes();
+
+  return year + '-' + month + '-' + day + ' ' + hours + ':' + minutes;
 }

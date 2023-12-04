@@ -3,17 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@tanstack/react-query": "^4.35.3",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^13.2.1",
     "axios": "^1.4.0",
     "classnames": "^2.3.2",
+    "history": "^5.3.0",
     "http-proxy-middleware": "^2.0.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.10.1",
-    "react-router-dom": "^6.13.0",
+    "react-js-pagination": "^3.0.3",
+    "react-router-dom": "^6.19.0",
     "react-scripts": "5.0.1",
+    "react-spinners": "^0.13.8",
     "recoil": "^0.7.7",
     "recoil-persist": "^5.1.0",
     "web-vitals": "^2.1.0"
@@ -45,5 +49,5 @@
   "devDependencies": {
     "eslint-config-react-app": "^7.0.1"
   },
-  "proxy": "http://15.164.52.180:8080"
+  "proxy": "http://3.37.154.250:8080/"
 }
