@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import styles from './Board.module.css';
 import { Link } from 'react-router-dom';
 import Post from '../../components/Post/Post';
-import { BiSearch } from 'react-icons/bi';
 import { getPosts, getSearchPost } from '../../API/TeamMon';
 import Paging from '../../components/ui/Paging/Paging';
 export default function Board() {

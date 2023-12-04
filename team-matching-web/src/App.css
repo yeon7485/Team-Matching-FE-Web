@@ -12,9 +12,8 @@
 .teamWrapper {
 	display: flex;
 	flex-direction: column;
-	width: 80%;
-	height: 100%;
-	margin: 2.5rem 9% 11%;
+	height: 100vh;
+	margin: 3rem 15% 15%;
 }
 
 .teamContentWrapper {
