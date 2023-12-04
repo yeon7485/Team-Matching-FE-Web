@@ -11,7 +11,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 export default function NewTeam() {
   const {
-    state: { team, prev },
+    state: { team, myTeam },
   } = useLocation();
   const [newTeam, setNewTeam] = useState({
     category: '',
@@ -26,7 +26,6 @@ export default function NewTeam() {
   const cn = classNames.bind(styles);
   const userToken = useRecoilValue(userState).token;
   const today = dateToString(new Date());
-  console.log(prev);
   const queryClient = useQueryClient();
   const addTeam = useMutation(
     ({ newTeam, userToken }) => createTeam(newTeam, userToken),
@@ -65,7 +64,6 @@ export default function NewTeam() {
       var date = new Date(e.target.value);
       date.setHours(date.getHours() + 23);
       date = date.toISOString().replace('T', ' ').substring(0, 16);
-      console.log(date);
       setNewTeam((team) => ({ ...team, deadline: date }));
       return;
     }
@@ -94,21 +92,24 @@ export default function NewTeam() {
         '취소하시겠습니까? \n확인 선택 시, 작성된 내용은 저장되지 않습니다.'
       ) === true
     ) {
-      if (prev) nav(`/myteam/${team.id}/info`);
-      else nav(-1);
+      if (myTeam) nav(`/myteam/${team.id}/info`, { replace: true });
+      else nav(-1, { replace: true });
     }
   };
 
   // 등록 버튼
   const handleSubmit = (e) => {
     e.preventDefault();
+  };
+
+  const handleAddClick = () => {
     if (checkForm(newTeam)) {
       addTeam.mutate(
         { newTeam, userToken },
         {
           onSuccess: () => {
             alert('등록되었습니다.');
-            nav('/teams');
+            nav('/teams', { replace: true });
           },
         }
       );
@@ -122,8 +123,12 @@ export default function NewTeam() {
         {
           onSuccess: () => {
             alert('수정되었습니다.');
-            if (prev) nav(`/myteam/${team.id}/info`);
-            else nav(`/teams/${team.Id}`, { state: { team } });
+            console.log(team.id);
+            console.log(myTeam);
+            if (myTeam) nav(`/myteam/${team.id}/info`, { replace: true });
+            else {
+              nav(-1, { replace: true });
+            }
           },
         }
       );
@@ -133,12 +138,14 @@ export default function NewTeam() {
   return (
     <div className={styles.container}>
       <div className={styles.top}>
-        <h1 className={styles.title}>팀 새로 만들기</h1>
+        <h1 className={styles.title}>
+          {team ? '팀 새로 만들기' : '팀 수정하기'}
+        </h1>
         {!team && (
           <button
             className={styles.list}
             onClick={() => {
-              nav(`/teams`);
+              nav(`/teams`, { replace: true });
             }}
           >
             목록
@@ -146,7 +153,7 @@ export default function NewTeam() {
         )}
       </div>
       <hr />
-      <form className={styles.write} onSubmit={handleSubmit}>
+      <div className={styles.write} onSubmit={handleSubmit}>
         <p className={styles.subTitle}>카테고리</p>
         <div className={styles.category}>
           <button
@@ -269,7 +276,14 @@ export default function NewTeam() {
             onClick={handleCancelClick}
           />
           <div className={styles.space} />
-          {!team && <RoundBtn type={'submit'} text={'등록'} fill={true} />}
+          {!team && (
+            <RoundBtn
+              type={'button'}
+              text={'등록'}
+              fill={true}
+              onClick={handleAddClick}
+            />
+          )}
           {team && (
             <RoundBtn
               type={'button'}
@@ -279,7 +293,7 @@ export default function NewTeam() {
             />
           )}
         </div>
-      </form>
+      </div>
     </div>
   );
 }

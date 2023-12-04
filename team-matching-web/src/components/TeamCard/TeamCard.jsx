@@ -19,7 +19,7 @@ export default function TeamCard({
   },
 }) {
   const [closed, setClosed] = useState(false);
-  const navigate = useNavigate();
+  const nav = useNavigate();
 
   const cn = classNames.bind(styles);
   const cat = useCategory(category);
@@ -37,7 +37,7 @@ export default function TeamCard({
     <li
       className={styles.root}
       onClick={() => {
-        navigate(`/teams/${id}`, { state: { team } });
+        nav(`/teams/${id}`);
       }}
     >
       <div className={styles.top}>
