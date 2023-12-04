@@ -76,7 +76,7 @@ export default function TeamInfo() {
             text='수정'
             fill
             onClick={() => {
-              nav(`/teams/new`, { state: { team, prev: 'myTeam' } });
+              nav(`/teams/new`, { state: { team, myTeam } });
             }}
           />
         </div>

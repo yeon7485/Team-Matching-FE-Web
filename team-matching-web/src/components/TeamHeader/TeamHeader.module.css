@@ -10,10 +10,25 @@
 	min-width: 730px;
 }
 
+.left {
+	display: flex;
+	align-items: end;
+}
 
 .name {
 	font-size: 1.8rem;
 	margin-right: 1rem;
+}
+
+.goDetail {
+	font-size: 0.9rem;
+	font-weight: normal;
+	color: var(--gray800);
+	cursor: pointer;
+}
+
+.goDetail:hover {
+	color: var(--main-color);
 }
 
 .Dday {

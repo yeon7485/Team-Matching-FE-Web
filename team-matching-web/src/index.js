@@ -16,11 +16,8 @@ import TeamDetail from './pages/TeamDetail/TeamDetail';
 import NewPost from './pages/NewPost/NewPost';
 import NewTeam from './pages/NewTeam/NewTeam';
 import ApplyList from './pages/ApplyList/ApplyList';
-import TeamBoard from './pages/TeamOnly/TeamBoard/TeamBoard';
-import TeamPostDetail from './pages/TeamOnly/TeamPostDetail/TeamPostDetail';
-import LeaveTeam from './pages/TeamOnly/LeaveTeam/LeaveTeam';
-import TeamInfo from './pages/TeamOnly/TeamInfo/TeamInfo';
-import NewTeamPost from './pages/TeamOnly/NewTeamPost/NewTeamPost';
+import LeaveTeam from './pages/MyTeam/LeaveTeam/LeaveTeam';
+import TeamInfo from './pages/MyTeam/TeamInfo/TeamInfo';
 
 const router = createBrowserRouter([
   {
@@ -32,16 +29,16 @@ const router = createBrowserRouter([
       { path: 'join', element: <Join /> },
       { path: 'login', element: <Login /> },
       { path: 'board', element: <Board /> },
-      { path: 'board/:num', element: <PostDetail /> },
+      { path: 'board/:postId', element: <PostDetail /> },
       { path: 'board/new', element: <NewPost /> },
       { path: 'mypage', element: <MyPage /> },
       { path: 'teams', element: <FindTeam /> },
-      { path: 'teams/:num', element: <TeamDetail /> },
+      { path: 'teams/:teamId', element: <TeamDetail /> },
       { path: 'mypage', element: <MyPage /> },
       { path: 'teams/new', element: <NewTeam /> },
-      { path: 'teams/:num/admission', element: <ApplyList /> },
-      { path: 'myteam/:num/info', element: <TeamInfo /> },
-      { path: 'myteam/:num/leave', element: <LeaveTeam /> },
+      { path: 'teams/:teamId/admission', element: <ApplyList /> },
+      { path: 'myteam/:teamId/info', element: <TeamInfo /> },
+      { path: 'myteam/:teamId/leave', element: <LeaveTeam /> },
     ],
   },
 ]);
