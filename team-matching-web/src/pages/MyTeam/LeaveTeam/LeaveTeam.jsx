@@ -3,11 +3,7 @@ import styles from './LeaveTeam.module.css';
 import RoundBtn from '../../../components/ui/RoundBtn/RoundBtn';
 import { useRecoilValue } from 'recoil';
 import { myTeamState, userState } from '../../../Recoil/state';
-import {
-  useMutation,
-  QueryClient,
-  useQueryClient,
-} from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { deleteTeam } from '../../../API/TeamMon';
 import { useNavigate } from 'react-router-dom';
 
@@ -29,7 +25,7 @@ export default function LeaveTeam() {
   const leaveTeam = useMutation(
     ({ teamId, userToken }) => deleteTeam(teamId, userToken),
     {
-      onSuccess: () => queryClient.invalidateQueries(['teams', 0]),
+      onSuccess: () => queryClient.invalidateQueries(['getMyTeamList', 0]),
     }
   );
 
@@ -39,13 +35,14 @@ export default function LeaveTeam() {
       {
         onSuccess: () => {
           alert(`${isMine ? '팀이 삭제되었습니다.' : '팀을 탈퇴하였습니다.'}`);
-          nav('/mypage');
+          nav('/mypage', { replace: true });
         },
       }
     );
   };
   return (
     <div className={styles.root}>
+      {console.log(isMine)}
       {!isMine && (
         <p className={styles.text}>
           팀을 탈퇴하시겠습니까? <br />팀 탈퇴 시 팀 전용 페이지에 접속할 수
