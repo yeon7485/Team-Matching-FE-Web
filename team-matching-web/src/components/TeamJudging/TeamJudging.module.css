@@ -1,14 +1,13 @@
-.root {
-	display: flex;
-	flex-direction: column;
-	width: 100%;
-	padding: 0.5rem 1rem 0 1.5rem;
+.content {
+	padding-left: 1rem;
+	padding-top: 1rem;
 }
 
 .header {
 	display: flex;
 	align-items: center;
 	height: 2rem;
+	margin-top: 1rem;
 	background: #E9E9E9;
 	border-top: 1px solid;
 }
@@ -19,19 +18,19 @@
 }
 
 .header div:nth-child(1) {
-	flex-grow: 0.4;
+	flex-grow: 0.8;
 }
 
 .header div:nth-child(2) {
-	flex-grow: 4.5;
+	flex-grow: 8;
 }
 
 .header div:nth-child(3) {
-	flex-grow: 1;
+	flex-grow: 0.5;
 }
 
 .header div:nth-child(4) {
-	flex-grow: 1;
+	flex-grow: 1.5;
 }
 
 .ul {
@@ -41,9 +40,4 @@
 	padding-left: 0;
 	margin: 0;
 	margin-bottom: 2rem;
-}
-
-.btnArea {
-	display: flex;
-	justify-content: end;
 }
