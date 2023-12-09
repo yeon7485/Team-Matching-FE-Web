@@ -340,7 +340,18 @@ export async function getMyPosts(id, token) {
 //마이페이지 팀 조회
 export async function getMyTeamList(userId, token) {
   return axios
-    .get(`my-page/${userId}/teams`, {
+    .get(`/my-page/${userId}/teams`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    .then((result) => {
+      return result.data.resultData;
+    });
+}
+
+// 마이페이지 신청 중인 팀 조회
+export async function getMyJudging(userId, token) {
+  return axios
+    .get(`/my-page/${userId}/teams/judging`, {
       headers: { Authorization: `Bearer ${token}` },
     })
     .then((result) => {
@@ -458,11 +469,10 @@ export async function getApplyDetail(teamId, applyId, token) {
 }
 
 // 팀 가입 거절/취소
-export async function rejectApply(teamId, userId, token) {
-  console.log(teamId, userId, token);
+export async function rejectApply(teamId, applyId, token) {
   return axios
     .post(
-      `/teams/${teamId}/admission/reject/${userId}`,
+      `/teams/${teamId}/admission/reject/${applyId}`,
       {},
       {
         headers: { Authorization: `Bearer ${token}` },
@@ -472,15 +482,16 @@ export async function rejectApply(teamId, userId, token) {
       return result;
     })
     .catch((error) => {
+      console.log(error);
       return error.response;
     });
 }
 
 // 팀 가입 승인
-export async function approvalApply(teamId, userId, token) {
+export async function approvalApply(teamId, applyId, token) {
   return axios
     .post(
-      `/teams/${teamId}/admission/approval/${userId}`,
+      `/teams/${teamId}/admission/approval/${applyId}`,
       {},
       {
         headers: { Authorization: `Bearer ${token}` },

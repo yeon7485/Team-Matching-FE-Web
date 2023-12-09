@@ -4,6 +4,7 @@ import MyInfo from '../../components/MyInfo/MyInfo';
 import WritePost from '../../components/WritePost/WritePost';
 import WriteComment from './../../components/WriteComment/WriteComment';
 import TeamAct from '../../components/TeamAct/TeamAct';
+import TeamJudging from './../../components/TeamJudging/TeamJudging';
 export default function MyPage() {
   const [index, setIndex] = useState('MyInfo');
   return (
@@ -50,6 +51,16 @@ export default function MyPage() {
               참여 중인 팀
             </span>
           </li>
+          <li className={styles.list}>
+            <span
+              className={styles.item}
+              onClick={() => {
+                setIndex('TeamJudging');
+              }}
+            >
+              신청 중인 팀
+            </span>
+          </li>
         </ul>
       </aside>
       <section className={styles.content}>
@@ -57,6 +68,7 @@ export default function MyPage() {
         {index === 'WritePost' && <WritePost />}
         {index === 'WriteComment' && <WriteComment />}
         {index === 'TeamAct' && <TeamAct />}
+        {index === 'TeamJudging' && <TeamJudging />}
       </section>
     </div>
   );
