@@ -33,6 +33,7 @@ const router = createBrowserRouter([
       { path: 'board/new', element: <NewPost /> },
       { path: 'mypage', element: <MyPage /> },
       { path: 'teams', element: <FindTeam /> },
+      { path: 'teams/:keyword', element: <FindTeam /> },
       { path: 'teams/:teamId', element: <TeamDetail /> },
       { path: 'mypage', element: <MyPage /> },
       { path: 'teams/new', element: <NewTeam /> },
