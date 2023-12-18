@@ -7,7 +7,6 @@
       "hooks/*": ["hooks/*"],
       "api/*": ["api/*"],
       "pages/*": ["pages/*"],
-      "MyTeam/*": ["pages/MyTeam/*"],
       "Recoil/*": ["Recoil/*"]
     }
   }
