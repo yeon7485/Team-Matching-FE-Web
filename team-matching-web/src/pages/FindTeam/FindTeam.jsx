@@ -12,6 +12,7 @@ import classNames from 'classnames/bind';
 import Paging from 'ui/Paging/Paging';
 import Loading from 'ui/Loading/Loading';
 import NotFound from '../NotFound/NotFound';
+import useDebounce from 'hooks/useDebounce';
 
 export default function FindTeam() {
   const [isSearch, setIsSearch] = useState(false);
@@ -20,7 +21,6 @@ export default function FindTeam() {
   const [page, setPage] = useState(1);
   const [size, setSize] = useState(9);
   const [totalElements, setTotalElements] = useState(-1);
-
   const cn = classNames.bind(styles);
 
   const {
@@ -56,10 +56,11 @@ export default function FindTeam() {
     { enabled: category !== 'ALL' }
   );
 
+  const debounceKeyword = useDebounce(search, 500);
   const { data: searchTeams } = useQuery(
-    ['teams', 'search', search, page],
+    ['teams', 'search', debounceKeyword, page],
     () => {
-      return getSearchTeamList(search, page - 1, 9).then((data) => {
+      return getSearchTeamList(debounceKeyword, page - 1, 9).then((data) => {
         setTotalElements(data.totalElements);
         console.log(data);
         return data.content;
@@ -69,6 +70,7 @@ export default function FindTeam() {
       enabled: isSearch,
     }
   );
+
   const handleSearchChange = (e) => {
     setSearch(e.target.value);
 
@@ -81,7 +83,6 @@ export default function FindTeam() {
     e.preventDefault();
     setIsSearch(true);
   };
-  console.log(isSearch);
 
   const onCategoryClick = (e) => {
     const cat = e.target.value;
@@ -200,4 +201,11 @@ export default function FindTeam() {
       </div>
     </div>
   );
+}
+
+function getFilteredItems(team, filter) {
+  if (filter === 'ALL') {
+    return team;
+  }
+  return team.filter((team) => team.category === filter);
 }
