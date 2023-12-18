@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import styles from './TeamJudging.module.css';
-import { useRecoilValue } from 'recoil';
-import { userState } from './../../Recoil/state';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
-import { getMyJudging, rejectApply } from '../../API/TeamMon';
-import Loading from '../ui/Loading/Loading';
-import NotFound from '../../pages/NotFound/NotFound';
+import { useRecoilValue } from 'recoil';
+import { userState } from 'Recoil/state';
+import { getMyJudging, rejectApply } from 'api/TeamMon';
+import Paging from 'ui/Paging/Paging';
+import Loading from 'ui/Loading/Loading';
+import NotFound from 'pages/NotFound/NotFound';
 import TeamItem from '../TeamItem/TeamItem';
-import Paging from './../ui/Paging/Paging';
 
 export default function TeamJudging() {
   const { userId, token } = useRecoilValue(userState);

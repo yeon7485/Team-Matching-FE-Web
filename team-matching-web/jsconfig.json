@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "baseUrl": "src",
+    "paths": {
+      "components/*": ["components/*"],
+      "ui/*": ["components/ui/*"],
+      "hooks/*": ["hooks/*"],
+      "api/*": ["api/*"],
+      "pages/*": ["pages/*"],
+      "MyTeam/*": ["pages/MyTeam/*"],
+      "Recoil/*": ["Recoil/*"]
+    }
+  }
+}

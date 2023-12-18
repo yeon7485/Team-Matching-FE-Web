@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import styles from './MyPage.module.css';
-import MyInfo from '../../components/MyInfo/MyInfo';
-import WritePost from '../../components/WritePost/WritePost';
-import WriteComment from './../../components/WriteComment/WriteComment';
-import TeamAct from '../../components/TeamAct/TeamAct';
-import TeamJudging from './../../components/TeamJudging/TeamJudging';
+import MyInfo from 'components/MyInfo/MyInfo';
+import WritePost from 'components/WritePost/WritePost';
+import WriteComment from 'components/WriteComment/WriteComment';
+import TeamAct from 'components/TeamAct/TeamAct';
+import TeamJudging from 'components/TeamJudging/TeamJudging';
+
 export default function MyPage() {
   const [index, setIndex] = useState('MyInfo');
   return (

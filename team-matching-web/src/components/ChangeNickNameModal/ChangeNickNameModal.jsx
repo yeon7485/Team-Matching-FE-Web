@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import styles from './ChangeNickNameModal.module.css';
-import { userState } from '../../Recoil/state';
+import { userState } from 'Recoil/state';
 import { useRecoilValue } from 'recoil';
-import { upDateMyPageInfo } from '../../API/TeamMon';
+import { upDateMyPageInfo } from 'api/TeamMon';
 export default function ChangeNickNameModal({
   setModalOpen,
   userInfo,

@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import styles from './LeaveTeam.module.css';
-import RoundBtn from '../../../components/ui/RoundBtn/RoundBtn';
-import { useRecoilValue } from 'recoil';
-import { myTeamState, userState } from '../../../Recoil/state';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { deleteTeam } from '../../../API/TeamMon';
 import { useNavigate } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
+import { myTeamState, userState } from 'Recoil/state';
+import { deleteTeam } from 'api/TeamMon';
+import RoundBtn from 'ui/RoundBtn/RoundBtn';
 
 export default function LeaveTeam() {
   const myTeam = useRecoilValue(myTeamState);

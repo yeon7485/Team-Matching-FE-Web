@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import styles from './FindTeam.module.css';
+import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import {
   getSearchTeamList,
   getCategoryTeamList,
   getTeamList,
-} from '../../API/TeamMon';
-import TeamCard from '../../components/TeamCard/TeamCard';
+} from 'api/TeamMon';
+import TeamCard from 'components/TeamCard/TeamCard';
 import classNames from 'classnames/bind';
-import Paging from '../../components/ui/Paging/Paging';
-import Loading from '../../components/ui/Loading/Loading';
+import Paging from 'ui/Paging/Paging';
+import Loading from 'ui/Loading/Loading';
 import NotFound from '../NotFound/NotFound';
-import { useQuery } from '@tanstack/react-query';
 
 export default function FindTeam() {
   const [isSearch, setIsSearch] = useState(false);

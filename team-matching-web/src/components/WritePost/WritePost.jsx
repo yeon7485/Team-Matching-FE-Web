@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import styles from './WritePost.module.css';
 import { useRecoilValue } from 'recoil';
-import { userState } from '../../Recoil/state';
-import { getMyPosts } from '../../API/TeamMon';
+import { userState } from 'Recoil/state';
+import { getMyPosts } from 'api/TeamMon';
 import Post from '../Post/Post';
+
 export default function WritePost() {
   const user = useRecoilValue(userState);
   const [myPost, setMyPost] = useState();

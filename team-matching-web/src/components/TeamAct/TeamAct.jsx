@@ -1,6 +1,6 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { getMyTeamList } from '../../API/TeamMon';
+import { getMyTeamList } from 'api/TeamMon';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { myTeamState, userState } from '../../Recoil/state';
 import styles from './TeamAct.module.css';

@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import { useLocation, Link, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
 import styles from './PostDetail.module.css';
-import { deletePost, getPostsDetail, writeComment } from '../../API/TeamMon';
-import { useRecoilValue } from 'recoil';
 import { useQuery } from '@tanstack/react-query';
-import { userState } from '../../Recoil/state';
-import Comment from '../../components/Comment/Comment';
-import RoundBtn from '../../components/ui/RoundBtn/RoundBtn';
-import Loading from '../../components/ui/Loading/Loading';
+import { useLocation, Link, useNavigate } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
+import { userState } from 'Recoil/state';
+import { deletePost, getPostsDetail, writeComment } from 'api/TeamMon';
+import Comment from 'components/Comment/Comment';
+import RoundBtn from 'ui/RoundBtn/RoundBtn';
+import Loading from 'ui/Loading/Loading';
 import NotFound from '../NotFound/NotFound';
+
 export default function PostDetail() {
   const {
     state: {

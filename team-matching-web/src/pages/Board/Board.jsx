@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Board.module.css';
 import { Link } from 'react-router-dom';
-import Post from '../../components/Post/Post';
-import { getPosts, getSearchPost } from '../../API/TeamMon';
-import Paging from '../../components/ui/Paging/Paging';
+import { getPosts, getSearchPost } from 'api/TeamMon';
+import Post from 'components/Post/Post';
+import Paging from 'ui/Paging/Paging';
+
 export default function Board() {
   const [search, setSearch] = useState();
   const handleChange = (e) => {
