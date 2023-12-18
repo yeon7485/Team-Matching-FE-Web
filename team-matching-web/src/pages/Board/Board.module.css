@@ -13,22 +13,12 @@
 }
 
 .inputSearch{
-  height: 23px;
-}
-
-.searchBtn{
-  width: 23px;
-  height: 23px;
-  padding: 0.2rem;
-  background-color: var(--main-color);
-  color: #fff;
-  text-align: center;
-  cursor: pointer;
-  
-}
-
-.searchBtn:hover{
-  background-color: rgba(0, 108, 140, 1.2);
+  height: 27px;
+  width: 300px;
+  padding: 0.2rem 1rem;
+  border: #E9E9E9;
+  border-radius: 0.8rem;
+  background-color: #E9E9E9;
 }
 
 .boardHeader{
@@ -39,6 +29,8 @@
   background: #E9E9E9;
   border-top: 1px solid;
 }
+
+
 
 .item{
   text-align: center;

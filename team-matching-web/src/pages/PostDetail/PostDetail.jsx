@@ -1,24 +1,37 @@
-import React, { useEffect, useState } from 'react';
-import { useLocation, Link, useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
 import styles from './PostDetail.module.css';
-import { deletePost, getPostsDetail, writeComment } from '../../API/TeamMon';
+import { useQuery } from '@tanstack/react-query';
+import { useLocation, Link, useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
-import { userState } from '../../Recoil/state';
-import Comment from '../../components/Comment/Comment';
-import RoundBtn from '../../components/ui/RoundBtn/RoundBtn';
+import { userState } from 'Recoil/state';
+import { deletePost, getPostsDetail, writeComment } from 'api/TeamMon';
+import Comment from 'components/Comment/Comment';
+import RoundBtn from 'ui/RoundBtn/RoundBtn';
+import Loading from 'ui/Loading/Loading';
+import NotFound from '../NotFound/NotFound';
+
 export default function PostDetail() {
   const {
     state: {
       post: { id },
     },
   } = useLocation();
-
   const [isMine, setIsMine] = useState(false);
-  const [comments, setComments] = useState([]);
   const [content, setContent] = useState();
-  const [postInfo, setPostInfo] = useState();
   const user = useRecoilValue(userState);
   const nav = useNavigate();
+  const {
+    isLoading,
+    error,
+    data: postInfo,
+  } = useQuery(['getPost', id], () => {
+    return getPostsDetail(id).then((data) => {
+      if (data.userAccountDto.userId === user.userId) {
+        setIsMine(true);
+      }
+      return data;
+    });
+  });
   const editClickListner = () => {
     nav('/board/new', { state: { postInfo } });
   };
@@ -30,32 +43,25 @@ export default function PostDetail() {
       }
     });
   };
-  useEffect(() => {
-    getPostsDetail(id).then((result) => {
-      setPostInfo(result);
-      setComments(result.commentDtos);
-      if (result.userAccountDto.userId === user.userId) {
-        setIsMine(true);
-      }
-    });
-  }, []);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     writeComment(content, id, user.token).then((result) => {
+      setContent('');
       if (result.status === 401) {
         alert('로그인 후 이용해 주세요!!');
         return;
       }
     });
-    getPostsDetail(id).then((result) => {
-      setPostInfo(result);
-      setComments(result.commentDtos);
-    });
   };
+  if (isLoading) return <Loading />;
+  if (error) return <NotFound />;
   return (
     <div className={styles.root}>
       <div className={styles.titleHeader}>
-        <h1 className={styles.title}>자유게시판</h1>
+        <Link to='/board' className={styles.title}>
+          자유게시판
+        </Link>
         <Link className={styles.boardLink} to='/board'>
           목록
         </Link>
@@ -67,7 +73,9 @@ export default function PostDetail() {
         <span className={styles.name}>
           {postInfo && postInfo.userAccountDto.nickname}
         </span>
-        <span className={styles.date}>{postInfo && postInfo.createdAt}</span>
+        <span className={styles.date}>
+          {postInfo && postInfo.createdAt.substr(0, 16).replace('T', ' ')}
+        </span>
       </div>
       <article className={styles.post}>
         <div className={styles.content}>{postInfo && postInfo.content}</div>
@@ -75,11 +83,14 @@ export default function PostDetail() {
       </article>
       <section className={styles.comment}>
         <div className={styles.commentHeader}>
-          댓글 <span className={styles.commentsLength}>{comments.length}</span>
+          댓글{' '}
+          <span className={styles.commentsLength}>
+            {postInfo.commentDtos.length}
+          </span>
         </div>
         <ul className={styles.commentUl}>
-          {comments &&
-            comments.map((comment) => (
+          {postInfo.commentDtos &&
+            postInfo.commentDtos.map((comment) => (
               <Comment key={comment.id} comment={comment} />
             ))}
         </ul>
@@ -98,22 +109,24 @@ export default function PostDetail() {
           </form>
         </div>
       </section>
-      {isMine && (
-        <RoundBtn
-          type={'button'}
-          text={'수정'}
-          fill={false}
-          onClick={editClickListner}
-        ></RoundBtn>
-      )}
-      {isMine && (
-        <RoundBtn
-          type={'button'}
-          text={'삭제'}
-          fill={true}
-          onClick={deleteClickListner}
-        ></RoundBtn>
-      )}
+      <div className={styles.buttonDiv}>
+        {isMine && (
+          <RoundBtn
+            type={'button'}
+            text={'수정'}
+            fill={false}
+            onClick={editClickListner}
+          ></RoundBtn>
+        )}
+        {isMine && (
+          <RoundBtn
+            type={'button'}
+            text={'삭제'}
+            fill={true}
+            onClick={deleteClickListner}
+          ></RoundBtn>
+        )}
+      </div>
     </div>
   );
 }

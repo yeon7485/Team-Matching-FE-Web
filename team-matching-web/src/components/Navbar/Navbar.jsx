@@ -1,8 +1,8 @@
-import { useRecoilValue } from 'recoil';
-import { userState } from '../../Recoil/state';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
 import styles from './Navbar.module.css';
+import { useRecoilValue } from 'recoil';
+import { userState } from 'Recoil/state';
+import { Link } from 'react-router-dom';
 import SubMenu from '../SubMenu/SubMenu';
 import classNames from 'classnames/bind';
 
@@ -33,25 +33,16 @@ export default function Navbar() {
           게시판
         </Link>
         <Link
-          to='/findteam'
+          to='/teams'
           className={cn(
             'item',
-            `${window.location.pathname === '/findteam' ? 'select' : ''}`
+            `${window.location.pathname === '/teams' ? 'select' : ''}`
           )}
         >
           팀 찾기
         </Link>
       </nav>
       <div className={styles.btn}>
-<<<<<<< HEAD
-        <Link to='/join' className={styles.join}>
-          회원가입
-        </Link>
-        <Link to='/login' className={styles.login}>
-          로그인
-        </Link>
-        <Link to='/mypage'>임시mypage</Link>
-=======
         {!user.userId && (
           <Link to='/join' className={styles.join}>
             회원가입
@@ -72,7 +63,6 @@ export default function Navbar() {
             {isHover && <SubMenu user={user} />}
           </div>
         )}
->>>>>>> main
       </div>
     </header>
   );

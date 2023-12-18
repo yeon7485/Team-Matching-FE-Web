@@ -1,0 +1,57 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	position: absolute;
+	top: 55%;
+	left: 50%;
+	width: 28rem;
+	height: 23rem;
+	z-index: 999;
+	border-radius: 1rem;
+	background-color: white;
+	transform: translate(-50%, -50%);
+	box-shadow: rgba(0, 0, 0, 0.5) 0 0 0 9999px;
+}
+
+.header {
+	display: flex;
+	padding: 1.2rem 1.8rem;
+	font-weight: bold;
+	background-color: rgba(115, 115, 222, 0.2);
+}
+
+.closeBtn {
+	margin-left: auto;
+	width: 1.2rem;
+	height: 1.2rem;
+	cursor: pointer;
+}
+
+.message {
+	display: flex;
+	flex-direction: column;
+	padding: 1.8rem 2.5rem;
+}
+
+.textArea {
+	margin-top: 1rem;
+	height: 6rem;
+	resize: none;
+	padding: 1rem;
+	color: var(--gray800);
+	border-radius: 5px;
+	border-color: var(--gray500);
+}
+
+.textArea:focus {
+	outline: none;
+}
+
+.btnArea {
+	display: flex;
+	justify-content: center;
+}
+
+.space {
+	width: 1rem;
+}

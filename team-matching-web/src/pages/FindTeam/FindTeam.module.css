@@ -34,7 +34,7 @@
 	height: 2.4rem;
 }
 
-.selectBox {
+.searchBox {
 	display: flex;
 	justify-content: stretch;
 }
@@ -50,9 +50,14 @@ form {
 }
 
 .inputSearch {
-	width: 100%;
+	height: 27px;
+  width: 300px;
+  padding: 0.2rem 1rem;
+  border: #E9E9E9;
+  border-radius: 0.8rem;
+  background-color: #E9E9E9;
 	min-width: 5rem;
-	padding: 0.5rem;
+	
 }
 
 .searchBtn {
@@ -81,7 +86,13 @@ form {
 	margin: 3rem 0;
 	place-items: center;
 	gap: 1.5rem 1rem;
+	grid-template-columns: repeat(auto-fit, minmax(25%, auto));
+}
 
+
+.empty {
+	margin: 2rem 0;
+	grid-column: 1 / span 4;
 }
 
 

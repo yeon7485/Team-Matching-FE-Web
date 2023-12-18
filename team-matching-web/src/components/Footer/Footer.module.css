@@ -3,33 +3,47 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	width: 100%;
+	width: 80%;
 	height: 11rem;
 	padding: 1rem 0;
-	background-color: var(--main-color);
+	margin: auto;
 }
 
+.logo{
+	display: inline-block;
+	width: 90%;
+	margin-bottom: 0.5rem;
+}
+
+.icons{
+	float: right;
+}
 .title {
-	margin: 0.4rem;
-	color: white;
+	float: left;
+	margin: 0;
+	color: var(--main-color);
 	font-size: 1.5rem;
 }
+.linkDiv{
+	margin-right: auto;
+	margin-left: 3.1rem;
 
+}
 .link {
 	margin: 0.7rem;
-	color: white;
+	color: #8A8A8A;
 	font-size: 0.7rem;
 	text-decoration: none;
 }
 
 .line {
-	width: 90vw;
-	margin: 1rem;
-	opacity: 20%;
+	width: 100%;
+	opacity: 50%;
+	margin-bottom: 2rem;
 }
 
 .icon {
-	margin: 0 1.5rem;
-	color: white;
-	font-size: 1.7rem;
+	color: var(--main-color);
+	margin: 0 0.5rem;
+	font-size: 1.8rem;
 }

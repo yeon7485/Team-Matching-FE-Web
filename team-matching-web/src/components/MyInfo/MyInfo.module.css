@@ -1,4 +1,4 @@
-.infoBox{
+.infoBox {
   display: grid;
   padding: 2rem;
   grid-template-columns: 1fr 1fr;
@@ -6,87 +6,78 @@
   grid-column-gap: 0.5fr;
 }
 
-.idBox{
-  display: flex;
-  width: 100%;
-  max-width: 500px;
-}
-.pwBox{
+.idBox {
   display: flex;
   width: 100%;
   max-width: 500px;
 }
 
-.nicknameBox{
+.pwBox {
   display: flex;
   width: 100%;
   max-width: 500px;
 }
 
-.emailBox{
+.nicknameBox {
+  display: flex;
+  width: 100%;
+  max-width: 500px;
+}
+
+.emailBox {
   display: flex;
   width: 100%;
   max-width: 500px;
 }
 
 
-.user{
-<<<<<<< HEAD
+.user {
+  margin: 2rem;
   opacity: 60%;
-  margin: 2rem; 
 }
 
-.title{
+.title {
+  margin: 2rem;
   font-weight: 500;
-  margin: 2rem; 
-=======
-  margin: 2rem;
-  opacity: 60%; 
 }
 
-.title{
-  margin: 2rem;
-  font-weight: 500; 
->>>>>>> main
-}
-
-.infoBtn{
+.infoBtn {
   height: 27px;
   margin: 2rem;
   border: 1px solid;
-  border-radius: 0.3rem; 
+  border-radius: 0.3rem;
   background-color: #fff;
   cursor: pointer;
 }
 
-.selfBox{
+.selfBox {
   display: flex;
   padding: 2rem;
-  
+
 }
 
-.selfTitle{
+.selfTitle {
   width: 10%;
   margin: 2rem;
   margin-top: 0;
   font-weight: 500;
 }
 
-.selfForm{
+.selfForm {
   display: flex;
   flex-direction: column;
   width: 80%;
 
 }
 
-.textarea{
+.textarea {
   height: 7rem;
   padding: 1rem;
   margin-bottom: 2rem;
   resize: none;
 }
 
-.saveBtn{
+.saveBtn {
   padding: 0.3rem 0.8rem;
   margin-left: auto;
   border: 1px solid var(--main-color);
@@ -97,6 +88,6 @@
   cursor: pointer;
 }
 
-.saveBtn:hover{
+.saveBtn:hover {
   background-color: rgba(0, 108, 140, 1.2);
 }

@@ -1,0 +1,37 @@
+.root {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 80%;
+	margin: 2.5rem 9% 11%;
+}
+
+.header {
+	display: flex;
+	align-items: end;
+}
+
+.title {
+	font-size: 1.5rem;
+	margin: 0;
+}
+
+.total {
+	font-size: 1rem;
+	font-weight: 600;
+	color: var(--main-color-pink);
+	margin-left: 1rem;
+	padding-bottom: 0.2rem;
+}
+
+.items {
+	display: grid;
+	grid-template-columns: repeat(4, 1fr);
+	margin: 3rem 0;
+	place-items: center;
+	gap: 1.5rem 1rem;
+}
+
+.noItems {
+	margin: 3rem 1rem;
+}

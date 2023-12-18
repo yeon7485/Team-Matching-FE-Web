@@ -1,86 +1,90 @@
-import React, { useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { deleteTeam, getTeamDetail } from '../../API/TeamMon';
+import React, { useState } from 'react';
 import styles from './TeamDetail.module.css';
-import classNames from 'classnames/bind';
-import ApplyModal from '../../components/ApplyModal/ApplyModal';
-import RoundBtn from '../../components/ui/RoundBtn/RoundBtn';
-import useCategory from '../../hooks/useCategory';
-import Loading from '../../components/ui/Loading/Loading';
-import NotFound from './../NotFound/NotFound';
-import { userState } from './../../Recoil/state';
+import { useParams, useNavigate } from 'react-router-dom';
+import { userState } from 'Recoil/state';
 import { useRecoilValue } from 'recoil';
+import { deleteTeam, getTeamDetail } from 'api/TeamMon';
+import classNames from 'classnames/bind';
+import ApplyModal from 'components/ApplyModal/ApplyModal';
+import useCategory from 'hooks/useCategory';
+import RoundBtn from 'ui/RoundBtn/RoundBtn';
+import Loading from 'ui/Loading/Loading';
+import NotFound from 'pages/NotFound/NotFound';
+
+import {
+  useQuery,
+  QueryClient,
+  useMutation,
+  useQueryClient,
+} from '@tanstack/react-query';
 
 export default function TeamDetail() {
-  const {
-    state: {
-      team: { id },
-    },
-  } = useLocation();
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(undefined);
-  const [team, setTeam] = useState({});
+  const { teamId } = useParams();
   const [applyModalOpen, setApplyModalOpen] = useState(false);
   const [isMine, setIsMine] = useState(false);
   const [closed, setClosed] = useState(false);
   const user = useRecoilValue(userState);
+  const userToken = user.token;
   const nav = useNavigate();
+  const today = new Date();
+  const queryClient = useQueryClient();
 
-  useEffect(() => {
-    setLoading(true);
-    getTeamDetail(id)
-      .then((result) => {
-        setTeam(result);
-        if (result.adminUserAccountDto.userId === user.userId) {
-          setIsMine(true);
-        }
-      })
-      .catch((e) => setError(e))
-      .finally(() => setLoading(false));
-    return () => {
-      console.log('clean');
-    };
-  }, [id]);
+  const {
+    isLoading,
+    error,
+    data: team,
+  } = useQuery(['teamDetail', teamId], () => {
+    return getTeamDetail(teamId).then((data) => {
+      if (data.adminUserAccountDto.userId == user.userId) {
+        setIsMine(true);
+      }
+      if (data.capacity === data.total || today > new Date(data.deadline)) {
+        setClosed(true);
+      }
+      console.log(data);
+      return data;
+    });
+  });
+
+  const removeTeam = useMutation(
+    ({ teamId, userToken }) => deleteTeam(teamId, userToken),
+    {
+      onSuccess: () => queryClient.invalidateQueries(['teams', 0]),
+    }
+  );
 
   const cn = classNames.bind(styles);
   const cat = useCategory(team ? team.category : '');
-
-  useEffect(() => {
-    if (team.capacity === team.total || new Date() > new Date(team.deadline)) {
-      setClosed(true);
-    }
-  }, [team.capacity, team.total, team.deadline]);
-
-  const showApplyModal = () => {
-    if (isMine) {
-      alert('자신의 팀에 신청할 수 없습니다.');
-      return;
-    }
-    setApplyModalOpen(true);
+  const showModal = () => {
+    isMine
+      ? nav(`/teams/${team.id}/admission`, { state: { team } })
+      : setApplyModalOpen(true);
   };
 
-  const onEditTeam = () => {
-    nav('/newteam', { state: { team } });
+  const handleEdit = () => {
+    nav('/teams/new', { state: { team } });
   };
 
-  const onDeleteTeam = () => {
+  const handleDelete = () => {
     if (
       window.confirm(
         '삭제하시겠습니까? \n팀 삭제 시 팀 관련 정보가 모두 삭제됩니다.'
       ) === true
     ) {
-      deleteTeam(id, user.token).then((result) => {
-        alert('삭제되었습니다.');
-        if (result.status === 200) {
-          nav('/findteam');
+      removeTeam.mutate(
+        { teamId, userToken },
+        {
+          onSuccess: () => {
+            alert('삭제되었습니다.');
+            nav('/teams', { replace: true });
+          },
         }
-      });
+      );
     }
   };
 
-  if (loading) return <Loading />;
+  if (isLoading || !team) return <Loading />;
   if (error) return <NotFound />;
-
   return (
     <>
       <div className={styles.root}>
@@ -93,40 +97,34 @@ export default function TeamDetail() {
             </p>
             <div className={styles.times}>
               <p>{formatDate(team.createdAt)} 작성</p>
-              <p className={cn('dot')}>•</p>
+              <p className={styles.dot}>•</p>
               {team.createdAt !== team.modifiedAt && (
                 <p>{formatDate(team.modifiedAt)} 수정</p>
               )}
             </div>
           </div>
-          <div className={cn('right')}>
+          <div className={styles.right}>
             <p className={styles.deadline}>{`마감일  ${formatDeadline(
               new Date(team.deadline)
             )}`}</p>
             <p
               className={cn('count')}
             >{`${team.total} / ${team.capacity} 명`}</p>
-            {console.log(closed)}
             {closed && (
-              <button
-                className={styles.apply}
-                onClick={() => {
-                  alert('모집 완료되었습니다.');
-                }}
-              >
+              <button className={styles.closed} disabled>
                 모집완료
               </button>
             )}
             {!closed && (
-              <button className={styles.apply} onClick={showApplyModal}>
-                신청하기
+              <button className={styles.apply} onClick={showModal}>
+                {isMine ? '신청 확인하기' : '신청하기'}
               </button>
             )}
 
             {applyModalOpen && (
               <ApplyModal
                 setModalOpen={setApplyModalOpen}
-                id={id}
+                id={teamId}
                 token={user.token}
               />
             )}
@@ -142,14 +140,14 @@ export default function TeamDetail() {
             type={'button'}
             text={'수정'}
             fill={false}
-            onClick={onEditTeam}
+            onClick={handleEdit}
           />
           <div className={styles.space} />
           <RoundBtn
             type={'button'}
             text={'삭제'}
             fill={true}
-            onClick={onDeleteTeam}
+            onClick={handleDelete}
           />
         </div>
       )}
@@ -163,7 +161,11 @@ function formatDeadline(deadline) {
 
 function formatDate(date) {
   const newDate = new Date(date);
-  return `${newDate.getFullYear()}.${
-    newDate.getMonth() + 1
-  }.${newDate.getDate()} ${newDate.getHours()}:${newDate.getMinutes()}`;
+  let year = newDate.getFullYear();
+  let month = ('0' + (newDate.getMonth() + 1)).slice(-2);
+  let day = ('0' + newDate.getDate()).slice(-2);
+  let hours = newDate.getHours();
+  let minutes = newDate.getMinutes();
+
+  return year + '-' + month + '-' + day + ' ' + hours + ':' + minutes;
 }

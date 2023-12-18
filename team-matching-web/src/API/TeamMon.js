@@ -3,7 +3,7 @@ import axios from 'axios';
 //회원가입
 export async function signUp({ user }) {
   return axios
-    .post('auth/sign-up', {
+    .post('/auth/sign-up', {
       userId: user.id,
       userPassword: user.password,
       email: user.email,
@@ -23,7 +23,7 @@ export async function signUp({ user }) {
 //로그인
 export async function logIn(id, password) {
   return axios
-    .post('auth/login', {
+    .post('/auth/login', {
       userId: id,
       userPassword: password,
     })
@@ -42,7 +42,7 @@ export async function logIn(id, password) {
 //로그아웃
 export async function logOut(id, token) {
   return axios
-    .post('auth/logout', {
+    .post('/auth/logout', {
       userId: id,
       accessToken: token,
     })
@@ -58,6 +58,7 @@ export async function logOut(id, token) {
     });
 }
 
+// 팀 생성
 export async function createTeam(team, token) {
   return axios
     .post(
@@ -79,13 +80,16 @@ export async function createTeam(team, token) {
       return result;
     })
     .catch((error) => {
-      alert(error.response.data);
+      console.log(error.response);
       return error.response;
     });
 }
 
 // 팀 수정
-export async function editTeam(id, team, token) {
+export async function updateTeam(id, team, token) {
+  console.log('id', id);
+  console.log('team', team);
+  console.log('token', token);
   return axios
     .patch(
       `/teams/${id}`,
@@ -102,7 +106,7 @@ export async function editTeam(id, team, token) {
       }
     )
     .then((result) => {
-      alert('팀 수정 성공');
+      console.log('팀 수정 성공');
       return result;
     })
     .catch((error) => {
@@ -153,9 +157,23 @@ export function upDateMyPageInfo(userId, token, nickname, memo) {
 }
 
 // 팀 리스트 간단 조회
-export async function getTeamList(page) {
+export async function getTeamList(page, size) {
   return axios
-    .get(`/teams?page=${page}`)
+    .get(`/teams?page=${page}&size=${size}`)
+    .then((result) => {
+      return result.data.resultData;
+    })
+    .catch((error) => {
+      console.log(error);
+      return error.response;
+    });
+}
+
+// 카테고리별 팀 리스트 간단 조회
+export async function getCategoryTeamList(page, category) {
+  console.log(category);
+  return axios
+    .get(`/teams/category?category=${category}&page=${page}`)
     .then((result) => {
       return result.data.resultData;
     })
@@ -178,9 +196,21 @@ export async function getTeamDetail(id) {
     });
 }
 
+//검색어를 포함한 팀 리스트 간단 조회
+export async function getSearchTeamList(keyword, page, size) {
+  return axios
+    .get(`/teams/search?keyword=${keyword}&page=${page}&size=${size}`)
+    .then((result) => {
+      return result.data.resultData;
+    })
+    .catch((error) => {
+      console.log(error);
+      return error.response;
+    });
+}
+
 // 팀 가입 신청
 export async function admissionTeam(id, message, token) {
-  console.log(id);
   return axios
     .post(
       `/teams/${id}/admission`,
@@ -197,7 +227,6 @@ export async function admissionTeam(id, message, token) {
       return result;
     })
     .catch((error) => {
-      console.log(error);
       return error.response;
     });
 }
@@ -233,7 +262,7 @@ export async function getPosts(page, size) {
   return axios
     .get(`/posts?page=${page}&size=${size}`)
     .then((result) => {
-      return result;
+      return result.data.resultData;
     })
     .catch((error) => {
       console.log(error);
@@ -243,16 +272,9 @@ export async function getPosts(page, size) {
 
 //자세한 게시글 정보 받아오기
 export async function getPostsDetail(id) {
-  return axios
-    .get(`/posts/${id}`)
-    .then((result) => {
-      console.log(result);
-      return result.data.resultData;
-    })
-    .catch((error) => {
-      console.log(error);
-      return error.response;
-    });
+  return axios.get(`/posts/${id}`).then((result) => {
+    return result.data.resultData;
+  });
 }
 
 //글 삭제하기
@@ -263,6 +285,19 @@ export async function deletePost(id, token) {
     })
     .then((result) => {
       return result;
+    });
+}
+
+//검색어로 글 검색하기
+export async function getSearchPost(keyword, page, size) {
+  return axios
+    .get(`/posts/search?keyword=${keyword}&page=${page}&size=${size}`)
+    .then((result) => {
+      return result;
+    })
+    .catch((error) => {
+      console.log(error);
+      return error.response;
     });
 }
 //댓글 쓰기
@@ -304,6 +339,43 @@ export async function getMyPosts(id, token) {
     });
 }
 
+//마이페이지 팀 조회
+export async function getMyTeamList(userId, token) {
+  return axios
+    .get(`/my-page/${userId}/teams`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    .then((result) => {
+      return result.data.resultData;
+    });
+}
+
+// 마이페이지 신청 중인 팀 조회
+export async function getMyJudging(userId, token) {
+  return axios
+    .get(`/my-page/${userId}/teams/judging`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    .then((result) => {
+      return result.data.resultData;
+    });
+}
+
+//내가 쓴 댓글 조회
+export async function getMyComments(id, token) {
+  return axios
+    .get(`/my-page/${id}/comments`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    .then((result) => {
+      return result.data.resultData.content;
+    })
+    .catch((error) => {
+      alert(error.response.data.error);
+      return error.response;
+    });
+}
+
 //게시글 수정하기
 export async function editPost(id, post, token) {
   return axios
@@ -326,6 +398,111 @@ export async function editPost(id, post, token) {
       alert(error.response.data.resultMessage);
       console.log(error);
       alert(error.response.data);
+      return error.response;
+    });
+}
+
+//비밀번호 변경하기
+export async function changePassword(userId, token, password, checkPw) {
+  return axios
+    .patch(
+      `/my-page/${userId}/password`,
+      {
+        password: password,
+        passwordCheck: checkPw,
+      },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    )
+    .then((result) => {
+      alert('비번 수정 성공!');
+      return result;
+    })
+    .catch((error) => {
+      alert(error.response.data.resultMessage);
+      console.log(error);
+      alert(error.response.data);
+      return error.response;
+    });
+}
+
+//비밀번호 검증하기
+export async function checkPassword(userId, token, password) {
+  return axios
+    .post(
+      `/my-page/${userId}/password`,
+      {
+        password: password,
+      },
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    )
+    .then((result) => {
+      return result;
+    });
+}
+
+// 팀 가입 신청 간단 조회 (팀 관리자)
+export async function getApplyList(teamId, token) {
+  return axios
+    .get(`/teams/${teamId}/admission`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    .then((result) => {
+      return result.data.resultData;
+    });
+}
+
+// 팀 가입 신청 상세 조회 (관리자)
+export async function getApplyDetail(teamId, applyId, token) {
+  return axios
+    .get(`/teams/${teamId}/admission/${applyId}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    .then((result) => {
+      return result.data.resultData;
+    })
+    .catch((error) => {
+      alert(error.response.data.resultMessage);
+      return error.response;
+    });
+}
+
+// 팀 가입 거절/취소
+export async function rejectApply(teamId, applyId, token) {
+  return axios
+    .post(
+      `/teams/${teamId}/admission/reject/${applyId}`,
+      {},
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    )
+    .then((result) => {
+      return result;
+    })
+    .catch((error) => {
+      console.log(error);
+      return error.response;
+    });
+}
+
+// 팀 가입 승인
+export async function approvalApply(teamId, applyId, token) {
+  return axios
+    .post(
+      `/teams/${teamId}/admission/approval/${applyId}`,
+      {},
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    )
+    .then((result) => {
+      return result;
+    })
+    .catch((error) => {
       return error.response;
     });
 }

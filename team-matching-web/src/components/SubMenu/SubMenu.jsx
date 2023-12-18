@@ -1,22 +1,28 @@
 import React from 'react';
 import styles from './SubMenu.module.css';
-import { Link } from 'react-router-dom';
-import { logOut } from '../../API/TeamMon';
+import { Link, useNavigate } from 'react-router-dom';
 import { useResetRecoilState } from 'recoil';
-import { userState } from '../../Recoil/state';
+import { userState } from 'Recoil/state';
+import { logOut } from 'api/TeamMon';
 
 export default function SubMenu({ onMouseEnter, onMouseLeave, user }) {
   const reset = useResetRecoilState(userState);
+  const nav = useNavigate();
   const handleClick = () => {
     //back에서 로그아웃
-    logOut(user.userId, user.token).then((result) => {
-      reset();
-      if (result.status === 200) {
-        //front에 남아있던 인증토큰 삭제
+    logOut(user.userId, user.token)
+      .then((result) => {
         reset();
-      }
-    });
+        if (result.status === 200) {
+          //front에 남아있던 인증토큰 삭제
+          reset();
+        }
+      })
+      .finally(() => {
+        nav('/');
+      });
   };
+
   return (
     <ul
       className={styles.submenu}
