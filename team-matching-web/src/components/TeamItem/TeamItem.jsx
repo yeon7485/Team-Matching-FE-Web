@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './TeamItem.module.css';
-import useCategory from '../../hooks/useCategory';
+import useCategory from 'hooks/useCategory';
 
 export default function TeamItem({
   teamData: { name, category, hashtag, capacity, total },

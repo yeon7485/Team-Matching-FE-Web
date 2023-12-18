@@ -1,15 +1,16 @@
 import React, { useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { deleteTeam, getTeamDetail } from '../../API/TeamMon';
 import styles from './TeamDetail.module.css';
-import classNames from 'classnames/bind';
-import ApplyModal from '../../components/ApplyModal/ApplyModal';
-import RoundBtn from '../../components/ui/RoundBtn/RoundBtn';
-import useCategory from '../../hooks/useCategory';
-import Loading from '../../components/ui/Loading/Loading';
-import NotFound from './../NotFound/NotFound';
-import { userState } from './../../Recoil/state';
+import { useParams, useNavigate } from 'react-router-dom';
+import { userState } from 'Recoil/state';
 import { useRecoilValue } from 'recoil';
+import { deleteTeam, getTeamDetail } from 'api/TeamMon';
+import classNames from 'classnames/bind';
+import ApplyModal from 'components/ApplyModal/ApplyModal';
+import useCategory from 'hooks/useCategory';
+import RoundBtn from 'ui/RoundBtn/RoundBtn';
+import Loading from 'ui/Loading/Loading';
+import NotFound from 'pages/NotFound/NotFound';
+
 import {
   useQuery,
   QueryClient,

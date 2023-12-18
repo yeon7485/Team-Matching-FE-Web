@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styles from './ApprovalModal.module.css';
-import Loading from '../ui/Loading/Loading';
-import RoundBtn from '../ui/RoundBtn/RoundBtn';
-import { approvalApply, getApplyDetail } from '../../API/TeamMon';
-import { AiOutlineClose } from 'react-icons/ai';
-import { rejectApply } from '../../API/TeamMon';
 import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query';
-import NotFound from '../../pages/NotFound/NotFound';
+import { approvalApply, rejectApply, getApplyDetail } from 'api/TeamMon';
+import { AiOutlineClose } from 'react-icons/ai';
+import NotFound from 'pages/NotFound/NotFound';
+import Loading from 'ui/Loading/Loading';
+import RoundBtn from 'ui/RoundBtn/RoundBtn';
 
 export default function ApprovalModal({
   setModalOpen,

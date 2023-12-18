@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import styles from './NewTeam.module.css';
-import { useNavigate, useLocation } from 'react-router-dom';
-import RoundBtn from '../../components/ui/RoundBtn/RoundBtn';
-import classNames from 'classnames/bind';
-import { AiOutlinePlusCircle, AiOutlineMinusCircle } from 'react-icons/ai';
-import { createTeam, updateTeam } from '../../API/TeamMon';
-import { useRecoilValue } from 'recoil';
-import { userState } from '../../Recoil/state';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
+import { userState } from 'Recoil/state';
+import { createTeam, updateTeam } from 'api/TeamMon';
+import { AiOutlinePlusCircle, AiOutlineMinusCircle } from 'react-icons/ai';
+import RoundBtn from 'ui/RoundBtn/RoundBtn';
+import classNames from 'classnames/bind';
 
 export default function NewTeam() {
   const {
