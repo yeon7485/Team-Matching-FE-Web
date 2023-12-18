@@ -1,25 +1,29 @@
 import React from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { getMyTeamList } from '../../API/TeamMon';
+import { getMyTeamList } from 'api/TeamMon';
 import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { myTeamState, userState } from '../../Recoil/state';
 import styles from './TeamAct.module.css';
-import MyTeam from '../MyTeam/MyTeam';
+import TeamItem from '../TeamItem/TeamItem';
 import { useNavigate } from 'react-router-dom';
 import Loading from './../ui/Loading/Loading';
 import NotFound from './../../pages/NotFound/NotFound';
 export default function TeamAct() {
-  const user = useRecoilValue(userState);
+  const { userId, token } = useRecoilValue(userState);
   const setMyTeam = useSetRecoilState(myTeamState);
-  const { isLoading, error, data } = useQuery(['getMyTeamList'], () => {
-    return getMyTeamList(user.userId, user.token);
-  });
+  const { isLoading, error, data } = useQuery(
+    ['getMyTeamList', userId],
+    () => {
+      return getMyTeamList(userId, token);
+    },
+    { enabled: !!userId }
+  );
   const nav = useNavigate();
 
   const handleClick = (team) => {
     setMyTeam({
       teamId: team.id,
-      admin: user.userId,
+      admin: team.adminUserAccountDto.userId,
       teamName: team.name,
       deadline: team.deadline,
     });
@@ -43,9 +47,10 @@ export default function TeamAct() {
         <ul className={styles.ul}>
           {data &&
             data.content.map((data) => (
-              <MyTeam
+              <TeamItem
                 key={data.id}
                 teamData={data}
+                type={'act'}
                 onClick={() => {
                   handleClick(data);
                 }}

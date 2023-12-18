@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import styles from './WriteComment.module.css';
 import { useRecoilValue } from 'recoil';
-import { userState } from '../../Recoil/state';
-import { getMyComments } from '../../API/TeamMon';
+import { userState } from 'Recoil/state';
+import { getMyComments } from 'api/TeamMon';
 import MyComment from '../MyComment/MyComment';
+
 export default function WriteComment() {
   const user = useRecoilValue(userState);
   const [myComments, setMyComments] = useState();

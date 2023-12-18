@@ -1,30 +1,28 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styles from './FindTeam.module.css';
-import { BiSearch } from 'react-icons/bi';
+import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import {
   getSearchTeamList,
   getCategoryTeamList,
   getTeamList,
-} from '../../API/TeamMon';
-import TeamCard from '../../components/TeamCard/TeamCard';
+} from 'api/TeamMon';
+import TeamCard from 'components/TeamCard/TeamCard';
 import classNames from 'classnames/bind';
-import Paging from '../../components/ui/Paging/Paging';
-import Loading from '../../components/ui/Loading/Loading';
+import Paging from 'ui/Paging/Paging';
+import Loading from 'ui/Loading/Loading';
 import NotFound from '../NotFound/NotFound';
-import { useQuery, useQueries } from '@tanstack/react-query';
 
 export default function FindTeam() {
-  const [team, setTeam] = useState([]);
   const [isSearch, setIsSearch] = useState(false);
   const [search, setSearch] = useState();
   const [category, setCategory] = useState('ALL');
   const [page, setPage] = useState(1);
   const [size, setSize] = useState(9);
   const [totalElements, setTotalElements] = useState(-1);
-  const [total, setTotal] = useState(-1);
 
   const cn = classNames.bind(styles);
+
   const {
     isLoading,
     error,

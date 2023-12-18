@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styles from './ApprovalModal.module.css';
-import Loading from '../ui/Loading/Loading';
-import RoundBtn from '../ui/RoundBtn/RoundBtn';
-import { approvalApply, getApplyDetail } from '../../API/TeamMon';
+import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query';
+import { approvalApply, rejectApply, getApplyDetail } from 'api/TeamMon';
 import { AiOutlineClose } from 'react-icons/ai';
-import { rejectApply } from '../../API/TeamMon';
+import NotFound from 'pages/NotFound/NotFound';
+import Loading from 'ui/Loading/Loading';
+import RoundBtn from 'ui/RoundBtn/RoundBtn';
 
 export default function ApprovalModal({
   setModalOpen,
@@ -12,25 +13,31 @@ export default function ApprovalModal({
   applyId,
   token,
 }) {
-  const [loading, setLoading] = useState(false);
-  const [applyDetail, setApplyDetail] = useState({});
+  const {
+    isLoading,
+    error,
+    data: applyDetail,
+  } = useQuery(['applyDetail', applyId], () => {
+    return getApplyDetail(teamId, applyId, token).then((data) => {
+      return data;
+    });
+  });
 
-  useEffect(() => {
-    setLoading(true);
-    console.log(token);
-    getApplyDetail(teamId, applyId, token)
-      .then((result) => {
-        console.log(result);
-        setApplyDetail({
-          nickname: result.userAccountDto.nickname,
-          userId: result.userAccountDto.userId,
-          application: result.application,
-        });
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-  }, []);
+  const queryClient = useQueryClient();
+
+  const approvalItem = useMutation(
+    ({ teamId, applyId, token }) => approvalApply(teamId, applyId, token),
+    {
+      onSuccess: () => queryClient.invalidateQueries(['applyList', teamId]),
+    }
+  );
+
+  const rejectItem = useMutation(
+    ({ teamId, applyId, token }) => rejectApply(teamId, applyId, token),
+    {
+      onSuccess: () => queryClient.invalidateQueries(['applyList', teamId]),
+    }
+  );
 
   const closeModal = () => {
     window.location.reload();
@@ -38,29 +45,42 @@ export default function ApprovalModal({
   };
 
   const onApprovalClick = () => {
-    approvalApply(teamId, applyId, token).then((result) => {
-      alert('가입 신청이 승인되었습니다.');
-      console.log(result);
-      closeModal();
-    });
+    approvalItem.mutate(
+      { teamId, applyId, token },
+      {
+        onSuccess: () => {
+          alert('가입 신청이 승인되었습니다.');
+          closeModal();
+        },
+      }
+    );
   };
 
   const onRejectClick = () => {
     if (window.confirm('팀 가입 신청을 거절하시겠습니까?') === true) {
-      rejectApply(teamId, applyId, token).then((result) => {
-        console.log(result);
-        closeModal();
-      });
+      rejectItem.mutate(
+        { teamId, applyId, token },
+        {
+          onSuccess: (result) => {
+            console.log(result.status);
+            result.status === 200
+              ? alert('가입 신청이 거절되었습니다.')
+              : alert('오류가 발생했습니다. 다시 시도해주세요.');
+            closeModal();
+          },
+        }
+      );
     }
   };
 
-  if (loading) return <Loading />;
+  if (isLoading) return <Loading />;
+  if (error) return <NotFound />;
   return (
     <div className={styles.container}>
       <header className={styles.header}>
         <p className={styles.title}>
-          {applyDetail.nickname}
-          <span>{`(${applyDetail.userId})`}</span>
+          {applyDetail && applyDetail.userAccountDto.nickname}
+          <span>{`  (${applyDetail.userAccountDto.userId})`}</span>
         </p>
         <AiOutlineClose onClick={closeModal} className={styles.closeBtn} />
       </header>

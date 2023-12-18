@@ -1,18 +1,28 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styles from './TeamHeader.module.css';
-import { myTeamState, userState } from '../../Recoil/state';
+import { myTeamState } from 'Recoil/state';
 import { useRecoilValue } from 'recoil';
+import { useNavigate } from 'react-router-dom';
 
 export default function TeamHeader() {
   const myTeam = useRecoilValue(myTeamState);
-  const user = useRecoilValue(userState);
-
-  console.log(myTeam.deadline);
-  console.log(getDday(myTeam.deadline));
+  const teamId = myTeam.teamId;
+  const nav = useNavigate();
 
   return (
     <div className={styles.header}>
-      <p className={styles.name}>{myTeam && myTeam.teamName}</p>
+      <div className={styles.left}>
+        <p className={styles.name}>{myTeam && myTeam.teamName}</p>
+        <p
+          className={styles.goDetail}
+          onClick={() => {
+            nav(`/teams/${teamId}`, { state: { teamId } });
+          }}
+        >
+          팀 상세글 바로 가기
+        </p>
+      </div>
+
       <p className={styles.Dday}>{myTeam && `D-${getDday(myTeam.deadline)}`}</p>
     </div>
   );

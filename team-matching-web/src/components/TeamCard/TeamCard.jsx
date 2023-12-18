@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './TeamCard.module.css';
 import classNames from 'classnames/bind';
 import { useNavigate } from 'react-router-dom';
-import useCategory from '../../hooks/useCategory';
+import useCategory from 'hooks/useCategory';
 
 export default function TeamCard({
   team,
@@ -19,7 +19,7 @@ export default function TeamCard({
   },
 }) {
   const [closed, setClosed] = useState(false);
-  const navigate = useNavigate();
+  const nav = useNavigate();
 
   const cn = classNames.bind(styles);
   const cat = useCategory(category);
@@ -37,7 +37,7 @@ export default function TeamCard({
     <li
       className={styles.root}
       onClick={() => {
-        navigate(`/teams/${id}`, { state: { team } });
+        nav(`/teams/${id}`);
       }}
     >
       <div className={styles.top}>

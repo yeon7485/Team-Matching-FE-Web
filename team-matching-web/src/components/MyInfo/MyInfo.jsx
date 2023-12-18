@@ -3,8 +3,8 @@ import styles from './MyInfo.module.css';
 import ChangePwModal from '../ChangePwModal/ChangePwModal';
 import ChangeNickNameModal from '../ChangeNickNameModal/ChangeNickNameModal';
 import { useRecoilValue } from 'recoil';
-import { userState } from '../../Recoil/state';
-import { myPageInfo, upDateMyPageInfo } from '../../API/TeamMon';
+import { userState } from 'Recoil/state';
+import { myPageInfo, upDateMyPageInfo } from 'api/TeamMon';
 export default function MyInfo() {
   const [userInfo, setUserInfo] = useState({
     id: '',

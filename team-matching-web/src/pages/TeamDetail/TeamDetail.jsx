@@ -1,75 +1,88 @@
 import React, { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
-import { deleteTeam, getTeamDetail } from '../../API/TeamMon';
 import styles from './TeamDetail.module.css';
-import classNames from 'classnames/bind';
-import ApplyModal from '../../components/ApplyModal/ApplyModal';
-import RoundBtn from '../../components/ui/RoundBtn/RoundBtn';
-import useCategory from '../../hooks/useCategory';
-import Loading from '../../components/ui/Loading/Loading';
-import NotFound from './../NotFound/NotFound';
-import { userState } from './../../Recoil/state';
+import { useParams, useNavigate } from 'react-router-dom';
+import { userState } from 'Recoil/state';
 import { useRecoilValue } from 'recoil';
-import { useQuery } from '@tanstack/react-query';
+import { deleteTeam, getTeamDetail } from 'api/TeamMon';
+import classNames from 'classnames/bind';
+import ApplyModal from 'components/ApplyModal/ApplyModal';
+import useCategory from 'hooks/useCategory';
+import RoundBtn from 'ui/RoundBtn/RoundBtn';
+import Loading from 'ui/Loading/Loading';
+import NotFound from 'pages/NotFound/NotFound';
+
+import {
+  useQuery,
+  QueryClient,
+  useMutation,
+  useQueryClient,
+} from '@tanstack/react-query';
 
 export default function TeamDetail() {
-  const {
-    state: {
-      team: { id },
-    },
-  } = useLocation();
-
+  const { teamId } = useParams();
   const [applyModalOpen, setApplyModalOpen] = useState(false);
   const [isMine, setIsMine] = useState(false);
   const [closed, setClosed] = useState(false);
   const user = useRecoilValue(userState);
+  const userToken = user.token;
   const nav = useNavigate();
   const today = new Date();
+  const queryClient = useQueryClient();
 
   const {
     isLoading,
     error,
     data: team,
-  } = useQuery(['teamDetail', id], () => {
-    return getTeamDetail(id).then((data) => {
+  } = useQuery(['teamDetail', teamId], () => {
+    return getTeamDetail(teamId).then((data) => {
       if (data.adminUserAccountDto.userId == user.userId) {
         setIsMine(true);
       }
       if (data.capacity === data.total || today > new Date(data.deadline)) {
         setClosed(true);
       }
+      console.log(data);
       return data;
     });
   });
 
+  const removeTeam = useMutation(
+    ({ teamId, userToken }) => deleteTeam(teamId, userToken),
+    {
+      onSuccess: () => queryClient.invalidateQueries(['teams', 0]),
+    }
+  );
+
   const cn = classNames.bind(styles);
   const cat = useCategory(team ? team.category : '');
-
   const showModal = () => {
     isMine
-      ? nav(`/teams/${id}/admission`, { state: { team } })
+      ? nav(`/teams/${team.id}/admission`, { state: { team } })
       : setApplyModalOpen(true);
   };
 
-  const onEditTeam = () => {
+  const handleEdit = () => {
     nav('/teams/new', { state: { team } });
   };
 
-  const onDeleteTeam = () => {
+  const handleDelete = () => {
     if (
       window.confirm(
         '삭제하시겠습니까? \n팀 삭제 시 팀 관련 정보가 모두 삭제됩니다.'
       ) === true
     ) {
-      deleteTeam(id, user.token).then((result) => {
-        alert('삭제되었습니다.');
-        if (result.status === 200) {
-          nav('/teams');
+      removeTeam.mutate(
+        { teamId, userToken },
+        {
+          onSuccess: () => {
+            alert('삭제되었습니다.');
+            nav('/teams', { replace: true });
+          },
         }
-      });
+      );
     }
   };
-  console.log(team);
+
   if (isLoading || !team) return <Loading />;
   if (error) return <NotFound />;
   return (
@@ -111,7 +124,7 @@ export default function TeamDetail() {
             {applyModalOpen && (
               <ApplyModal
                 setModalOpen={setApplyModalOpen}
-                id={id}
+                id={teamId}
                 token={user.token}
               />
             )}
@@ -127,14 +140,14 @@ export default function TeamDetail() {
             type={'button'}
             text={'수정'}
             fill={false}
-            onClick={onEditTeam}
+            onClick={handleEdit}
           />
           <div className={styles.space} />
           <RoundBtn
             type={'button'}
             text={'삭제'}
             fill={true}
-            onClick={onDeleteTeam}
+            onClick={handleDelete}
           />
         </div>
       )}

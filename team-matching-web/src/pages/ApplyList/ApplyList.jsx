@@ -1,12 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styles from './ApplyList.module.css';
-import Profile from '../../components/Profile/Profile';
-import { useRecoilValue } from 'recoil';
-import { userState } from '../../Recoil/state';
-import { getApplyList } from '../../API/TeamMon';
+import { useQuery } from '@tanstack/react-query';
 import { useLocation } from 'react-router-dom';
-import ApprovalModal from '../../components/ApprovalModal/ApprovalModal';
-import Loading from '../../components/ui/Loading/Loading';
+import { useRecoilValue } from 'recoil';
+import { userState } from 'Recoil/state';
+import { getApplyList } from 'api/TeamMon';
+import ApprovalModal from 'components/ApprovalModal/ApprovalModal';
+import Profile from 'components/Profile/Profile';
+import Loading from 'ui/Loading/Loading';
+import NotFound from '../NotFound/NotFound';
 
 export default function ApplyList() {
   const {
@@ -14,34 +16,31 @@ export default function ApplyList() {
       team: { id },
     },
   } = useLocation();
-  const [applyList, setApplyList] = useState([]);
+
   const [totalElements, setTotalElements] = useState(null);
-  const [loading, setLoading] = useState(false);
   const [approvalModalOpen, setApprovalModalOpen] = useState(false);
   const [applyId, setApplyId] = useState(null);
 
   const user = useRecoilValue(userState);
 
-  useEffect(() => {
-    setLoading(true);
-    getApplyList(id, user.token)
-      .then((result) => {
-        console.log('applyList', result.content);
-        setApplyList(result.content);
-        setTotalElements(result.totalElements);
-      })
-      .catch((e) => console.log(e))
-      .finally(() => setLoading(false));
-  }, []);
+  const {
+    isLoading,
+    error,
+    data: applyList,
+  } = useQuery(['applyList', id], async () => {
+    return getApplyList(id, user.token).then((data) => {
+      setTotalElements(data.totalElements);
+      return data.content;
+    });
+  });
 
-  console.log('applyList', user.token);
-
-  const handleClick = (params) => {
-    setApplyId(params);
+  const handleClick = (applyId) => {
+    setApplyId(applyId);
     setApprovalModalOpen(true);
   };
 
-  if (loading) return <Loading />;
+  if (isLoading) return <Loading />;
+  if (error) return <NotFound />;
   return (
     <div className={styles.root}>
       <div className={styles.header}>

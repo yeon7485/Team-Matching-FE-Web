@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './Sidebar.module.css';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
-import { myTeamState } from '../../Recoil/state';
+import { myTeamState } from 'Recoil/state';
 import classNames from 'classnames/bind';
 
 export default function Sidebar() {
