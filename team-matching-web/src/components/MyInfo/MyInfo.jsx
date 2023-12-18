@@ -5,6 +5,7 @@ import ChangeNickNameModal from '../ChangeNickNameModal/ChangeNickNameModal';
 import { useRecoilValue } from 'recoil';
 import { userState } from 'Recoil/state';
 import { myPageInfo, upDateMyPageInfo } from 'api/TeamMon';
+import { useQuery } from '@tanstack/react-query';
 export default function MyInfo() {
   const [userInfo, setUserInfo] = useState({
     id: '',
@@ -18,16 +19,18 @@ export default function MyInfo() {
     e.preventDefault();
     upDateMyPageInfo(user.userId, user.token, userInfo.nickname, userInfo.memo);
   };
-  useEffect(() => {
-    myPageInfo(user.userId, user.token).then((result) => {
+
+  const { isLoading, error, data } = useQuery(['myPageData'], () => {
+    return myPageInfo(user.userId, user.token).then((result) => {
       setUserInfo({
         id: result.userId,
         nickname: result.nickname,
         email: result.email,
         memo: result.memo,
       });
+      return result;
     });
-  }, []);
+  });
 
   //비밀번호 변경 팝업창 관리
   const [pwModalOpen, setPwModalOpen] = useState(false);

@@ -16,32 +16,25 @@ export default function PostDetail() {
       post: { id },
     },
   } = useLocation();
-
   const [isMine, setIsMine] = useState(false);
-  const [comments, setComments] = useState([]);
   const [content, setContent] = useState();
-  const [postInfo, setPostInfo] = useState();
   const user = useRecoilValue(userState);
   const nav = useNavigate();
+  const {
+    isLoading,
+    error,
+    data: postInfo,
+  } = useQuery(['getPost', id], () => {
+    return getPostsDetail(id).then((data) => {
+      if (data.userAccountDto.userId === user.userId) {
+        setIsMine(true);
+      }
+      return data;
+    });
+  });
   const editClickListner = () => {
     nav('/board/new', { state: { postInfo } });
   };
-  const { isLoading, error, data } = useQuery(
-    ['getPost', id],
-    () => {
-      return getPostsDetail(id);
-    },
-    {
-      onSuccess: (data) => {
-        setPostInfo(data.data.resultData);
-        setComments(data.data.resultData.commentDtos);
-        if (data.data.resultData.userAccountDto.userId === user.userId) {
-          setIsMine(true);
-        }
-      },
-    }
-  );
-
   const deleteClickListner = () => {
     deletePost(postInfo.id, user.token).then((result) => {
       if (result.status === 200) {
@@ -90,11 +83,14 @@ export default function PostDetail() {
       </article>
       <section className={styles.comment}>
         <div className={styles.commentHeader}>
-          댓글 <span className={styles.commentsLength}>{comments.length}</span>
+          댓글{' '}
+          <span className={styles.commentsLength}>
+            {postInfo.commentDtos.length}
+          </span>
         </div>
         <ul className={styles.commentUl}>
-          {comments &&
-            comments.map((comment) => (
+          {postInfo.commentDtos &&
+            postInfo.commentDtos.map((comment) => (
               <Comment key={comment.id} comment={comment} />
             ))}
         </ul>

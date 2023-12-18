@@ -3,8 +3,8 @@ import styles from './FindTeam.module.css';
 import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import {
-  getSearchTeamList,
   getCategoryTeamList,
+  getSearchTeamList,
   getTeamList,
 } from 'api/TeamMon';
 import TeamCard from 'components/TeamCard/TeamCard';

@@ -262,7 +262,7 @@ export async function getPosts(page, size) {
   return axios
     .get(`/posts?page=${page}&size=${size}`)
     .then((result) => {
-      return result;
+      return result.data.resultData;
     })
     .catch((error) => {
       console.log(error);
@@ -272,7 +272,9 @@ export async function getPosts(page, size) {
 
 //자세한 게시글 정보 받아오기
 export async function getPostsDetail(id) {
-  return axios.get(`/posts/${id}`);
+  return axios.get(`/posts/${id}`).then((result) => {
+    return result.data.resultData;
+  });
 }
 
 //글 삭제하기
