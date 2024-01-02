@@ -1,8 +1,8 @@
 import styles from './Main.module.css';
 import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { getTeamList } from '../../API/TeamMon';
-import TeamCard from '../../components/TeamCard/TeamCard';
+import { getTeamList } from 'api/TeamMon';
+import TeamCard from 'components/TeamCard/TeamCard';
 
 export default function Main() {
   const { isLoading, error, data } = useQuery(['getTeamList'], () => {

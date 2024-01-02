@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styles from './ApplyList.module.css';
-import Profile from '../../components/Profile/Profile';
-import { useRecoilValue } from 'recoil';
-import { userState } from '../../Recoil/state';
-import { getApplyList } from '../../API/TeamMon';
-import { useLocation } from 'react-router-dom';
-import ApprovalModal from '../../components/ApprovalModal/ApprovalModal';
-import Loading from '../../components/ui/Loading/Loading';
 import { useQuery } from '@tanstack/react-query';
+import { useLocation } from 'react-router-dom';
+import { useRecoilValue } from 'recoil';
+import { userState } from 'Recoil/state';
+import { getApplyList } from 'api/TeamMon';
+import ApprovalModal from 'components/ApprovalModal/ApprovalModal';
+import Profile from 'components/Profile/Profile';
+import Loading from 'ui/Loading/Loading';
 import NotFound from '../NotFound/NotFound';
 
 export default function ApplyList() {

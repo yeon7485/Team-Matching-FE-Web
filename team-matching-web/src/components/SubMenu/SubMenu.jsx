@@ -1,9 +1,9 @@
 import React from 'react';
 import styles from './SubMenu.module.css';
 import { Link, useNavigate } from 'react-router-dom';
-import { logOut } from '../../API/TeamMon';
 import { useResetRecoilState } from 'recoil';
-import { userState } from '../../Recoil/state';
+import { userState } from 'Recoil/state';
+import { logOut } from 'api/TeamMon';
 
 export default function SubMenu({ onMouseEnter, onMouseLeave, user }) {
   const reset = useResetRecoilState(userState);

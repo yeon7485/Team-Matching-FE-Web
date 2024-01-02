@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Board.module.css';
 import { Link } from 'react-router-dom';
-import Post from '../../components/Post/Post';
-import { getPosts, getSearchPost } from '../../API/TeamMon';
-import Paging from '../../components/ui/Paging/Paging';
+import { getPosts, getSearchPost } from 'api/TeamMon';
+import Post from 'components/Post/Post';
+import Paging from 'ui/Paging/Paging';
+
+import { useQuery } from '@tanstack/react-query';
 export default function Board() {
   const [search, setSearch] = useState();
   const handleChange = (e) => {
@@ -11,17 +13,22 @@ export default function Board() {
   };
   const [page, setPage] = useState(1);
   const [totalElements, setTotalElements] = useState(-1);
-  const [post, setPost] = useState();
-  useEffect(() => {
-    getPosts(page - 1, 15).then((result) => {
-      setPost(result.data.resultData);
-      setTotalElements(result.data.resultData.totalElements);
+
+  const {
+    isLoading,
+    error,
+    data: post,
+  } = useQuery(['getPosts'], () => {
+    return getPosts(page - 1, 15).then((data) => {
+      setTotalElements(data.totalElements);
+      return data;
     });
-  }, [page]);
+  });
+  console.log(post);
   const handleSubmit = (e) => {
     e.preventDefault();
     getSearchPost(search, 0, 15).then((result) => {
-      setPost(result.data.resultData);
+      // setPost(result.data.resultData);
       setTotalElements(result.data.resultData.totalElements);
     });
   };

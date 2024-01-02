@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styles from './ApplyModal.module.css';
-import { admissionTeam } from '../../API/TeamMon';
+import { admissionTeam } from 'api/TeamMon';
 import { useNavigate } from 'react-router-dom';
 import { useQueryClient, useMutation } from '@tanstack/react-query';
 

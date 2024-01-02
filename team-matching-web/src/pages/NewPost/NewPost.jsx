@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import styles from './NewPost.module.css';
-import RoundBtn from '../../components/ui/RoundBtn/RoundBtn';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { editPost, writePost } from '../../API/TeamMon';
 import { useRecoilValue } from 'recoil';
-import { userState } from '../../Recoil/state';
+import { userState } from 'Recoil/state';
+import { editPost, writePost } from 'api/TeamMon';
+import RoundBtn from 'ui/RoundBtn/RoundBtn';
 
 export default function NewPost() {
   const {

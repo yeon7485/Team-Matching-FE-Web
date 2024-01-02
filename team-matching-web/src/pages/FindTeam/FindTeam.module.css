@@ -95,6 +95,11 @@ form {
 	grid-column: 1 / span 4;
 }
 
+
+.empty {
+	margin: 3rem 2rem;
+}
+
 .black {
 	color: black;
 	font-weight: bold;

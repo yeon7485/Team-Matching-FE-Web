@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import styles from './TeamCard.module.css';
 import classNames from 'classnames/bind';
 import { useNavigate } from 'react-router-dom';
-import useCategory from '../../hooks/useCategory';
+import useCategory from 'hooks/useCategory';
 
 export default function TeamCard({
   team,

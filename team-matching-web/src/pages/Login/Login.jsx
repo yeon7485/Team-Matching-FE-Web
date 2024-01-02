@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import styles from './Login.module.css';
 import { Link, useNavigate } from 'react-router-dom';
-import { logIn } from '../../API/TeamMon';
-import { userState } from '../../Recoil/state';
+import { logIn } from 'api/TeamMon';
+import { userState } from 'Recoil/state';
 import { useSetRecoilState } from 'recoil';
+
 export default function Login() {
   const [id, setId] = useState();
   const [password, setPassword] = useState();
