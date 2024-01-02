@@ -1,21 +1,23 @@
 import React from 'react';
 import styles from './Post.module.css';
 import { useNavigate } from 'react-router-dom';
+
 export default function Post({
   post,
   post: { id, title, hashtag, createdAt, commentsCount },
 }) {
-  const navigate = useNavigate();
+  const nav = useNavigate();
   let today = new Date();
   let year = String(today.getFullYear());
   let month = String(today.getMonth() + 1).padStart(2, '0');
   let date = String(today.getDate()).padStart(2, '0');
   let today_date = year + '-' + month + '-' + date;
+
   return (
     <li
       className={styles.postLi}
       onClick={() => {
-        navigate(`/board/${id}`, { state: { post } });
+        nav(`/board/${id}`, { state: { post } });
       }}
     >
       <div className={styles.item}>{id}</div>

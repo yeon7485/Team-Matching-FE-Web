@@ -1,16 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styles from './Board.module.css';
 import { Link } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 import { getPosts, getSearchPost } from 'api/TeamMon';
 import Post from 'components/Post/Post';
 import Paging from 'ui/Paging/Paging';
 
-import { useQuery } from '@tanstack/react-query';
 export default function Board() {
   const [search, setSearch] = useState();
-  const handleChange = (e) => {
-    setSearch(e.target.value);
-  };
+
   const [page, setPage] = useState(1);
   const [totalElements, setTotalElements] = useState(-1);
 
@@ -25,6 +23,11 @@ export default function Board() {
     });
   });
   console.log(post);
+
+  const handleChange = (e) => {
+    setSearch(e.target.value);
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     getSearchPost(search, 0, 15).then((result) => {
@@ -32,6 +35,7 @@ export default function Board() {
       setTotalElements(result.data.resultData.totalElements);
     });
   };
+
   return (
     <div className={styles.root}>
       <h1 className={styles.title}>자유게시판</h1>
@@ -60,7 +64,7 @@ export default function Board() {
         <ul className={styles.boardUl}>
           {post &&
             post.content.map((post) => (
-              <Post key={post.id} post={post} teamOnly={false} onClick />
+              <Post key={post.id} post={post} onClick />
             ))}
         </ul>
       </section>

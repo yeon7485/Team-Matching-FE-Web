@@ -6,6 +6,9 @@ import { useRecoilValue } from 'recoil';
 import { userState } from 'Recoil/state';
 import { myPageInfo, upDateMyPageInfo } from 'api/TeamMon';
 import { useQuery } from '@tanstack/react-query';
+import Loading from 'ui/Loading/Loading';
+import NotFound from 'pages/NotFound/NotFound';
+
 export default function MyInfo() {
   const [userInfo, setUserInfo] = useState({
     id: '',
@@ -43,6 +46,9 @@ export default function MyInfo() {
   const showNnModal = () => {
     setNnModalOpen(true);
   };
+
+  if (isLoading) return <Loading />;
+  if (error) return <NotFound />;
   return (
     <>
       <h3>내 정보 관리</h3>
