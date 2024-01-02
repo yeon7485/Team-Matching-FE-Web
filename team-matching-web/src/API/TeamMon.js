@@ -324,14 +324,14 @@ export async function writeComment(content, id, token) {
     });
 }
 
-//내가 쓴 게시글 조회
-export async function getMyPosts(id, token) {
+// [마이페이지] 내가 쓴 게시글 조회
+export async function getMyPosts(userId, token, page) {
   return axios
-    .get(`my-page/${id}/posts`, {
+    .get(`my-page/${userId}/posts?page=${page}`, {
       headers: { Authorization: `Bearer ${token}` },
     })
     .then((result) => {
-      return result.data.resultData.content;
+      return result.data.resultData;
     })
     .catch((error) => {
       alert(error.response.data.error);
@@ -339,40 +339,40 @@ export async function getMyPosts(id, token) {
     });
 }
 
-//마이페이지 팀 조회
-export async function getMyTeamList(userId, token) {
+// [마이페이지] 내가 쓴 댓글 조회
+export async function getMyComments(userId, token, page) {
   return axios
-    .get(`/my-page/${userId}/teams`, {
+    .get(`/my-page/${userId}/comments?page=${page}`, {
       headers: { Authorization: `Bearer ${token}` },
     })
     .then((result) => {
       return result.data.resultData;
-    });
-}
-
-// 마이페이지 신청 중인 팀 조회
-export async function getMyJudging(userId, token) {
-  return axios
-    .get(`/my-page/${userId}/teams/judging`, {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-    .then((result) => {
-      return result.data.resultData;
-    });
-}
-
-//내가 쓴 댓글 조회
-export async function getMyComments(id, token) {
-  return axios
-    .get(`/my-page/${id}/comments`, {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-    .then((result) => {
-      return result.data.resultData.content;
     })
     .catch((error) => {
       alert(error.response.data.error);
       return error.response;
+    });
+}
+
+// [마이페이지] 참여 중인 팀 조회
+export async function getMyTeamList(userId, token, page) {
+  return axios
+    .get(`/my-page/${userId}/teams?page=${page}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    .then((result) => {
+      return result.data.resultData;
+    });
+}
+
+// [마이페이지] 신청 중인 팀 조회
+export async function getMyJudging(userId, token, page) {
+  return axios
+    .get(`/my-page/${userId}/teams/judging?page=${page}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    .then((result) => {
+      return result.data.resultData;
     });
 }
 
@@ -470,7 +470,25 @@ export async function getApplyDetail(teamId, applyId, token) {
     });
 }
 
-// 팀 가입 거절/취소
+// 팀 가입 승인
+export async function approvalApply(teamId, applyId, token) {
+  return axios
+    .post(
+      `/teams/${teamId}/admission/approval/${applyId}`,
+      {},
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    )
+    .then((result) => {
+      return result;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+}
+
+// 팀 가입 거절
 export async function rejectApply(teamId, applyId, token) {
   return axios
     .post(
@@ -489,11 +507,11 @@ export async function rejectApply(teamId, applyId, token) {
     });
 }
 
-// 팀 가입 승인
-export async function approvalApply(teamId, applyId, token) {
+// 팀 가입 취소
+export async function cancelApply(teamId, applyId, token) {
   return axios
     .post(
-      `/teams/${teamId}/admission/approval/${applyId}`,
+      `/teams/${teamId}/admission/cancel/${applyId}`,
       {},
       {
         headers: { Authorization: `Bearer ${token}` },
@@ -503,6 +521,7 @@ export async function approvalApply(teamId, applyId, token) {
       return result;
     })
     .catch((error) => {
+      console.log(error);
       return error.response;
     });
 }
