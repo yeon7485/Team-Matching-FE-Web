@@ -19,7 +19,7 @@ export default function SubMenu({ onMouseEnter, onMouseLeave, user }) {
         }
       })
       .finally(() => {
-        nav('/');
+        nav('/', { replace: true });
       });
   };
 
