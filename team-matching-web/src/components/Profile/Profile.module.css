@@ -1,0 +1,26 @@
+.container {
+	min-width: 7rem;
+	padding: 2rem;
+	border: 1px solid black;
+	border-radius: 1rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	cursor: pointer;
+}
+
+.nickname {
+	font-weight: 600;
+}
+
+.nickname span {
+	color: var(--gray800);
+	font-weight: 400;
+}
+
+.memo {
+	margin-top: 1rem;
+	font-size: 0.8rem;
+	color: var(--gray500);
+}

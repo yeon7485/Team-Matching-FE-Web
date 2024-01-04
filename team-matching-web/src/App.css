@@ -1,0 +1,21 @@
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 100vh;
+}
+
+.contentWrapper {
+	flex: 1;
+}
+
+.teamWrapper {
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+	margin: 3rem 15% 15%;
+}
+
+.teamContentWrapper {
+	display: flex;
+}

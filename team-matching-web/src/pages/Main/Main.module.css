@@ -4,34 +4,66 @@
 	justify-content: center;
 	align-items: center;
 	height: 30rem;
-	background-size: 100% 100%;
-	background-image: url(/src/images/banner.png);
-	background-repeat: no-repeat;
+	background-color: rgba(115, 115, 222, 0.3);
+	;
 }
 
 .title {
-	margin: 0;
+	margin-top: 0;
+	margin-bottom: 2rem;
+	color: var(--main-color-dark);
 	font-size: 3rem;
 }
 
 .text {
+	font-size: 1rem;
 	text-align: center;
 	opacity: 80%;
-	font-size: 1rem;
 }
 
 .btn {
 	padding: 0.8rem 3rem;
 	margin: 1.5rem;
 	border: none;
-	background: var(--main-color);
+	background: var(--main-color-dark);
 	color: white;
 	font-size: 1rem;
 	text-decoration: none;
 }
 
 .main {
-	width: auto;
-	height: 100%;
-	margin-bottom: 11rem;
+	padding: 5%;
+}
+.newTeam{
+	margin-left: 1.2rem;
+}
+
+.more{
+	margin-left: 2rem;
+font-size: 1rem;text-decoration: none;font-weight: 500;}
+
+.teamList {
+	display: grid;
+	margin: 3rem 0;
+	place-items: center;
+	gap: 1.5rem 1rem;
+	grid-template-columns: repeat(auto-fit, minmax(25%, auto));
+}
+
+@media screen and (min-width: 750px) {
+	.teamList {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media screen and (min-width: 1200px) {
+	.teamList {
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
+
+@media screen and (min-width: 1650px) {
+	.teamList {
+		grid-template-columns: repeat(4, 1fr);
+	}
 }

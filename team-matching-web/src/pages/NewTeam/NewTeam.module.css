@@ -1,0 +1,153 @@
+.container {
+	margin: 2% 9% 10%;
+}
+
+.top {
+	display: flex;
+	justify-content: space-between;
+	align-items: end;
+	padding: 0 1rem;
+	margin-bottom: 1rem;
+}
+
+.title {
+	margin-bottom: 1rem;
+	color: var(--main-color);
+	font-size: 2.5rem;
+}
+
+.list {
+	padding: 0.5rem 1.8rem;
+	border: 1px solid var(--main-color);
+	background-color: white;
+	color: var(--main-color);
+	font-weight: bold;
+	font-size: 1rem;
+}
+
+.list:hover {
+	background-color: rgba(0, 129, 167, 0.2);
+}
+
+.write {
+	display: flex;
+	flex-direction: column;
+	padding: 2% 3%;
+}
+
+.subTitle {
+	margin-bottom: 0.6rem;
+	font-weight: bold;
+}
+
+.category {
+	margin-right: 1rem;
+	margin-bottom: 2.5rem;
+	flex-shrink: 0;
+}
+
+.categoryBtn {
+	padding: 0.4rem 0.8rem;
+	margin: 0 0.3rem;
+	border: solid 1px var(--gray500);
+	border-radius: 20px;
+	background-color: white;
+	color: var(--gray800);
+	font-size: 1.1rem;
+	cursor: pointer;
+}
+
+.mid {
+	display: flex;
+	width: 100%;
+	margin-bottom: 2.5rem;
+}
+
+.date {
+	padding: 1rem 2.5rem;
+	border: 1px solid var(--gray500);
+	font-size: 1rem;
+}
+
+.total {
+	margin-left: 20%;
+}
+
+.count {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	width: 90%;
+	padding: 0.6rem 1.2rem;
+	margin-top: 0.5rem;
+	font-size: 1.4rem;
+}
+
+.btn {
+	width: 1.8rem;
+	height: 1.8rem;
+	padding-top: 0.2rem;
+	color: var(--main-color);
+}
+
+.btn:hover {
+	transform: scale(1.2);
+	transition-duration: 0.2s;
+}
+
+.input {
+	width: 95%;
+	padding: 1.1rem 1.3rem;
+	margin-bottom: 2.5rem;
+	border: 1px solid var(--gray500);
+	font-size: 1rem;
+}
+
+.textArea {
+	height: 15rem;
+	resize: none;
+}
+
+.contents {
+	height: 17rem;
+	vertical-align: text-top;
+}
+
+.btnArea {
+	display: flex;
+	justify-content: center;
+}
+
+.space {
+	margin: 0.5rem;
+}
+
+.black {
+	color: black;
+	font-weight: bold;
+	border-color: black;
+}
+
+.blue {
+	color: var(--category-dev);
+	font-weight: bold;
+	border-color: var(--category-dev);
+}
+
+.green {
+	color: var(--category-hobby);
+	font-weight: bold;
+	border-color: var(--category-hobby);
+}
+
+.red {
+	color: var(--category-sports);
+	font-weight: bold;
+	border-color: var(--category-sports);
+}
+
+.pink {
+	color: var(--category-game);
+	font-weight: bold;
+	border-color: var(--category-game);
+}

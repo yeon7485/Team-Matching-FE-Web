@@ -1,17 +1,32 @@
 import React, { useState } from 'react';
 import styles from './Login.module.css';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { logIn } from 'api/TeamMon';
+import { userState } from 'Recoil/state';
+import { useSetRecoilState } from 'recoil';
 
 export default function Login() {
   const [id, setId] = useState();
   const [password, setPassword] = useState();
+  const setUser = useSetRecoilState(userState);
+  //recoil 사용 선언부
+
+  const nav = useNavigate();
   const handleSubmit = (e) => {
     e.preventDefault();
+    logIn(id, password).then((result) => {
+      console.log(result);
+      if (result.status === 200) {
+        setUser({ userId: id, token: result.headers.authorization });
+        nav('/');
+      }
+    });
   };
+
   return (
     <div className={styles.root}>
       <section className={styles.container}>
-        <p1 className={styles.title}>Team-Matching</p1>
+        <h1 className={styles.title}>Team-Matching</h1>
         <form className={styles.form} onSubmit={handleSubmit}>
           <label htmlFor='id'>아이디</label>
           <input
@@ -42,9 +57,9 @@ export default function Login() {
 
           <button className={styles.loginButton}>로그인</button>
         </form>
-        <p3>
+        <p>
           아직 회원이 아니신가요? <Link to='/join'>회원가입</Link>
-        </p3>
+        </p>
       </section>
     </div>
   );
