@@ -4,7 +4,7 @@ import { userState } from 'Recoil/state';
 import { Navigate } from 'react-router-dom';
 
 export default function ProtectedRoute({ children }) {
-  const { userId, token } = useRecoilValue(userState);
+  const { token } = useRecoilValue(userState);
 
   if (token === '') {
     console.log(token);

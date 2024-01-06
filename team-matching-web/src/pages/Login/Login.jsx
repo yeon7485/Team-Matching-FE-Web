@@ -17,6 +17,8 @@ export default function Login() {
     logIn(id, password).then((result) => {
       if (result.status === 200) {
         setUser({ userId: id, token: result.headers.authorization });
+        const timer = new Date(result.headers.date).getTime() + 60 * 1000 * 60;
+        localStorage.setItem('tokenTimer', timer);
         nav('/', { replace: true });
       }
     });
@@ -39,7 +41,7 @@ export default function Login() {
             className={styles.inputBox}
             name='id'
             id='id'
-            value={id}
+            value={id || ''}
             placeholder='아이디를 입력해주세요.'
             required
             onChange={(e) => {
@@ -52,7 +54,7 @@ export default function Login() {
             name='password'
             className={styles.inputBox}
             id='password'
-            value={password}
+            value={password || ''}
             placeholder='비밀번호를 입력해주세요.'
             required
             onChange={(e) => {

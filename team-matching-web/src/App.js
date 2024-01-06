@@ -1,17 +1,18 @@
+import './App.css';
 import { Outlet, useLocation } from 'react-router-dom';
-import Footer from './components/Footer/Footer';
-import Navbar from './components/Navbar/Navbar';
-import { RecoilRoot } from 'recoil';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import './App.css';
-import Sidebar from './components/Sidebar/Sidebar';
-import TeamHeader from './components/TeamHeader/TeamHeader';
+import { RecoilRoot } from 'recoil';
+import Sidebar from 'components/Sidebar/Sidebar';
+import TeamHeader from 'components/TeamHeader/TeamHeader';
+import Footer from 'components/Footer/Footer';
+import Navbar from 'components/Navbar/Navbar';
 
 const queryClient = new QueryClient();
 
 function App() {
   const location = useLocation();
+
   if (location.pathname === '/join' || location.pathname === '/login')
     return (
       <QueryClientProvider client={queryClient}>

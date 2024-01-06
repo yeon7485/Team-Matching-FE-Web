@@ -16,6 +16,7 @@ export default function SubMenu({ onMouseEnter, onMouseLeave, user }) {
         if (result.status === 200) {
           //front에 남아있던 인증토큰 삭제
           reset();
+          localStorage.removeItem('tokenTimer');
         }
       })
       .finally(() => {
