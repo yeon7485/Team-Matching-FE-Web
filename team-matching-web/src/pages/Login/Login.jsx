@@ -15,18 +15,25 @@ export default function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     logIn(id, password).then((result) => {
-      console.log(result);
       if (result.status === 200) {
         setUser({ userId: id, token: result.headers.authorization });
-        nav('/');
+        const timer = new Date(result.headers.date).getTime() + 60 * 1000 * 60;
+        localStorage.setItem('tokenTimer', timer);
+        nav('/', { replace: true });
       }
     });
+  };
+
+  const goToMain = () => {
+    nav('/');
   };
 
   return (
     <div className={styles.root}>
       <section className={styles.container}>
-        <h1 className={styles.title}>Team-Matching</h1>
+        <h1 className={styles.title} onClick={goToMain}>
+          Team-Mon
+        </h1>
         <form className={styles.form} onSubmit={handleSubmit}>
           <label htmlFor='id'>아이디</label>
           <input
@@ -34,7 +41,7 @@ export default function Login() {
             className={styles.inputBox}
             name='id'
             id='id'
-            value={id}
+            value={id || ''}
             placeholder='아이디를 입력해주세요.'
             required
             onChange={(e) => {
@@ -47,7 +54,7 @@ export default function Login() {
             name='password'
             className={styles.inputBox}
             id='password'
-            value={password}
+            value={password || ''}
             placeholder='비밀번호를 입력해주세요.'
             required
             onChange={(e) => {
@@ -58,7 +65,10 @@ export default function Login() {
           <button className={styles.loginButton}>로그인</button>
         </form>
         <p>
-          아직 회원이 아니신가요? <Link to='/join'>회원가입</Link>
+          아직 회원이 아니신가요?{' '}
+          <Link to='/join' className={styles.joinBtn}>
+            회원가입
+          </Link>
         </p>
       </section>
     </div>

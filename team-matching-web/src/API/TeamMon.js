@@ -47,7 +47,6 @@ export async function logOut(id, token) {
       accessToken: token,
     })
     .then((result) => {
-      alert('로그아웃 성공!!');
       return result;
     })
     .catch((error) => {
