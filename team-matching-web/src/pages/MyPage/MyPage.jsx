@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import styles from './MyPage.module.css';
-import MyInfo from '../../components/MyInfo/MyInfo';
-import WritePost from '../../components/WritePost/WritePost';
-import WriteComment from './../../components/WriteComment/WriteComment';
-import TeamAct from '../../components/TeamAct/TeamAct';
+import MyInfo from 'components/MyInfo/MyInfo';
+import WritePost from 'components/WritePost/WritePost';
+import WriteComment from 'components/WriteComment/WriteComment';
+import TeamAct from 'components/TeamAct/TeamAct';
+import TeamJudging from 'components/TeamJudging/TeamJudging';
+
 export default function MyPage() {
   const [index, setIndex] = useState('MyInfo');
   return (
@@ -47,7 +49,17 @@ export default function MyPage() {
                 setIndex('TeamAct');
               }}
             >
-              팀 활동
+              참여 중인 팀
+            </span>
+          </li>
+          <li className={styles.list}>
+            <span
+              className={styles.item}
+              onClick={() => {
+                setIndex('TeamJudging');
+              }}
+            >
+              신청 중인 팀
             </span>
           </li>
         </ul>
@@ -57,6 +69,7 @@ export default function MyPage() {
         {index === 'WritePost' && <WritePost />}
         {index === 'WriteComment' && <WriteComment />}
         {index === 'TeamAct' && <TeamAct />}
+        {index === 'TeamJudging' && <TeamJudging />}
       </section>
     </div>
   );

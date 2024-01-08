@@ -1,8 +1,9 @@
 .root {
-	width: auto;
 	min-width: 30rem;
-	padding: 3.7rem 4.3rem;
-	margin: 3.7rem 10rem 11rem;
+	max-width: 120rem;
+	padding: 3.4rem 4rem;
+	min-zoom: 67%;
+	margin: 3.7rem 8%;
 	border: 1px solid var(--gray800);
 	border-radius: 20px;
 }
@@ -38,8 +39,11 @@
 
 .times {
 	display: flex;
-	justify-content: space-around;
 	color: var(--gray500);
+}
+
+.dot {
+	margin: 0 1rem;
 }
 
 .right {
@@ -49,7 +53,7 @@
 	align-items: end;
 }
 
-.date {
+.deadline {
 	margin-bottom: 0.3rem;
 	font-size: 1.2rem;
 	flex-shrink: 0;
@@ -57,20 +61,21 @@
 
 .count {
 	margin-bottom: 1rem;
-	color: var(--main-color-red);
+	color: var(--main-color-pink);
 	font-weight: bold;
-	font-size: 1.5rem;
+	font-size: 1.3rem;
 }
 
 .apply {
-	padding: 0.8rem 1.4rem;
+	padding: 0.6rem 1.2rem;
 	border: 2px solid var(--main-color);
 	border-radius: 40px;
 	color: var(--main-color);
 	font-weight: bold;
-	font-size: 1.5rem;
+	font-size: 1.3rem;
 	text-decoration: none;
 	cursor: pointer;
+	white-space: nowrap;
 }
 
 .apply:hover {
@@ -79,28 +84,50 @@
 
 }
 
-.contents {
+.closed {
+	padding: 0.6rem 1.2rem;
+	border: 2px solid var(--gray500);
+	border-radius: 40px;
+	color: var(--gray500);
+	font-weight: bold;
+	font-size: 1.3rem;
+	text-decoration: none;
+	white-space: nowrap;
+}
+
+.description {
 	margin: 1.3rem 0.5rem 3rem 0.5rem;
 	white-space: pre-line;
+	font-size: 1rem;
 }
 
 .tag {
 	margin: 0.5rem;
 }
 
+.btnArea {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 8%;
+}
 
-.dev {
+.space {
+	margin: 0.4rem;
+}
+
+
+.개발 {
 	color: var(--category-dev);
 }
 
-.hobby {
+.취미 {
 	color: var(--category-hobby);
 }
 
-.sports {
+.스포츠 {
 	color: var(--category-sports);
 }
 
-.game {
+.게임 {
 	color: var(--category-game);
 }

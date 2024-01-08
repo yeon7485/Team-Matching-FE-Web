@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styles from './Join.module.css';
 import { Link, useNavigate } from 'react-router-dom';
-import { signUp } from '../../API/TeamMon';
+import { signUp } from 'api/TeamMon';
+
 export default function Join() {
   const [user, setUser] = useState({});
-  const [message, setMessage] = useState('');
   const navigate = useNavigate();
   const handleChange = (e) => {
     const { name, value } = e.target;
