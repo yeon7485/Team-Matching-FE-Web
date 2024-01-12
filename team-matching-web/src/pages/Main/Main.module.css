@@ -13,6 +13,7 @@
 	margin-bottom: 2rem;
 	color: var(--main-color-dark);
 	font-size: 3rem;
+	font-family: 'RixInooAriDuriR';
 }
 
 .text {
@@ -34,13 +35,17 @@
 .main {
 	padding: 5%;
 }
-.newTeam{
+
+.newTeam {
 	margin-left: 1.2rem;
 }
 
-.more{
+.more {
 	margin-left: 2rem;
-font-size: 1rem;text-decoration: none;font-weight: 500;}
+	font-size: 1rem;
+	text-decoration: none;
+	font-weight: 500;
+}
 
 .teamList {
 	display: grid;

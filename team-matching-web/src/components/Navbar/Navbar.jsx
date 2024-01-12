@@ -41,7 +41,7 @@ export default function Navbar() {
   return (
     <header className={styles.header}>
       <Link to='/' className={styles.logo}>
-        <h2>Team-Mon</h2>
+        <h2 className={styles.title}>Team Mon</h2>
       </Link>
       <nav className={styles.nav}>
         <Link
