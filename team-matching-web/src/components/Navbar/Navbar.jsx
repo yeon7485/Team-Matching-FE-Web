@@ -41,49 +41,51 @@ export default function Navbar() {
   return (
     <header className={styles.header}>
       <Link to='/' className={styles.logo}>
-        <h2 className={styles.title}>Team Mon</h2>
+        <h2 className={styles.title}>TeamMon</h2>
       </Link>
-      <nav className={styles.nav}>
-        <Link
-          to='/board'
-          className={cn(
-            'item',
-            `${window.location.pathname === '/board' ? 'select' : ''}`
-          )}
-        >
-          게시판
-        </Link>
-        <Link
-          to='/teams'
-          className={cn(
-            'item',
-            `${window.location.pathname === '/teams' ? 'select' : ''}`
-          )}
-        >
-          팀 찾기
-        </Link>
-      </nav>
-      <div className={styles.btn}>
-        {!user.userId && (
-          <Link to='/join' className={styles.join}>
-            회원가입
-          </Link>
-        )}
-        {!user.userId && (
-          <Link to='/login' className={styles.login}>
-            로그인
-          </Link>
-        )}
-        {user.userId && (
-          <div
-            className={styles.user}
-            onMouseEnter={handleIsHover}
-            onMouseLeave={handleIsNotHover}
+      <div className={styles.subHeader}>
+        <nav className={styles.nav}>
+          <Link
+            to='/board'
+            className={cn(
+              'item',
+              `${window.location.pathname === '/board' ? 'select' : ''}`
+            )}
           >
-            <p>{user.userId}님, 반가워요!</p>
-            {isHover && <SubMenu user={user} />}
-          </div>
-        )}
+            게시판
+          </Link>
+          <Link
+            to='/teams'
+            className={cn(
+              'item',
+              `${window.location.pathname === '/teams' ? 'select' : ''}`
+            )}
+          >
+            팀 찾기
+          </Link>
+        </nav>
+        <div className={styles.userBtn}>
+          {!user.userId && (
+            <Link to='/join' className={styles.join}>
+              회원가입
+            </Link>
+          )}
+          {!user.userId && (
+            <Link to='/login' className={styles.login}>
+              로그인
+            </Link>
+          )}
+          {user.userId && (
+            <div
+              className={styles.user}
+              onMouseEnter={handleIsHover}
+              onMouseLeave={handleIsNotHover}
+            >
+              <p>{user.userId}님, 반가워요!</p>
+              {isHover && <SubMenu user={user} />}
+            </div>
+          )}
+        </div>
       </div>
     </header>
   );
