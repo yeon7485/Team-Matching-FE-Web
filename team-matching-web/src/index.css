@@ -1,11 +1,26 @@
 @import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
 
+@font-face {
+  font-family: 'RixInooAriDuriR';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2207-01@1.0/RixInooAriDuriR.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'KCC-Ganpan';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/KCC-Ganpan.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+
 body {
   width: 100%;
   height: 100%;
   margin: 0;
   font-family: 'Noto Sans KR', sans-serif;
-  overflow-x: auto;
+  overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
