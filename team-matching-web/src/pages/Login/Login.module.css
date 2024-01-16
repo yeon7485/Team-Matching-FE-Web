@@ -1,0 +1,82 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+  min-width: 500px;
+  height: 100%;
+  padding: 5rem;
+}
+
+.title {
+  margin: 0rem 0rem 2rem;
+  color: var(--main-color);
+  font-weight: bold;
+  font-size: 2.5rem;
+  text-decoration: none;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 70%;
+  max-width: 500px;
+  height: auto;
+  padding: 2rem;
+  margin-bottom: 1rem;
+  border-radius: 15px;
+  background-color: rgba(115, 115, 222, 0.08);
+}
+
+label {
+  margin-right: auto;
+  margin-bottom: 1rem;
+}
+
+.inputBox {
+  width: 93%;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+}
+
+.loginButton {
+  width: 100%;
+  padding: 0.6rem 1.2rem;
+  margin-top: 2rem;
+  border: 1px solid var(--main-color);
+  border-radius: 0.5rem;
+  background-color: var(--main-color);
+  color: white;
+  font-weight: 550;
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+.loginButton:hover {
+  background-color: var(--main-color-dark);
+}
+
+.joinBtn {
+  color: var(--main-color);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.joinBtn:hover {
+  text-decoration: underline;
+}

@@ -1,0 +1,23 @@
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	width: 100vw;
+	height: 100vh;
+	min-width: 500px;
+}
+
+.contentWrapper {
+	flex: 1;
+}
+
+.teamWrapper {
+	display: flex;
+	flex-direction: column;
+	height: 100vh;
+	margin: 3rem 15% 15%;
+}
+
+.teamContentWrapper {
+	display: flex;
+}

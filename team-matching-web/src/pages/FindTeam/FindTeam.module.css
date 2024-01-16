@@ -1,0 +1,159 @@
+.root {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 80%;
+	margin: 2.5rem 9% 11%;
+}
+
+.topBar {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.category {
+	margin-right: 1rem;
+	flex-shrink: 0;
+}
+
+.categoryBtn {
+	padding: 0.4rem 0.8rem;
+	margin: 0 0.3rem;
+	border: solid 1px var(--gray500);
+	border-radius: 20px;
+	background-color: white;
+	color: var(--gray800);
+	font-size: 1.1rem;
+	cursor: pointer;
+}
+
+.rightBox {
+	display: flex;
+	align-items: center;
+	height: 2.4rem;
+}
+
+.searchBox {
+	display: flex;
+	justify-content: stretch;
+}
+
+.searchSelect {
+	width: 7rem;
+	padding: 0.5rem;
+	font-size: 1rem;
+}
+
+form {
+	display: flex;
+}
+
+.inputSearch {
+	height: 27px;
+  width: 300px;
+  padding: 0.2rem 1rem;
+  border: #E9E9E9;
+  border-radius: 0.8rem;
+  background-color: #E9E9E9;
+	min-width: 5rem;
+	
+}
+
+.searchBtn {
+	width: 1.6rem;
+	height: 1.6rem;
+	padding: 0.4rem;
+	background-color: var(--main-color);
+	color: white;
+	text-align: center;
+	cursor: pointer;
+	flex-shrink: 0;
+}
+
+.createBtn {
+	padding: 0.5rem 1.5rem;
+	margin-left: 1.5rem;
+	background-color: var(--main-color);
+	color: white;
+	text-decoration: none;
+	text-align: center;
+	flex-shrink: 0;
+}
+
+.teamList {
+	display: grid;
+	margin: 3rem 0;
+	place-items: center;
+	gap: 1.5rem 1rem;
+	grid-template-columns: repeat(auto-fit, minmax(25%, auto));
+}
+
+
+.empty {
+	margin: 2rem 0;
+	grid-column: 1 / span 4;
+}
+
+
+.empty {
+	margin: 3rem 2rem;
+}
+
+.black {
+	color: black;
+	font-weight: bold;
+	border-color: black;
+}
+
+.blue {
+	color: var(--category-dev);
+	font-weight: bold;
+	border-color: var(--category-dev);
+}
+
+.green {
+	color: var(--category-hobby);
+	font-weight: bold;
+	border-color: var(--category-hobby);
+}
+
+.red {
+	color: var(--category-sports);
+	font-weight: bold;
+	border-color: var(--category-sports);
+}
+
+.pink {
+	color: var(--category-game);
+	font-weight: bold;
+	border-color: var(--category-game);
+}
+
+@media screen and (max-width: 749px) {
+	.topBar {
+		flex-direction: column;
+	}
+
+	.category {
+		margin-bottom: 1rem;
+	}
+}
+
+@media screen and (min-width: 750px) {
+	.teamList {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media screen and (min-width: 1200px) {
+	.teamList {
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
+
+@media screen and (min-width: 1650px) {
+	.teamList {
+		grid-template-columns: repeat(4, 1fr);
+	}
+}

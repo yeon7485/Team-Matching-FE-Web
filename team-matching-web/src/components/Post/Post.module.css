@@ -1,0 +1,42 @@
+.postLi{
+  display: flex;
+  align-items: center;
+  height: 2rem;
+  border-bottom: 1px solid lightgray;
+}
+
+.postLi:hover{
+  background: #E9E9E9;
+  cursor: pointer;
+}
+
+.item {
+  font-size: 0.9rem;
+  flex-basis: 50px;
+}
+
+.postLi .item:nth-child(1){
+  text-align: center;
+  flex-grow: 0.5;
+}
+.postLi .item:nth-child(2){
+  flex-grow: 7;
+  flex-shrink: 0;
+
+}
+.postLi .item:nth-child(3){
+  text-align: center;
+  flex-grow: 1;
+}
+.postLi .item:nth-child(4){
+  text-align: center;
+  flex-grow: 1;
+}
+.postLi .item:nth-child(5){
+  text-align: center;
+  flex-grow: 1;
+}
+.commentsCount{
+  color: #E679AD;
+  margin-left: 0.4rem;
+}

@@ -6,8 +6,16 @@ import { FiMail, FiInstagram, FiGithub } from 'react-icons/fi';
 export default function Footer() {
   return (
     <footer className={styles.footer}>
-      <h2 className={styles.title}>Team-Matching</h2>
-      <div>
+      <hr className={styles.line} />
+      <div className={styles.logo}>
+        <h2 className={styles.title}>Team-Mon</h2>
+        <div className={styles.icons}>
+          <FiMail className={styles.icon} />
+          <FiInstagram className={styles.icon} />
+          <FiGithub className={styles.icon} />
+        </div>
+      </div>
+      <div className={styles.linkDiv}>
         <Link to='#' className={styles.link}>
           공지사항
         </Link>
@@ -17,12 +25,6 @@ export default function Footer() {
         <Link to='#' className={styles.link}>
           이용약관
         </Link>
-      </div>
-      <hr className={styles.line} />
-      <div>
-        <FiMail className={styles.icon} />
-        <FiInstagram className={styles.icon} />
-        <FiGithub className={styles.icon} />
       </div>
     </footer>
   );
