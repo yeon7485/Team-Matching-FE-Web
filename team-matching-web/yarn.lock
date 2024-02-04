@@ -14762,6 +14762,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"sweetalert2@npm:^11.10.3":
+  version: 11.10.3
+  resolution: "sweetalert2@npm:11.10.3"
+  checksum: db07199bb5069384db94d6d5075c7c9d2016d638037f85464f53d0993888cf45aaf2da9b4bd6bd14f2966316091e15528d4403e4cc2c21623ed2199fae74b5f4
+  languageName: node
+  linkType: hard
+
 "symbol-tree@npm:^3.2.4":
   version: 3.2.4
   resolution: "symbol-tree@npm:3.2.4"
@@ -14869,6 +14876,7 @@ __metadata:
     react-spinners: ^0.13.8
     recoil: ^0.7.7
     recoil-persist: ^5.1.0
+    sweetalert2: ^11.10.3
     web-vitals: ^2.1.0
   languageName: unknown
   linkType: soft

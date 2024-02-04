@@ -354,9 +354,9 @@ export async function getMyComments(userId, token, page) {
 }
 
 // [마이페이지] 참여 중인 팀 조회
-export async function getMyTeamList(userId, token, page) {
+export async function getMyTeamList(userId, token, page, size) {
   return axios
-    .get(`/my-page/${userId}/teams?page=${page}`, {
+    .get(`/my-page/${userId}/teams?page=${page}&size=${size}`, {
       headers: { Authorization: `Bearer ${token}` },
     })
     .then((result) => {

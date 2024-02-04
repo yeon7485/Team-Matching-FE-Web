@@ -14,6 +14,7 @@
 	font-weight: 500;
 	font-size: 3rem;
 	font-family: 'KCC-Ganpan';
+	flex-shrink: 1;
 }
 
 .text {
@@ -25,13 +26,13 @@
 
 .btn {
 	padding: 0.8rem 3rem;
+	margin-top: 1rem;
 	border: none;
+	border-radius: 2rem;
 	background-color: var(--main-color-dark);
 	color: white;
 	font-size: 1rem;
 	text-decoration: none;
-	border-radius: 2rem;
-	margin-top: 1rem;
 }
 
 .btn:hover {
@@ -42,37 +43,46 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	padding: 3% 10%;
+	padding: 3% 11%;
 }
 
 .teams {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-}
-
-.teamTitle {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
 	width: 100%;
-	flex-grow: 1;
-	gap: 40px;
+	max-width: 1200px;
 }
 
-.teamText {
-	font-size: 1.6rem;
+.gotoBox {
+	display: flex;
+	align-items: center;
+	width: fit-content;
+	cursor: pointer;
+}
+
+.subTitle {
+	font-size: 1.5rem;
 	flex-shrink: 1;
 }
 
+.arrow {
+	padding-top: 0.2rem;
+	margin-left: 1rem;
+}
 
 .moreTeams {
 	display: flex;
 	align-items: center;
+	height: 100%;
+	margin: auto 0;
 	font-weight: 500;
-	font-size: 1rem;
 	text-decoration: none;
 	flex-shrink: 0;
+}
+
+.moreTeams span {
+	padding-bottom: 0.2rem;
 }
 
 .moreTeams:visited {
@@ -92,6 +102,20 @@
 	gap: 16px;
 	grid-template-columns: repeat(3, minmax(100px, 320px));
 	grid-auto-rows: minmax(100px, auto);
+}
+
+.myTeams {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 100%;
+	max-width: 1200px;
+	margin-top: 4rem;
+}
+
+.myTeamList {
+	display: flex;
+	flex-direction: column;
 }
 
 @media screen and (min-width: 500px) {

@@ -51,6 +51,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-spinners", "virtual:2201fb470c295c617516ca15733c6eb352605199013f875ea7a03f7c5855894ac92bb45c2d76a94419ea48424f4caf8e10310cb2e7ea3d8046b17d8bfe129cfc#npm:0.13.8"],\
             ["recoil", "virtual:2201fb470c295c617516ca15733c6eb352605199013f875ea7a03f7c5855894ac92bb45c2d76a94419ea48424f4caf8e10310cb2e7ea3d8046b17d8bfe129cfc#npm:0.7.7"],\
             ["recoil-persist", "virtual:2201fb470c295c617516ca15733c6eb352605199013f875ea7a03f7c5855894ac92bb45c2d76a94419ea48424f4caf8e10310cb2e7ea3d8046b17d8bfe129cfc#npm:5.1.0"],\
+            ["sweetalert2", "npm:11.10.3"],\
             ["web-vitals", "npm:2.1.4"]\
           ],\
           "linkType": "SOFT"\
@@ -19458,6 +19459,15 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "linkType": "HARD"\
         }]\
       ]],\
+      ["sweetalert2", [\
+        ["npm:11.10.3", {\
+          "packageLocation": "./.yarn/cache/sweetalert2-npm-11.10.3-549ca41203-db07199bb5.zip/node_modules/sweetalert2/",\
+          "packageDependencies": [\
+            ["sweetalert2", "npm:11.10.3"]\
+          ],\
+          "linkType": "HARD"\
+        }]\
+      ]],\
       ["symbol-tree", [\
         ["npm:3.2.4", {\
           "packageLocation": "./.yarn/cache/symbol-tree-npm-3.2.4-fe70cdb75b-6e8fc7e148.zip/node_modules/symbol-tree/",\
@@ -19568,6 +19578,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["react-spinners", "virtual:2201fb470c295c617516ca15733c6eb352605199013f875ea7a03f7c5855894ac92bb45c2d76a94419ea48424f4caf8e10310cb2e7ea3d8046b17d8bfe129cfc#npm:0.13.8"],\
             ["recoil", "virtual:2201fb470c295c617516ca15733c6eb352605199013f875ea7a03f7c5855894ac92bb45c2d76a94419ea48424f4caf8e10310cb2e7ea3d8046b17d8bfe129cfc#npm:0.7.7"],\
             ["recoil-persist", "virtual:2201fb470c295c617516ca15733c6eb352605199013f875ea7a03f7c5855894ac92bb45c2d76a94419ea48424f4caf8e10310cb2e7ea3d8046b17d8bfe129cfc#npm:5.1.0"],\
+            ["sweetalert2", "npm:11.10.3"],\
             ["web-vitals", "npm:2.1.4"]\
           ],\
           "linkType": "SOFT"\

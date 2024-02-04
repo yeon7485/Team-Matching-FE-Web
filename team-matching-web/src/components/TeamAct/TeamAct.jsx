@@ -23,7 +23,7 @@ export default function TeamAct() {
   } = useQuery(
     ['getMyTeamList', userId, page - 1],
     () => {
-      return getMyTeamList(userId, token, page - 1).then((data) => {
+      return getMyTeamList(userId, token, page - 1, 10).then((data) => {
         setTotalTeams(data.totalElements);
         return data.content;
       });
@@ -35,9 +35,6 @@ export default function TeamAct() {
   const handleClick = (team) => {
     setMyTeam({
       teamId: team.id,
-      admin: team.adminUserAccountDto.userId,
-      teamName: team.name,
-      deadline: team.deadline,
     });
     nav(`/myteam/${team.id}/info`);
   };
