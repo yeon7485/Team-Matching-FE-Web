@@ -139,7 +139,7 @@ export async function myPageInfo(userId, token) {
 
 //마이페이지 정보 수정하기
 export function upDateMyPageInfo(userId, token, nickname, memo) {
-  axios
+  return axios
     .patch(
       `/my-page/${userId}/info`,
       {
@@ -151,7 +151,7 @@ export function upDateMyPageInfo(userId, token, nickname, memo) {
       }
     )
     .then((result) => {
-      console.log(result);
+      return result;
     });
 }
 

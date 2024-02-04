@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import styles from './MyInfo.module.css';
 import ChangePwModal from '../ChangePwModal/ChangePwModal';
 import ChangeNickNameModal from '../ChangeNickNameModal/ChangeNickNameModal';
@@ -20,7 +20,16 @@ export default function MyInfo() {
   const user = useRecoilValue(userState);
   const handleSubmit = (e) => {
     e.preventDefault();
-    upDateMyPageInfo(user.userId, user.token, userInfo.nickname, userInfo.memo);
+    upDateMyPageInfo(
+      user.userId,
+      user.token,
+      userInfo.nickname,
+      userInfo.memo
+    ).then((result) => {
+      if (result.status === 200) {
+        alert('수정 성공');
+      }
+    });
   };
 
   const { isLoading, error, data } = useQuery(['myPageData'], () => {
@@ -50,7 +59,7 @@ export default function MyInfo() {
   if (isLoading) return <Loading />;
   if (error) return <NotFound />;
   return (
-    <>
+    <div className={styles.container}>
       <h3>내 정보 관리</h3>
       <hr />
       <div className={styles.infoBox}>
@@ -105,6 +114,6 @@ export default function MyInfo() {
           <button className={styles.saveBtn}>저장</button>
         </form>
       </article>
-    </>
+    </div>
   );
 }
