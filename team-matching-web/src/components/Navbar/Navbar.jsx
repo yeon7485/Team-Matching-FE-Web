@@ -20,13 +20,19 @@ export default function Navbar() {
       alert('로그인 시간이 만료되었습니다😭 다시 로그인해주세요');
       logOut(user.userId, user.token)
         .then((result) => {
+          console.log(user.userId);
           if (result.status === 200) {
             reset();
             localStorage.removeItem('tokenTimer');
+            nav('/login', { replace: true });
+          } else {
+            reset();
+            localStorage.removeItem('tokenTimer');
+            nav('/', { replace: true });
           }
         })
-        .finally(() => {
-          nav('/', { replace: true });
+        .catch((error) => {
+          console.error(error);
         });
     }
   });

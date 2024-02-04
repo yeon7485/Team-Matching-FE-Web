@@ -1,13 +1,23 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './MyPage.module.css';
 import MyInfo from 'components/MyInfo/MyInfo';
 import WritePost from 'components/WritePost/WritePost';
 import WriteComment from 'components/WriteComment/WriteComment';
 import TeamAct from 'components/TeamAct/TeamAct';
 import TeamJudging from 'components/TeamJudging/TeamJudging';
+import { useLocation } from 'react-router-dom';
 
 export default function MyPage() {
   const [index, setIndex] = useState('MyInfo');
+
+  const location = useLocation();
+  const fromMain = { ...location.state };
+  useEffect(() => {
+    if (fromMain.index) {
+      setIndex(fromMain.index);
+    }
+  });
+
   return (
     <div className={styles.root}>
       <aside className={styles.sidebar}>
