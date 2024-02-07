@@ -60,16 +60,15 @@ export default function MyInfo() {
   if (error) return <NotFound />;
   return (
     <div className={styles.container}>
-      <h3>내 정보 관리</h3>
-      <hr />
+      <h3 className={styles.index}>내 정보 관리</h3>
       <div className={styles.infoBox}>
         <div className={styles.idBox}>
           <p className={styles.title}>아이디</p>
-          <p className={styles.user}>{userInfo.id}</p>
+          <p className={styles.content}>{userInfo.id}</p>
         </div>
         <div className={styles.pwBox}>
           <p className={styles.title}>비밀번호</p>
-          <button onClick={showPwModal} className={styles.infoBtn}>
+          <button onClick={showPwModal} className={styles.updateBtn}>
             비밀번호 변경
           </button>
           {pwModalOpen && (
@@ -78,8 +77,8 @@ export default function MyInfo() {
         </div>
         <div className={styles.nicknameBox}>
           <p className={styles.title}>닉네임</p>
-          <p className={styles.user}>{userInfo.nickname}</p>
-          <button onClick={showNnModal} className={styles.infoBtn}>
+          <p className={styles.content}>{userInfo.nickname}</p>
+          <button onClick={showNnModal} className={styles.updateBtn}>
             변경
           </button>
           {nnModalOpen && (
@@ -92,11 +91,11 @@ export default function MyInfo() {
         </div>
         <div className={styles.emailBox}>
           <p className={styles.title}>이메일</p>
-          <p className={styles.user}>{userInfo.email}</p>
+          <p className={styles.content}>{userInfo.email}</p>
         </div>
       </div>
       <article className={styles.selfBox}>
-        <p className={styles.selfTitle}>자기 소개</p>
+        <p className={styles.selfTitle}>소개글</p>
         <form className={styles.selfForm} onSubmit={handleSubmit}>
           <textarea
             name=''

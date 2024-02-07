@@ -66,7 +66,7 @@ export default function MyPage() {
           </li>
         </ul>
       </aside>
-      <hr className={styles.divider} />
+
       <section className={styles.content}>
         {index === 'MyInfo' && <MyInfo />}
         {index === 'WritePost' && <WritePost />}
