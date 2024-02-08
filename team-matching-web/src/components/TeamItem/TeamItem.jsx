@@ -12,9 +12,11 @@ export default function TeamItem({
   const cat = useCategory(category);
   const cn = classNames.bind(styles);
   return (
-    <li className={styles.teamLi} onClick={onClick}>
+    <li className={styles.teamLi}>
       <div className={cn('item', cat)}>{cat}</div>
-      <div className={styles.item}>{name}</div>
+      <div className={styles.item} onClick={onClick}>
+        {name}
+      </div>
       <div className={styles.item}>#{hashtag}</div>
       {type !== 'act' && (
         <div className={styles.cancel} onClick={handleCancel}>

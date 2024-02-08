@@ -3,11 +3,6 @@
   align-items: center;
   padding: 1rem 0.4rem;
   border-bottom: 1px solid lightgray;
-  cursor: pointer;
-}
-
-.teamLi:hover {
-  background-color: var(--gray200);
 }
 
 .item {
@@ -25,6 +20,11 @@
   flex-grow: 7;
   flex-shrink: 0;
   font-weight: 500;
+  cursor: pointer;
+}
+
+.item:nth-child(2):hover {
+  text-decoration: underline;
 }
 
 .item:nth-child(3) {

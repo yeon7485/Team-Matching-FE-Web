@@ -24,8 +24,12 @@ export default function TeamAct() {
     ['getMyTeamList', userId, page - 1],
     () => {
       return getMyTeamList(userId, token, page - 1, 10).then((data) => {
-        setTotalTeams(data.totalElements);
-        return data.content;
+        const list = data.content.filter((team) => {
+          if (new Date(team.deadline) >= new Date()) return team;
+        });
+        setTotalTeams(list.length);
+        console.log(list);
+        return list;
       });
     },
     { enabled: !!userId }
@@ -38,7 +42,7 @@ export default function TeamAct() {
     });
     nav(`/myteam/${team.id}/info`);
   };
-
+  console.log(totalTeams);
   if (isLoading || totalTeams === -1) return <Loading />;
   if (error) return <NotFound />;
 
@@ -57,16 +61,18 @@ export default function TeamAct() {
         )}
         <ul className={styles.ul}>
           {teamList &&
-            teamList.map((team) => (
-              <TeamItem
-                key={team.id}
-                teamData={team}
-                type={'act'}
-                onClick={() => {
-                  handleClick(team);
-                }}
-              />
-            ))}
+            teamList.map((team) => {
+              return (
+                <TeamItem
+                  key={team.id}
+                  teamData={team}
+                  type={'act'}
+                  onClick={() => {
+                    handleClick(team);
+                  }}
+                />
+              );
+            })}
         </ul>
         {totalTeams > 0 && (
           <Paging
