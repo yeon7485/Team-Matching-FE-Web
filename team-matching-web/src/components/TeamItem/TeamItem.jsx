@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './TeamItem.module.css';
 import useCategory from 'hooks/useCategory';
+import classNames from 'classnames/bind';
 
 export default function TeamItem({
   teamData: { name, category, hashtag, capacity, total },
@@ -8,12 +9,12 @@ export default function TeamItem({
   handleCancel,
   type,
 }) {
+  const cat = useCategory(category);
+  const cn = classNames.bind(styles);
   return (
-    <li className={styles.teamLi}>
-      <div className={styles.item}>{useCategory(category)}</div>
-      <div className={styles.item} onClick={onClick}>
-        {name}
-      </div>
+    <li className={styles.teamLi} onClick={onClick}>
+      <div className={cn('item', cat)}>{cat}</div>
+      <div className={styles.item}>{name}</div>
       <div className={styles.item}>#{hashtag}</div>
       {type !== 'act' && (
         <div className={styles.cancel} onClick={handleCancel}>
@@ -21,7 +22,7 @@ export default function TeamItem({
         </div>
       )}
       {type === 'act' && (
-        <div className={styles.item}>{`${total}/${capacity}`}</div>
+        <div className={styles.item}>{`${total} / ${capacity}`}</div>
       )}
     </li>
   );

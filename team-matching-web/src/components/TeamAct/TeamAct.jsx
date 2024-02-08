@@ -13,7 +13,7 @@ import Paging from 'ui/Paging/Paging';
 export default function TeamAct() {
   const { userId, token } = useRecoilValue(userState);
   const [page, setPage] = useState(1);
-  const [totalTeams, setTotalTeams] = useState(0);
+  const [totalTeams, setTotalTeams] = useState(-1);
   const setMyTeam = useSetRecoilState(myTeamState);
 
   const {
@@ -39,13 +39,12 @@ export default function TeamAct() {
     nav(`/myteam/${team.id}/info`);
   };
 
-  if (isLoading) return <Loading />;
+  if (isLoading || totalTeams === -1) return <Loading />;
   if (error) return <NotFound />;
 
   return (
-    <>
-      <h3>참여 중인 팀</h3>
-      <hr />
+    <div className={styles.container}>
+      <h3 className={styles.index}>참여 중인 팀</h3>
       <div className={styles.content}>
         {totalTeams === 0 && <p>현재 참여 중인 팀이 없습니다.</p>}
         {totalTeams > 0 && (
@@ -78,6 +77,6 @@ export default function TeamAct() {
           />
         )}
       </div>
-    </>
+    </div>
   );
 }

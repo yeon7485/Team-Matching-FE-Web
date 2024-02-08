@@ -35,8 +35,12 @@ export default function Post({
 
       <div className={styles.item}>
         {(today_date == createdAt.substr(0, 10) && createdAt.substr(11, 5)) ||
-          createdAt.substr(0, 10)}
+          formatDate(createdAt)}
       </div>
     </li>
   );
+}
+
+function formatDate(date) {
+  return `${date.substr(2, 2)}.${date.substr(5, 2)}.${date.substr(8, 2)}`;
 }

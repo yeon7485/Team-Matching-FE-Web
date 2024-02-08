@@ -1,9 +1,13 @@
 .teamLi {
   display: flex;
   align-items: center;
-  height: 2rem;
-  padding: 0.4rem;
+  padding: 1rem 0.4rem;
   border-bottom: 1px solid lightgray;
+  cursor: pointer;
+}
+
+.teamLi:hover {
+  background-color: var(--gray200);
 }
 
 .item {
@@ -18,25 +22,22 @@
 
 .item:nth-child(2) {
   margin-left: 2rem;
-  cursor: pointer;
   flex-grow: 7;
   flex-shrink: 0;
-}
-
-.item:nth-child(2):hover {
-  text-decoration: underline;
+  font-weight: 500;
 }
 
 .item:nth-child(3) {
   text-align: center;
   flex-grow: 1;
+  color: var(--gray500);
 }
 
 .item:nth-child(4) {
   text-align: center;
   flex-grow: 1;
+  color: var(--main-color-pink);
 }
-
 
 .cancel {
   font-size: 0.9rem;
@@ -50,4 +51,20 @@
 .cancel:hover {
   font-weight: bold;
   text-decoration: underline;
+}
+
+.개발 {
+  color: var(--category-dev);
+}
+
+.취미 {
+  color: var(--category-hobby);
+}
+
+.스포츠 {
+  color: var(--category-sports);
+}
+
+.게임 {
+  color: var(--category-game);
 }
