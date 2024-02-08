@@ -12,7 +12,7 @@ import Paging from 'ui/Paging/Paging';
 export default function WritePost() {
   const { userId, token } = useRecoilValue(userState);
   const [page, setPage] = useState(1);
-  const [totalPosts, setTotalPosts] = useState(0);
+  const [totalPosts, setTotalPosts] = useState(-1);
   const {
     isLoading,
     error,
@@ -24,13 +24,12 @@ export default function WritePost() {
     });
   });
 
-  if (isLoading) return <Loading />;
+  if (isLoading || totalPosts === -1) return <Loading />;
   if (error) return <NotFound />;
 
   return (
-    <>
-      <h3>작성한 글</h3>
-      <hr />
+    <div className={styles.container}>
+      <h3 className={styles.index}>작성한 글</h3>
       <div className={styles.content}>
         {totalPosts === 0 && <p>작성한 글이 없습니다.</p>}
         {totalPosts > 0 && (
@@ -56,6 +55,6 @@ export default function WritePost() {
           />
         )}
       </div>
-    </>
+    </div>
   );
 }

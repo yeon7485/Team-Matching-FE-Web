@@ -3,6 +3,7 @@
   flex-direction: row;
   justify-content: center;
   padding: 0 11%;
+  min-height: 800px;
 }
 
 .sidebar {
@@ -40,16 +41,9 @@
   font-weight: bold;
 }
 
-.divider {
-  margin: 0 1rem;
-  width: 1px;
-  background-color: var(--gray300);
-  border: 0;
-}
-
 .content {
   display: flex;
   flex-direction: column;
   min-width: 800px;
-  border-left: 1px solid var(--gray500);
+  border-left: 1px solid var(--gray300);
 }
