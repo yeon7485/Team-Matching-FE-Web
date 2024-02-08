@@ -12,7 +12,7 @@ import Paging from 'ui/Paging/Paging';
 export default function WriteComment() {
   const { userId, token } = useRecoilValue(userState);
   const [page, setPage] = useState(1);
-  const [totalComments, setTotalComments] = useState(0);
+  const [totalComments, setTotalComments] = useState(-1);
 
   const {
     isLoading,
@@ -29,13 +29,12 @@ export default function WriteComment() {
     { enabled: !!userId }
   );
 
-  if (isLoading) return <Loading />;
+  if (isLoading || totalComments === -1) return <Loading />;
   if (error) return <NotFound />;
 
   return (
-    <>
-      <h3>작성한 댓글</h3>
-      <hr />
+    <div className={styles.container}>
+      <h3 className={styles.index}>작성한 댓글</h3>
       <div className={styles.content}>
         {totalComments === 0 && <p>작성한 댓글이 없습니다.</p>}
         {totalComments > 0 && (
@@ -58,6 +57,6 @@ export default function WriteComment() {
           />
         )}
       </div>
-    </>
+    </div>
   );
 }

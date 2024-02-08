@@ -13,7 +13,7 @@ import TeamItem from '../TeamItem/TeamItem';
 export default function TeamJudging() {
   const { userId, token } = useRecoilValue(userState);
   const [page, setPage] = useState(1);
-  const [totalApply, setTotalApply] = useState(0);
+  const [totalApply, setTotalApply] = useState(-1);
   const queryClient = useQueryClient();
 
   const {
@@ -55,12 +55,11 @@ export default function TeamJudging() {
     }
   };
 
-  if (isLoading) return <Loading />;
+  if (isLoading || totalApply === -1) return <Loading />;
   if (error) return <NotFound />;
   return (
-    <>
-      <h3>신청 중인 팀</h3>
-      <hr />
+    <div className={styles.container}>
+      <h3 className={styles.index}>신청 중인 팀</h3>
       <div className={styles.content}>
         {totalApply > 0 && (
           <header className={styles.header}>
@@ -73,19 +72,21 @@ export default function TeamJudging() {
         {totalApply === 0 && <p>현재 신청 중인 팀이 없습니다.</p>}
         <ul className={styles.ul}>
           {applyList &&
-            applyList.map((apply) => (
-              <TeamItem
-                key={apply.teamSimpleResponse.id}
-                teamData={apply.teamSimpleResponse}
-                type={'judging'}
-                handleCancel={() => {
-                  handleCancel(apply.teamSimpleResponse.id, apply.id);
-                }}
-                onClick={() => {
-                  handleClick(apply.teamSimpleResponse);
-                }}
-              />
-            ))}
+            applyList.map((apply) => {
+              return (
+                <TeamItem
+                  key={apply.teamSimpleResponse.id}
+                  teamData={apply.teamSimpleResponse}
+                  type={'judging'}
+                  handleCancel={() => {
+                    handleCancel(apply.teamSimpleResponse.id, apply.id);
+                  }}
+                  onClick={() => {
+                    handleClick(apply.teamSimpleResponse);
+                  }}
+                />
+              );
+            })}
         </ul>
 
         {totalApply > 0 && (
@@ -97,6 +98,6 @@ export default function TeamJudging() {
           />
         )}
       </div>
-    </>
+    </div>
   );
 }

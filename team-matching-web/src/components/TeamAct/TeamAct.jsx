@@ -13,7 +13,7 @@ import Paging from 'ui/Paging/Paging';
 export default function TeamAct() {
   const { userId, token } = useRecoilValue(userState);
   const [page, setPage] = useState(1);
-  const [totalTeams, setTotalTeams] = useState(0);
+  const [totalTeams, setTotalTeams] = useState(-1);
   const setMyTeam = useSetRecoilState(myTeamState);
 
   const {
@@ -24,8 +24,12 @@ export default function TeamAct() {
     ['getMyTeamList', userId, page - 1],
     () => {
       return getMyTeamList(userId, token, page - 1, 10).then((data) => {
-        setTotalTeams(data.totalElements);
-        return data.content;
+        const list = data.content.filter((team) => {
+          if (new Date(team.deadline) >= new Date()) return team;
+        });
+        setTotalTeams(list.length);
+        console.log(list);
+        return list;
       });
     },
     { enabled: !!userId }
@@ -38,14 +42,13 @@ export default function TeamAct() {
     });
     nav(`/myteam/${team.id}/info`);
   };
-
-  if (isLoading) return <Loading />;
+  console.log(totalTeams);
+  if (isLoading || totalTeams === -1) return <Loading />;
   if (error) return <NotFound />;
 
   return (
-    <>
-      <h3>참여 중인 팀</h3>
-      <hr />
+    <div className={styles.container}>
+      <h3 className={styles.index}>참여 중인 팀</h3>
       <div className={styles.content}>
         {totalTeams === 0 && <p>현재 참여 중인 팀이 없습니다.</p>}
         {totalTeams > 0 && (
@@ -58,16 +61,18 @@ export default function TeamAct() {
         )}
         <ul className={styles.ul}>
           {teamList &&
-            teamList.map((team) => (
-              <TeamItem
-                key={team.id}
-                teamData={team}
-                type={'act'}
-                onClick={() => {
-                  handleClick(team);
-                }}
-              />
-            ))}
+            teamList.map((team) => {
+              return (
+                <TeamItem
+                  key={team.id}
+                  teamData={team}
+                  type={'act'}
+                  onClick={() => {
+                    handleClick(team);
+                  }}
+                />
+              );
+            })}
         </ul>
         {totalTeams > 0 && (
           <Paging
@@ -78,6 +83,6 @@ export default function TeamAct() {
           />
         )}
       </div>
-    </>
+    </div>
   );
 }
