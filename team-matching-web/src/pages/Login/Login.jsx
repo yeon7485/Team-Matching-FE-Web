@@ -32,7 +32,7 @@ export default function Login() {
     <div className={styles.root}>
       <section className={styles.container}>
         <h1 className={styles.title} onClick={goToMain}>
-          Team-Mon
+          TeamMon
         </h1>
         <form className={styles.form} onSubmit={handleSubmit}>
           <label htmlFor='id'>아이디</label>

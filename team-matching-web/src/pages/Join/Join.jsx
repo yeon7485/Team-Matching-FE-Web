@@ -22,9 +22,12 @@ export default function Join() {
   return (
     <div className={styles.root}>
       <section className={styles.container}>
-        <h1 className={styles.title}>Team-Matching</h1>
-        <p className={styles.already}>
-          이미 회원이신가요? <Link to='/login'>로그인</Link>
+        <h1 className={styles.title}>TeamMon</h1>
+        <p>
+          이미 회원이신가요?{' '}
+          <Link to='/login' className={styles.loginBtn}>
+            로그인
+          </Link>
         </p>
         <form className={styles.form} onSubmit={handleSubmit}>
           <label htmlFor='id'>아이디</label>
@@ -74,7 +77,6 @@ export default function Join() {
             required
             onChange={handleChange}
           />
-          {/* <p className={styles.message}>{message}</p> */}
           <div className={styles.agreeBox}>
             <input
               type='checkbox'
@@ -82,9 +84,8 @@ export default function Join() {
               name='agree'
               className={styles.checkBox}
             />
-            <label htmlFor='agree'>
-              개인정보처리방침 및 이용약관에 동의합니다.
-            </label>
+            <div className={styles.showCheckBox}></div>
+            <span>개인정보처리방침 및 이용약관에 동의합니다.</span>
           </div>
 
           <button className={styles.joinButton}>회원가입</button>
