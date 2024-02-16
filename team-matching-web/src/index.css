@@ -1,15 +1,11 @@
-@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
-
 @font-face {
-  font-family: 'RixInooAriDuriR';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2207-01@1.0/RixInooAriDuriR.woff2') format('woff2');
-  font-weight: normal;
-  font-style: normal;
+  font-family: 'Pretendard-Regular';
+  src: url('./font/PretendardVariable.ttf');
 }
 
 @font-face {
   font-family: 'KCC-Ganpan';
-  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.0/KCC-Ganpan.woff2') format('woff2');
+  src: url('./font/KCC-Ganpan.ttf');
   font-weight: normal;
   font-style: normal;
 }
@@ -20,9 +16,10 @@ body {
   height: 100%;
   margin: 0;
   padding: 0;
-  font-family: 'Noto Sans KR', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  font-family: 'Pretendard-Regular';
 }
 
 p {
@@ -33,14 +30,6 @@ p {
   width: 100%;
   min-height: 100%;
   margin: 0;
-}
-
-input {
-  font-family: 'Noto Sans KR', sans-serif;
-}
-
-textarea {
-  font-family: 'Noto Sans KR', sans-serif;
 }
 
 :root {
