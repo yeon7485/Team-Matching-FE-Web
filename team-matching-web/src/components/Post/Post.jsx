@@ -34,7 +34,7 @@ export default function Post({
       )}
 
       <div className={styles.item}>
-        {(today_date == createdAt.substr(0, 10) && createdAt.substr(11, 5)) ||
+        {(today_date === createdAt.substr(0, 10) && createdAt.substr(11, 5)) ||
           formatDate(createdAt)}
       </div>
     </li>

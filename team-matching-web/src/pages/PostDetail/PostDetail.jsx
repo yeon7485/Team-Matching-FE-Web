@@ -32,10 +32,10 @@ export default function PostDetail() {
       return data;
     });
   });
-  const editClickListner = () => {
+  const editClickListener = () => {
     nav('/board/new', { state: { postInfo } });
   };
-  const deleteClickListner = () => {
+  const deleteClickListener = () => {
     deletePost(postInfo.id, user.token).then((result) => {
       if (result.status === 200) {
         alert('게시글이 삭제되었습니다.');
@@ -54,79 +54,89 @@ export default function PostDetail() {
       }
     });
   };
+
   if (isLoading) return <Loading />;
   if (error) return <NotFound />;
+
   return (
     <div className={styles.root}>
-      <div className={styles.titleHeader}>
-        <Link to='/board' className={styles.title}>
-          자유게시판
-        </Link>
-        <Link className={styles.boardLink} to='/board'>
-          목록
-        </Link>
-      </div>
-      <div className={styles.titleBox}>
-        <span>{postInfo && postInfo.title}</span>
-      </div>
-      <div className={styles.infoBox}>
-        <span className={styles.name}>
-          {postInfo && postInfo.userAccountDto.nickname}
-        </span>
-        <span className={styles.date}>
-          {postInfo && postInfo.createdAt.substr(0, 16).replace('T', ' ')}
-        </span>
-      </div>
-      <article className={styles.post}>
-        <div className={styles.content}>{postInfo && postInfo.content}</div>
-        <div className={styles.tag}>{postInfo && postInfo.hashtag}</div>
-      </article>
-      <section className={styles.comment}>
-        <div className={styles.commentHeader}>
-          댓글{' '}
-          <span className={styles.commentsLength}>
-            {postInfo.commentDtos.length}
+      <div className={styles.container}>
+        <div className={styles.titleHeader}>
+          <Link to='/board' className={styles.title}>
+            자유게시판
+          </Link>
+          <Link className={styles.boardLink} to='/board'>
+            목록
+          </Link>
+        </div>
+        <div className={styles.titleBox}>
+          <span>{postInfo && postInfo.title}</span>
+        </div>
+        <div className={styles.infoBox}>
+          <span className={styles.name}>
+            {postInfo && postInfo.userAccountDto.nickname}
+          </span>
+          <span className={styles.date}>
+            {postInfo && formatDate(postInfo.createdAt)}
           </span>
         </div>
-        <ul className={styles.commentUl}>
-          {postInfo.commentDtos &&
-            postInfo.commentDtos.map((comment) => (
-              <Comment key={comment.id} comment={comment} />
-            ))}
-        </ul>
-        <div className={styles.newComment}>
-          <form className={styles.form} onSubmit={handleSubmit}>
-            <input
-              type='text'
-              className={styles.commentInput}
-              placeholder='댓글을 입력해주세요....'
-              value={content}
-              onChange={(e) => {
-                setContent(e.target.value);
-              }}
-            />
-            <button className={styles.submitBtn}>등록</button>
-          </form>
+        <article className={styles.post}>
+          <div className={styles.content}>{postInfo && postInfo.content}</div>
+          <div className={styles.tag}>{`#${postInfo && postInfo.hashtag}`}</div>
+        </article>
+        <section className={styles.comment}>
+          <div className={styles.commentHeader}>
+            댓글{' '}
+            <span className={styles.commentsLength}>
+              {`(${postInfo.commentDtos.length})`}
+            </span>
+          </div>
+          <ul className={styles.commentUl}>
+            {postInfo.commentDtos &&
+              postInfo.commentDtos.map((comment) => (
+                <Comment key={comment.id} comment={comment} />
+              ))}
+          </ul>
+          <div className={styles.newComment}>
+            <form className={styles.form} onSubmit={handleSubmit}>
+              <input
+                type='text'
+                className={styles.commentInput}
+                placeholder='댓글을 입력해주세요....'
+                value={content}
+                onChange={(e) => {
+                  setContent(e.target.value);
+                }}
+              />
+              <button className={styles.submitBtn}>등록</button>
+            </form>
+          </div>
+        </section>
+        <div className={styles.buttonDiv}>
+          {isMine && (
+            <RoundBtn
+              type={'button'}
+              text={'수정'}
+              fill={false}
+              onClick={editClickListener}
+            ></RoundBtn>
+          )}
+          <div className={styles.space} />
+          {isMine && (
+            <RoundBtn
+              type={'button'}
+              text={'삭제'}
+              fill={true}
+              onClick={deleteClickListener}
+            ></RoundBtn>
+          )}
         </div>
-      </section>
-      <div className={styles.buttonDiv}>
-        {isMine && (
-          <RoundBtn
-            type={'button'}
-            text={'수정'}
-            fill={false}
-            onClick={editClickListner}
-          ></RoundBtn>
-        )}
-        {isMine && (
-          <RoundBtn
-            type={'button'}
-            text={'삭제'}
-            fill={true}
-            onClick={deleteClickListner}
-          ></RoundBtn>
-        )}
       </div>
     </div>
   );
+}
+
+function formatDate(date) {
+  return `${date.substr(2, 2)}.${date.substr(5, 2)}.${date.substr(8, 2)} 
+  ${date.substr(11, 5)}`;
 }
