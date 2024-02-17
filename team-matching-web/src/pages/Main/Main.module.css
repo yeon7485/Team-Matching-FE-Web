@@ -5,7 +5,6 @@
 	align-items: center;
 	height: 25rem;
 	background-color: rgba(115, 115, 222, 0.3);
-	animation-name: colorChange;
 }
 
 .title {
@@ -43,7 +42,7 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	padding: 3% 11%;
+	padding: 3rem 11%;
 }
 
 .teams {
@@ -133,15 +132,5 @@
 @media screen and (min-width: 1200px) {
 	.teamList {
 		grid-template-columns: repeat(3, 1fr);
-	}
-}
-
-@keyframes colorChange {
-	from {
-		background-color: rgba(115, 115, 222, 0.3);
-	}
-
-	to {
-		background-color: rgba(230, 121, 173, 0.3);
 	}
 }

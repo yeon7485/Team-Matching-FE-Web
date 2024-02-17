@@ -15,15 +15,15 @@ export default function Main() {
   const userId = useRecoilValue(userState).userId;
   const token = useRecoilValue(userState).token;
   const setMyTeam = useSetRecoilState(myTeamState);
-  const [teamTotal, setTeamTotal] = useState(0);
-  const [myTeamTotal, setMyTeamTotal] = useState(0);
+  const [totalTeam, setTotalTeam] = useState(-1);
+  const [totalMyTeam, setTotalMyTeam] = useState(-1);
   const {
     isLoading,
     error,
     data: teamList,
   } = useQuery(['getTeamList'], () => {
     return getTeamList(0, 6).then((data) => {
-      setTeamTotal(data.totalElements);
+      setTotalTeam(data.totalElements);
       return data.content;
     });
   });
@@ -36,7 +36,7 @@ export default function Main() {
     ['getMyTeamList', userId, 0],
     () => {
       return getMyTeamList(userId, token, 0, 3).then((data) => {
-        setMyTeamTotal(data.totalElements);
+        setTotalMyTeam(data.totalElements);
         return data.content;
       });
     },
@@ -85,8 +85,9 @@ export default function Main() {
             <FaAngleRight className={styles.arrow} />
           </section>
           <section className={styles.teamList}>
-            {teamTotal === 0 && <p>현재 참여 중인 팀이 없습니다.</p>}
-            {teamTotal > 0 &&
+            {totalTeam === -1 && <Loading />}
+            {totalTeam === 0 && <p>현재 참여 중인 팀이 없습니다.</p>}
+            {totalTeam > 0 &&
               teamList.map((team) => <TeamCard key={team.id} team={team} />)}
           </section>
         </div>
@@ -97,8 +98,9 @@ export default function Main() {
               <FaAngleRight className={styles.arrow} />
             </section>
             <section className={styles.myTeamList}>
-              {myTeamTotal === 0 && <p>현재 참여 중인 팀이 없습니다.</p>}
-              {myTeamTotal > 0 &&
+              {totalMyTeam === -1 && <Loading />}
+              {totalMyTeam === 0 && <p>현재 참여 중인 팀이 없습니다.</p>}
+              {totalMyTeam > 0 &&
                 myTeamList.map((team) => (
                   <TeamItem
                     key={team.id}

@@ -1,77 +1,97 @@
-.root{
-  height: 67.8vh;
-  padding: 1.5rem 3rem;
+.root {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 11%;
 }
 
-.title{
+.container {
+  width: 100%;
+  max-width: 1100px;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
   color: var(--main-color);
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--gray300);
 }
 
-.searchBox{
+.searchBox {
   display: flex;
   justify-content: flex-end;
 }
 
-.inputSearch{
-  height: 27px;
-  width: 300px;
-  padding: 0.2rem 1rem;
-  border: #E9E9E9;
+.inputSearch {
+  width: 20rem;
+  padding: 0.6rem 1rem;
+  border: none;
   border-radius: 0.8rem;
-  background-color: #E9E9E9;
+  background-color: var(--gray200);
 }
 
-.boardHeader{
+.boardHeader {
   display: flex;
-	align-items: center;
+  align-items: center;
   height: 2rem;
   margin-top: 1rem;
-  background: #E9E9E9;
-  border-top: 1px solid;
+  background-color: var(--gray100);
+  border-top: 1px solid var(--gray400);
+  border-bottom: 1px solid var(--gray300);
 }
 
-
-
-.item{
+.item {
   text-align: center;
   flex-basis: 50px;
 }
 
-.boardHeader div:nth-child(1){
+.boardHeader div:nth-child(1) {
   flex-grow: 0.5;
 }
-.boardHeader div:nth-child(2){
+
+.boardHeader div:nth-child(2) {
   flex-grow: 7;
 
 }
-.boardHeader div:nth-child(3){
-  flex-grow: 1;
-}
-.boardHeader div:nth-child(4){
-  flex-grow: 1;
-}
-.boardHeader div:nth-child(5){
+
+.boardHeader div:nth-child(3) {
   flex-grow: 1;
 }
 
-.writeLink{
-  float: right;
-  padding: 0.3rem 0.8rem;
+.boardHeader div:nth-child(4) {
+  flex-grow: 1;
+}
+
+.boardHeader div:nth-child(5) {
+  flex-grow: 1;
+}
+
+.writeBtn {
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  align-self: flex-end;
+  padding: 0.5rem 0.8rem;
   border-radius: 0.3rem;
-  background-color: var(--main-color);
-  color: white;
-  font-size: 0.8rem;
-  text-decoration: none;
-}
-.writeLink:hover{
-  background-color: rgba(0, 108, 140, 1.2);
+  border: 1px solid var(--main-color);
+  background-color: white;
+  color: var(--main-color);
+  cursor: pointer;
 }
 
-.boardUl{
+.writeIcon {
+  margin-right: 0.2rem;
+}
+
+.writeBtn:hover {
+  background-color: rgba(115, 115, 222, 0.2);
+}
+
+.boardUl {
   display: flex;
   list-style: none;
   flex-direction: column;
-  padding-left: 0;
-  margin: 0;
+  margin-top: 0;
   margin-bottom: 2rem;
 }

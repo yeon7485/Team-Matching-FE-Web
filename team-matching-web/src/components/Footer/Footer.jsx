@@ -37,9 +37,6 @@ export default function Footer() {
         </div>
         <div className={styles.linkDiv}>
           <Link to='#' className={styles.link}>
-            공지사항
-          </Link>
-          <Link to='#' className={styles.link}>
             개인정보처리방침
           </Link>
           <Link to='#' className={styles.link}>

@@ -19,7 +19,6 @@ export default function FindTeam() {
   const [search, setSearch] = useState();
   const [category, setCategory] = useState('ALL');
   const [page, setPage] = useState(1);
-  const [size, setSize] = useState(9);
   const [totalElements, setTotalElements] = useState(-1);
   const cn = classNames.bind(styles);
 
@@ -194,18 +193,11 @@ export default function FindTeam() {
           <Paging
             page={page}
             totalElements={totalElements}
-            size={size}
+            size={9}
             setPage={setPage}
           />
         )}
       </div>
     </div>
   );
-}
-
-function getFilteredItems(team, filter) {
-  if (filter === 'ALL') {
-    return team;
-  }
-  return team.filter((team) => team.category === filter);
 }
