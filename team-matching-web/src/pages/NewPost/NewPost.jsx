@@ -104,14 +104,6 @@ export default function NewPost() {
           onChange={handleChange}
           className={styles.input}
         ></input>
-        <p className={styles.subTitle}>참여 중인 팀 태그 (선택)</p>
-        <input
-          type='text'
-          name='team'
-          placeholder='내가 참여 중인 팀을 선택해주세요. (하나만 선택 가능)'
-          onChange={handleChange}
-          className={styles.input}
-        ></input>
         <div className={styles.btnArea}>
           <RoundBtn
             type={'button'}
