@@ -1,0 +1,32 @@
+.list {
+  padding: 0.3rem 0.7rem;
+  border-bottom: 1px solid lightgray;
+}
+
+.content {
+  margin: 0.3rem 0;
+  font-weight: 500;
+  font-size: 0.9rem;
+}
+
+.date {
+  margin: 0.2rem 0;
+  font-weight: 300;
+  font-size: 0.7rem;
+}
+
+.postData {
+  margin: 0.2rem 0;
+  font-weight: 400;
+  font-size: 0.7rem;
+}
+
+.commentsCount {
+  margin-left: 0.4rem;
+  color: var(--main-color-pink);
+}
+
+.list:hover {
+  background-color: var(--gray100);
+  cursor: pointer;
+}

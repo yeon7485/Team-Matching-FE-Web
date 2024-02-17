@@ -1,0 +1,139 @@
+.container {
+	display: flex;
+	justify-content: center;
+	padding: 3rem 11%;
+}
+
+.team {
+	width: 100%;
+	min-width: 500px;
+	max-width: 1200px;
+	padding: 3.4rem 4rem;
+	border: 1px solid var(--gray800);
+	border-radius: 20px;
+}
+
+.top {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 1.5rem;
+}
+
+.left {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	margin-right: 2rem;
+	flex-shrink: 0;
+}
+
+.category {
+	font-weight: bold;
+	font-size: 1.2rem;
+}
+
+.title {
+	margin-bottom: 1.3rem;
+	font-weight: bold;
+	font-size: 1.7rem;
+}
+
+.nickname {
+	color: var(--gray800);
+	font-weight: bold;
+}
+
+.times {
+	display: flex;
+	color: var(--gray500);
+}
+
+.dot {
+	margin: 0 1rem;
+}
+
+.right {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: end;
+}
+
+.deadline {
+	margin-bottom: 0.3rem;
+	font-size: 1.2rem;
+	flex-shrink: 0;
+}
+
+.count {
+	margin-bottom: 1rem;
+	color: var(--main-color-pink);
+	font-weight: bold;
+	font-size: 1.3rem;
+}
+
+.apply {
+	padding: 0.6rem 1.2rem;
+	border: 2px solid var(--main-color);
+	border-radius: 40px;
+	color: var(--main-color);
+	font-weight: bold;
+	font-size: 1.3rem;
+	text-decoration: none;
+	cursor: pointer;
+	white-space: nowrap;
+}
+
+.apply:hover {
+	background-color: var(--main-color);
+	color: white;
+
+}
+
+.closed {
+	padding: 0.6rem 1.2rem;
+	border: 2px solid var(--gray500);
+	border-radius: 40px;
+	color: var(--gray500);
+	font-weight: bold;
+	font-size: 1.3rem;
+	text-decoration: none;
+	white-space: nowrap;
+}
+
+.description {
+	margin: 1.3rem 0.5rem 3rem 0.5rem;
+	white-space: pre-line;
+	font-size: 1rem;
+}
+
+.tag {
+	margin: 0.5rem;
+}
+
+.btnArea {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 8%;
+}
+
+.space {
+	margin: 0.4rem;
+}
+
+
+.개발 {
+	color: var(--category-dev);
+}
+
+.취미 {
+	color: var(--category-hobby);
+}
+
+.스포츠 {
+	color: var(--category-sports);
+}
+
+.게임 {
+	color: var(--category-game);
+}

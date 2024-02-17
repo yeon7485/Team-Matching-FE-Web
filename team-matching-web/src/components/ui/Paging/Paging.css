@@ -1,0 +1,37 @@
+.pagination {
+	display: flex;
+	justify-content: center;
+	margin-top: 15px;
+}
+
+ul {
+	list-style: none;
+	padding: 0;
+}
+
+ul.pagination li {
+	display: inline-block;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 2rem;
+	height: 2rem;
+	font-size: 1rem;
+}
+
+ul.pagination li a {
+	color: black;
+	font-size: 1rem;
+	text-decoration: none;
+}
+
+ul.pagination li.active a {
+	color: var(--main-color-red);
+	font-weight: 500;
+}
+
+.page-selection {
+	width: 3rem;
+	height: 1.8rem;
+	color: var(--main-color);
+}

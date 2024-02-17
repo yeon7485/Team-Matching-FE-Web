@@ -1,0 +1,68 @@
+.container {
+	margin: 2% 9% 10%;
+}
+
+.top {
+	display: flex;
+	justify-content: space-between;
+	align-items: end;
+	padding: 0 1rem;
+	margin-bottom: 1rem;
+}
+
+.title {
+	margin-bottom: 1rem;
+	color: var(--main-color);
+	font-size: 2.5rem;
+}
+
+.list {
+	padding: 0.5rem 1.8rem;
+	border: 1px solid var(--main-color);
+	background-color: white;
+	color: var(--main-color);
+	font-weight: bold;
+	font-size: 1rem;
+}
+
+.list:hover {
+	background-color: rgba(0, 129, 167, 0.2);
+}
+
+.write {
+	display: flex;
+	flex-direction: column;
+	padding: 2% 3%;
+}
+
+.subTitle {
+	margin-bottom: 0.6rem;
+	font-weight: bold;
+}
+
+.input {
+	width: 95%;
+	padding: 1.1rem 1.3rem;
+	margin-bottom: 2.5rem;
+	border: 1px solid var(--gray500);
+	font-size: 1rem;
+}
+
+.textArea {
+	height: 15rem;
+	resize: none;
+}
+
+.contents {
+	height: 17rem;
+	vertical-align: text-top;
+}
+
+.btnArea {
+	display: flex;
+	justify-content: center;
+}
+
+.space {
+	margin: 0.5rem;
+}

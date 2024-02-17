@@ -1,22 +1,39 @@
 .header {
 	display: flex;
+	justify-content: center;
 	align-items: center;
 	height: 4.5rem;
-	padding: 0 7.5rem;
+	padding: 0 10%;
+	box-shadow: 0 1px 10px 0px rgba(0, 0, 0, 0.17);
 }
 
 .logo {
 	color: var(--main-color);
-	font-size: 0.9rem;
+	font-size: 1.1rem;
 	text-decoration: none;
 	flex-shrink: 0;
+}
+
+.title {
+	font-family: 'KCC-Ganpan';
+	font-weight: 200;
+}
+
+.subHeader {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	max-width: 1200px;
+	height: 100%;
+	flex: 1 0 0;
 }
 
 .nav {
 	display: flex;
 	justify-content: space-between;
-	width: 15rem;
-	margin: 0 4rem;
+	max-width: 10rem;
+	min-width: 8rem;
+	margin: 0 4%;
 	flex-shrink: 0;
 }
 
@@ -29,12 +46,19 @@
 	text-align: center;
 }
 
-.btn {
-	margin-left: auto;
+.item:hover {
+	color: var(--main-color);
+}
+
+.select {
+	color: var(--main-color);
+}
+
+.userBtn {
 	flex-shrink: 0;
 }
 
-.join{
+.join {
 	padding: 0.4rem 1.2rem;
 	margin: 0.5rem;
 	border: 1px solid var(--main-color);
@@ -46,11 +70,11 @@
 	text-align: center;
 }
 
-.join:hover{
-	background-color: rgba(0, 129, 167, 0.2);
+.join:hover {
+	background-color: rgba(115, 115, 222, 0.2);
 }
 
-.login{
+.login {
 	padding: 0.4rem 1.2rem;
 	margin: 0.5rem;
 	border: 1px solid var(--main-color);
@@ -63,5 +87,15 @@
 }
 
 .login:hover {
-	background-color: rgba(0, 108, 140, 1.2);
+	background-color: var(--main-color-dark);
+}
+
+.dropdown {
+	cursor: pointer;
+}
+
+.user {
+	font-size: 1rem;
+	padding: 1.8rem 0;
+	cursor: pointer;
 }

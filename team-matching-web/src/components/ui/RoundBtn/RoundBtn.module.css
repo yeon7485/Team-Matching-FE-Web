@@ -1,0 +1,28 @@
+.btn {
+	padding: 0.5rem 0.8rem;
+	border: 1px solid var(--main-color);
+	border-radius: 0.3rem;
+	color: var(--main-color);
+	font-weight: 500;
+	font-size: 1rem;
+	text-align: center;
+	white-space: nowrap;
+}
+
+.white {
+	background-color: white;
+	color: var(--main-color);
+}
+
+.fill {
+	background-color: var(--main-color);
+	color: white;
+}
+
+.btn:hover {
+	background-color: rgba(115, 115, 222, 0.2);
+}
+
+.fill:hover {
+	background-color: var(--main-color-dark);
+}

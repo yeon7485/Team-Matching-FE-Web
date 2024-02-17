@@ -1,0 +1,30 @@
+.list {
+  list-style: none;
+  border-bottom: 1px solid var(--gray300);
+}
+
+.comment {
+  padding: 1.2rem 1.7rem 1rem;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+}
+
+.nickname {
+  font-weight: 600;
+}
+
+.date {
+  margin-left: 1rem;
+  font-size: 0.8rem;
+  color: var(--gray500);
+}
+
+.content {
+  margin-top: 0.3rem;
+  white-space: pre-wrap;
+  line-height: 1.7;
+  font-size: 0.9rem;
+}
