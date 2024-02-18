@@ -27,7 +27,7 @@ export default function Post({
           {commentsCount !== 0 && `[${commentsCount}]`}
         </span>
       </div>
-      <div className={styles.item}>{hashtag}</div>
+      <div className={styles.item}>#{hashtag}</div>
 
       {post.userAccountDto && (
         <div className={styles.item}>{post.userAccountDto.nickname}</div>

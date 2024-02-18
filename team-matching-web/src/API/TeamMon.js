@@ -312,7 +312,6 @@ export async function writeComment(content, id, token) {
       }
     )
     .then((result) => {
-      alert('댓글 쓰기 성공!!');
       return result;
     })
     .catch((error) => {
@@ -320,6 +319,17 @@ export async function writeComment(content, id, token) {
       console.log(error);
       alert(error.response.data);
       return error.response;
+    });
+}
+
+// 댓글 삭제
+export async function deleteComment(postId, commentId, token) {
+  return axios
+    .delete(`/posts/${postId}/comments/${commentId}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    .then((result) => {
+      return result;
     });
 }
 

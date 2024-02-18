@@ -109,9 +109,10 @@
 
 .commentInput {
   width: 90%;
-  height: 3rem;
+  min-height: 4rem;
   padding: 1rem;
   border: 1px solid var(--gray500);
+  resize: vertical;
 }
 
 .commentUl {
