@@ -22,6 +22,17 @@
   color: var(--gray500);
 }
 
+.delBtn {
+  cursor: pointer;
+  font-size: 0.8rem;
+  color: var(--main-color-pink);
+  margin-left: 1rem;
+}
+
+.delBtn:hover {
+  text-decoration: underline;
+}
+
 .content {
   margin-top: 0.3rem;
   white-space: pre-wrap;

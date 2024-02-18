@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styles from './PostDetail.module.css';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { useLocation, Link, useNavigate } from 'react-router-dom';
 import { useRecoilValue } from 'recoil';
 import { userState } from 'Recoil/state';
@@ -17,9 +17,11 @@ export default function PostDetail() {
     },
   } = useLocation();
   const [isMine, setIsMine] = useState(false);
-  const [content, setContent] = useState();
+  const [content, setContent] = useState('');
   const user = useRecoilValue(userState);
   const nav = useNavigate();
+  const queryClient = useQueryClient();
+
   const {
     isLoading,
     error,
@@ -32,9 +34,11 @@ export default function PostDetail() {
       return data;
     });
   });
+
   const editClickListener = () => {
     nav('/board/new', { state: { postInfo } });
   };
+
   const deleteClickListener = () => {
     deletePost(postInfo.id, user.token).then((result) => {
       if (result.status === 200) {
@@ -46,12 +50,17 @@ export default function PostDetail() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    writeComment(content, id, user.token).then((result) => {
+    if (content.trim() === '') {
+      alert('댓글을 작성해주세요.');
+      return;
+    }
+    writeComment(content.trim(), id, user.token).then((result) => {
       setContent('');
       if (result.status === 401) {
         alert('로그인 후 이용해 주세요!!');
         return;
       }
+      queryClient.invalidateQueries(['getPost', id]);
     });
   };
 
@@ -62,10 +71,8 @@ export default function PostDetail() {
     <div className={styles.root}>
       <div className={styles.container}>
         <div className={styles.titleHeader}>
-          <Link to='/board' className={styles.title}>
-            자유게시판
-          </Link>
-          <Link className={styles.boardLink} to='/board'>
+          <p className={styles.title}>자유게시판</p>
+          <Link to='/board' replace className={styles.boardLink}>
             목록
           </Link>
         </div>
@@ -93,17 +100,21 @@ export default function PostDetail() {
           </div>
           <ul className={styles.commentUl}>
             {postInfo.commentDtos &&
-              postInfo.commentDtos.map((comment) => (
-                <Comment key={comment.id} comment={comment} />
-              ))}
+              [...postInfo.commentDtos]
+                .reverse()
+                .map((comment) => (
+                  <Comment key={comment.id} comment={comment} />
+                ))}
           </ul>
           <div className={styles.newComment}>
             <form className={styles.form} onSubmit={handleSubmit}>
-              <input
-                type='text'
-                className={styles.commentInput}
+              <textarea
+                name='comment'
+                wrap='hard'
                 placeholder='댓글을 입력해주세요....'
+                required
                 value={content}
+                className={styles.commentInput}
                 onChange={(e) => {
                   setContent(e.target.value);
                 }}
