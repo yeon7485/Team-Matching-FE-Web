@@ -71,10 +71,8 @@ export default function PostDetail() {
     <div className={styles.root}>
       <div className={styles.container}>
         <div className={styles.titleHeader}>
-          <Link to='/board' className={styles.title}>
-            자유게시판
-          </Link>
-          <Link className={styles.boardLink} to='/board'>
+          <p className={styles.title}>자유게시판</p>
+          <Link to='/board' replace className={styles.boardLink}>
             목록
           </Link>
         </div>
