@@ -38,7 +38,6 @@ export default function Board() {
       return getSearchPosts(search, page - 1, 15).then((data) => {
         setTotalElements(data.totalElements);
         setPosts(data);
-
         return data;
       });
     },
@@ -50,10 +49,12 @@ export default function Board() {
   const handleChange = (e) => {
     setSearch(e.target.value.trim());
     setIsSearch(false);
+    setPage(1);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setPage(1);
     setIsSearch(true);
   };
 
