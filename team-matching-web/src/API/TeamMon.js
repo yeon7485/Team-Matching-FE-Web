@@ -182,10 +182,10 @@ export async function getCategoryTeamList(page, category) {
     });
 }
 
-// 팀 상세조회
-export async function getTeamDetail(id) {
+//검색어를 포함한 팀 리스트 간단 조회
+export async function getSearchTeamList(keyword, page, size) {
   return axios
-    .get(`/teams/${id}`)
+    .get(`/teams/search?keyword=${keyword}&page=${page}&size=${size}`)
     .then((result) => {
       return result.data.resultData;
     })
@@ -195,10 +195,10 @@ export async function getTeamDetail(id) {
     });
 }
 
-//검색어를 포함한 팀 리스트 간단 조회
-export async function getSearchTeamList(keyword, page, size) {
+// 팀 상세조회
+export async function getTeamDetail(id) {
   return axios
-    .get(`/teams/search?keyword=${keyword}&page=${page}&size=${size}`)
+    .get(`/teams/${id}`)
     .then((result) => {
       return result.data.resultData;
     })
@@ -276,6 +276,19 @@ export async function getPostsDetail(id) {
   });
 }
 
+//검색어로 글 검색하기
+export async function getSearchPosts(keyword, page, size) {
+  return axios
+    .get(`/posts/search?keyword=${keyword}&page=${page}&size=${size}`)
+    .then((result) => {
+      return result.data.resultData;
+    })
+    .catch((error) => {
+      console.log(error);
+      return error.response;
+    });
+}
+
 //글 삭제하기
 export async function deletePost(id, token) {
   return axios
@@ -287,18 +300,6 @@ export async function deletePost(id, token) {
     });
 }
 
-//검색어로 글 검색하기
-export async function getSearchPost(keyword, page, size) {
-  return axios
-    .get(`/posts/search?keyword=${keyword}&page=${page}&size=${size}`)
-    .then((result) => {
-      return result;
-    })
-    .catch((error) => {
-      console.log(error);
-      return error.response;
-    });
-}
 //댓글 쓰기
 export async function writeComment(content, id, token) {
   return axios
