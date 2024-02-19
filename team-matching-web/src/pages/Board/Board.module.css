@@ -31,6 +31,11 @@
   background-color: var(--gray200);
 }
 
+.noPost {
+  padding: 5rem 0;
+  text-align: center;
+}
+
 .boardHeader {
   display: flex;
   align-items: center;

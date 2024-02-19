@@ -17,7 +17,7 @@ export default function NewPost() {
     team: '',
   });
   const user = useRecoilValue(userState);
-  const navigate = useNavigate();
+  const nav = useNavigate();
 
   const handleChange = (e) => {
     setPost((post) => ({ ...post, [e.target.name]: e.target.value }));
@@ -29,7 +29,7 @@ export default function NewPost() {
         '작성 중인 글을 취소하시겠습니까? \n확인 선택 시, 작성된 글은 저장되지 않습니다.'
       ) === true
     ) {
-      navigate(-1);
+      nav(-1);
     }
   };
 
@@ -45,7 +45,7 @@ export default function NewPost() {
     }
     writePost(post, user.token).then((result) => {
       if (result.status === 200) {
-        navigate('/board');
+        nav('/board', { replace: true });
       }
     });
   };
@@ -61,7 +61,7 @@ export default function NewPost() {
     }
     editPost(postInfo.id, post, user.token).then((result) => {
       if (result.status === 200) {
-        navigate('/board');
+        nav(-1, { replace: true });
       }
     });
   };
