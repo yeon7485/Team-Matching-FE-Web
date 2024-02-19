@@ -43,7 +43,7 @@ export default function PostDetail() {
     deletePost(postInfo.id, user.token).then((result) => {
       if (result.status === 200) {
         alert('게시글이 삭제되었습니다.');
-        nav('/board');
+        nav('/board', { replace: true });
       }
     });
   };
