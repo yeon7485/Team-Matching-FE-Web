@@ -1,92 +1,102 @@
-.infoBox{
+.container {
+  padding: 2.2rem 3rem;
+}
+
+.index {
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--gray300);
+}
+
+.infoBox {
   display: grid;
-  padding: 2rem;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr 1fr;
   grid-column-gap: 0.5fr;
 }
 
-.idBox{
+.idBox {
   display: flex;
   width: 100%;
   max-width: 500px;
-}
-.pwBox{
-  display: flex;
-  width: 100%;
-  max-width: 500px;
+  border-bottom: 1px;
 }
 
-.nicknameBox{
-  display: flex;
-  width: 100%;
-  max-width: 500px;
-}
-
-.emailBox{
+.pwBox {
   display: flex;
   width: 100%;
   max-width: 500px;
 }
 
-
-.user{
-  margin: 2rem;
-  opacity: 60%; 
+.nicknameBox {
+  display: flex;
+  width: 100%;
+  max-width: 500px;
 }
 
-.title{
-  margin: 2rem;
-  font-weight: 500; 
+.emailBox {
+  display: flex;
+  width: 100%;
+  max-width: 500px;
 }
 
-.infoBtn{
+.title {
+  margin: 1.5rem 2.5rem;
+  font-weight: 500;
+}
+
+.content {
+  margin: 1.5rem;
+  color: var(--gray600);
+}
+
+.updateBtn {
   height: 27px;
-  margin: 2rem;
+  margin: 1.5rem;
   border: 1px solid;
-  border-radius: 0.3rem; 
+  border-radius: 0.3rem;
   background-color: #fff;
   cursor: pointer;
 }
 
-.selfBox{
-  display: flex;
-  padding: 2rem;
-  
+.updateBtn:hover {
+  background-color: var(--gray300);
 }
 
-.selfTitle{
-  width: 10%;
-  margin: 2rem;
-  margin-top: 0;
+.selfBox {
+  display: flex;
+  margin: 1.5rem 0 0 2.5rem;
+}
+
+.selfTitle {
   font-weight: 500;
 }
 
-.selfForm{
+.selfForm {
   display: flex;
   flex-direction: column;
-  width: 80%;
-
+  align-items: end;
+  margin-left: 3.5rem;
 }
 
-.textarea{
+.textarea {
   height: 7rem;
   padding: 1rem;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   resize: none;
+  border: 1px dashed var(--gray800);
 }
 
-.saveBtn{
-  padding: 0.3rem 0.8rem;
-  margin-left: auto;
-  border: 1px solid var(--main-color);
+.saveBtn {
+  width: fit-content;
+  padding: 0.4rem 0.8rem;
+  border: none;
   border-radius: 0.2rem;
   background-color: var(--main-color);
   color: white;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   cursor: pointer;
 }
 
-.saveBtn:hover{
-  background-color: rgba(0, 108, 140, 1.2);
+.saveBtn:hover {
+  background-color: var(--main-color-dark);
 }

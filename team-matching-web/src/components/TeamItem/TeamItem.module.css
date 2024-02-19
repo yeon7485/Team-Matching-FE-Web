@@ -1,0 +1,70 @@
+.teamLi {
+  display: flex;
+  align-items: center;
+  padding: 1rem 0.4rem;
+  border-bottom: 1px solid lightgray;
+}
+
+.item {
+  font-size: 0.9rem;
+  flex-basis: 50px;
+}
+
+.item:nth-child(1) {
+  text-align: center;
+  flex-grow: 0.5;
+}
+
+.item:nth-child(2) {
+  margin-left: 2rem;
+  flex-grow: 7;
+  flex-shrink: 0;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.item:nth-child(2):hover {
+  text-decoration: underline;
+}
+
+.item:nth-child(3) {
+  text-align: center;
+  flex-grow: 1;
+  color: var(--gray500);
+}
+
+.item:nth-child(4) {
+  text-align: center;
+  flex-grow: 1;
+  color: var(--main-color-pink);
+}
+
+.cancel {
+  font-size: 0.9rem;
+  flex-basis: 50px;
+  text-align: center;
+  flex-grow: 1;
+  cursor: pointer;
+  color: var(--main-color-pink);
+}
+
+.cancel:hover {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+.개발 {
+  color: var(--category-dev);
+}
+
+.취미 {
+  color: var(--category-hobby);
+}
+
+.스포츠 {
+  color: var(--category-sports);
+}
+
+.게임 {
+  color: var(--category-game);
+}

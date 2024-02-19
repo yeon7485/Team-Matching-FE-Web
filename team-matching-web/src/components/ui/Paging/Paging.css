@@ -27,7 +27,7 @@ ul.pagination li a {
 
 ul.pagination li.active a {
 	color: var(--main-color-red);
-	font-weight: bold;
+	font-weight: 500;
 }
 
 .page-selection {

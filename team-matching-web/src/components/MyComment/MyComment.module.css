@@ -1,31 +1,32 @@
-.list{
+.list {
   padding: 0.3rem 0.7rem;
   border-bottom: 1px solid lightgray;
 }
 
-.content{
+.content {
   margin: 0.3rem 0;
-  font-weight: 600;
+  font-weight: 500;
+  font-size: 0.9rem;
 }
 
-.date{
-  margin: 0.3rem 0;
+.date {
+  margin: 0.2rem 0;
   font-weight: 300;
-  font-size: small;
+  font-size: 0.7rem;
 }
 
-.postData{
-  margin: 0.3rem 0;
+.postData {
+  margin: 0.2rem 0;
   font-weight: 400;
-  font-size: small;
+  font-size: 0.7rem;
 }
 
-.commentsCount{
+.commentsCount {
   margin-left: 0.4rem;
-  color: #E679AD;
+  color: var(--main-color-pink);
 }
 
-.list:hover{
-  background: #E9E9E9;
+.list:hover {
+  background-color: var(--gray100);
   cursor: pointer;
 }

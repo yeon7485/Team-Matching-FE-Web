@@ -1,75 +1,99 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import styles from './FindTeam.module.css';
-import { BiSearch } from 'react-icons/bi';
+import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
-import { getTeamList } from '../../API/TeamMon';
-import TeamCard from '../../components/TeamCard/TeamCard';
+import {
+  getCategoryTeamList,
+  getSearchTeamList,
+  getTeamList,
+} from 'api/TeamMon';
+import TeamCard from 'components/TeamCard/TeamCard';
 import classNames from 'classnames/bind';
-import Paging from '../../components/ui/Paging/Paging';
-import Loading from '../../components/ui/Loading/Loading';
+import Paging from 'ui/Paging/Paging';
+import Loading from 'ui/Loading/Loading';
 import NotFound from '../NotFound/NotFound';
+import useDebounce from 'hooks/useDebounce';
 
 export default function FindTeam() {
-  const [team, setTeam] = useState([]);
-
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState();
+  const [isSearch, setIsSearch] = useState(false);
   const [search, setSearch] = useState();
   const [category, setCategory] = useState('ALL');
   const [page, setPage] = useState(1);
-  const [size, setSize] = useState(0);
   const [totalElements, setTotalElements] = useState(-1);
-  const [total, setTotal] = useState(0);
   const cn = classNames.bind(styles);
-  const handleChange = (e) => {
+
+  const {
+    isLoading,
+    error,
+    data: teams,
+  } = useQuery(
+    ['teams', page],
+    () => {
+      return getTeamList(page - 1, 9).then((data) => {
+        setTotalElements(data.totalElements);
+        setIsSearch(false);
+        return data.content;
+      });
+    },
+    {
+      enabled: category === 'ALL',
+    }
+  );
+
+  const {
+    isLoadingCat,
+    errorCat,
+    data: categoryTeams,
+  } = useQuery(
+    ['teams', { category: `${category}` }, page],
+    () => {
+      return getCategoryTeamList(page - 1, category).then((data) => {
+        setTotalElements(data.totalElements);
+        return data.content;
+      });
+    },
+    { enabled: category !== 'ALL' }
+  );
+
+  const debounceKeyword = useDebounce(search, 500);
+  const { data: searchTeams } = useQuery(
+    ['teams', 'search', debounceKeyword, page],
+    () => {
+      return getSearchTeamList(debounceKeyword, page - 1, 9).then((data) => {
+        setTotalElements(data.totalElements);
+        console.log(data);
+        return data.content;
+      });
+    },
+    {
+      enabled: isSearch,
+    }
+  );
+
+  const handleSearchChange = (e) => {
     setSearch(e.target.value);
+
+    if (e.target.value === '') {
+      setIsSearch(false);
+    }
   };
 
-  useEffect(() => {
-    setLoading(true);
-    getTeamList(page - 1)
-      .then((result) => {
-        console.log(result);
-        setTeam(result.content);
-        setSize(result.size);
-        setTotalElements(result.totalElements);
-      })
-      .catch((e) => setError(e))
-      .finally(() => {
-        setLoading(false);
-        setTotal(totalElements);
-      });
-    return () => {
-      console.log('clean');
-    };
-  }, [page]);
-
-  // useEffect(() => {
-  //   if (category !== 'ALL') {
-  //     const newTeam = team.filter((team) => team.category == category);
-  //     setTotal(newTeam.length);
-  //   } else {
-  //     setTotal(totalElements);
-  //   }
-  //   console.log(total);
-  // }, [category]);
+  const handleSearchSubmit = (e) => {
+    e.preventDefault();
+    setIsSearch(true);
+  };
 
   const onCategoryClick = (e) => {
     const cat = e.target.value;
     setCategory(cat);
     setPage(1);
-    if (category !== 'ALL') {
-      const newTeam = team.filter((team) => team.category == cat);
-      setTotal(newTeam.length);
-    } else {
-      setTotal(totalElements);
-    }
-    console.log(total);
+    setIsSearch(false);
+    setSearch('');
   };
 
-  if (loading) return <Loading />;
-  if (error) return <NotFound />;
-
+  if (isLoading || isLoadingCat) return <Loading />;
+  if (error || errorCat) return <NotFound />;
+  console.log(totalElements);
   return (
     <div className={styles.root}>
       <section className={styles.topBar}>
@@ -127,64 +151,53 @@ export default function FindTeam() {
         </div>
 
         <div className={styles.rightBox}>
-          <div className={styles.selectBox}>
-            <select className={styles.searchSelect}>
-              <option value='title'>카테고리</option>
-              <option value='content'>제목</option>
-              <option value='content'>내용</option>
-              <option value='name'>작성자</option>
-              <option value='tag'>태그</option>
-            </select>
-
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-              }}
-            >
+          <div className={styles.searchBox}>
+            <form onSubmit={handleSearchSubmit}>
               <input
                 type='text'
                 name='search'
                 id='search'
-                value={search}
+                value={search || ''}
                 className={styles.inputSearch}
-                onChange={handleChange}
+                onChange={handleSearchChange}
+                placeholder='제목, 작성자, 태그 검색...'
               />
             </form>
-            <BiSearch className={styles.searchBtn} />
           </div>
-          <Link to='/newteam' className={styles.createBtn} state={{}}>
+          <Link to='/teams/new' className={styles.createBtn} state={{}}>
             팀 만들기
           </Link>
         </div>
       </section>
       <section className={styles.teamList}>
-        {team &&
-          getFilteredItems(team, category).map((team) => (
-            <TeamCard key={team.id} team={team} />
-          ))}
-        {team && totalElements === 0 && (
+        {console.log(isSearch, teams)}
+        {console.log(category, categoryTeams)}
+        {teams &&
+          !isSearch &&
+          category === 'ALL' &&
+          teams.map((team) => <TeamCard key={team.id} team={team} />)}
+        {categoryTeams &&
+          !isSearch &&
+          category !== 'ALL' &&
+          categoryTeams.map((team) => <TeamCard key={team.id} team={team} />)}
+        {searchTeams &&
+          isSearch &&
+          searchTeams.map((team) => <TeamCard key={team.id} team={team} />)}
+        {teams && totalElements === 0 && (
           <p className={styles.empty}>팀이 존재하지 않습니다.</p>
         )}
-        {category !== 'ALL' &&
-          getFilteredItems(team, category).length === 0 && (
-            <p className={styles.empty}>팀이 존재하지 않습니다.</p>
-          )}
       </section>
-      <div className={styles.pageArea}>
-        <Paging
-          page={page}
-          totalElements={category === 'ALL' ? totalElements : total}
-          size={size}
-          setPage={setPage}
-        />
+      <div>
+        {console.log('total', totalElements)}
+        {totalElements > 0 && (
+          <Paging
+            page={page}
+            totalElements={totalElements}
+            size={9}
+            setPage={setPage}
+          />
+        )}
       </div>
     </div>
   );
-}
-
-function getFilteredItems(team, filter) {
-  if (filter === 'ALL') {
-    return team;
-  }
-  return team.filter((team) => team.category === filter);
 }
