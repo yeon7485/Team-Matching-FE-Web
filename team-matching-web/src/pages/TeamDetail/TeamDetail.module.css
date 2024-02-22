@@ -1,9 +1,14 @@
-.root {
-	min-width: 30rem;
-	max-width: 120rem;
+.container {
+	display: flex;
+	justify-content: center;
+	padding: 3rem 11%;
+}
+
+.team {
+	width: 100%;
+	min-width: 500px;
+	max-width: 1200px;
 	padding: 3.4rem 4rem;
-	min-zoom: 67%;
-	margin: 3.7rem 8%;
 	border: 1px solid var(--gray800);
 	border-radius: 20px;
 }
@@ -19,6 +24,7 @@
 	flex-direction: column;
 	justify-content: space-between;
 	margin-right: 2rem;
+	flex-shrink: 0;
 }
 
 .category {
@@ -29,7 +35,7 @@
 .title {
 	margin-bottom: 1.3rem;
 	font-weight: bold;
-	font-size: 1.8rem;
+	font-size: 1.7rem;
 }
 
 .nickname {
@@ -81,6 +87,7 @@
 .apply:hover {
 	background-color: var(--main-color);
 	color: white;
+
 }
 
 .closed {

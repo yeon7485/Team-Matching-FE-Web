@@ -18,6 +18,7 @@ import NewTeam from './pages/NewTeam/NewTeam';
 import ApplyList from './pages/ApplyList/ApplyList';
 import LeaveTeam from './pages/MyTeam/LeaveTeam/LeaveTeam';
 import TeamInfo from './pages/MyTeam/TeamInfo/TeamInfo';
+import ProtectedRoute from './pages/ProtectedRoute';
 
 const router = createBrowserRouter([
   {
@@ -29,25 +30,76 @@ const router = createBrowserRouter([
       { path: 'join', element: <Join /> },
       { path: 'login', element: <Login /> },
       { path: 'board', element: <Board /> },
-      { path: 'board/:postId', element: <PostDetail /> },
-      { path: 'board/new', element: <NewPost /> },
-      { path: 'mypage', element: <MyPage /> },
       { path: 'teams', element: <FindTeam /> },
-      { path: 'teams/:teamId', element: <TeamDetail /> },
-      { path: 'mypage', element: <MyPage /> },
-      { path: 'teams/new', element: <NewTeam /> },
-      { path: 'teams/:teamId/admission', element: <ApplyList /> },
-      { path: 'myteam/:teamId/info', element: <TeamInfo /> },
-      { path: 'myteam/:teamId/leave', element: <LeaveTeam /> },
+      {
+        path: 'board/:postId',
+        element: (
+          <ProtectedRoute>
+            <PostDetail />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: 'board/new',
+        element: (
+          <ProtectedRoute>
+            <NewPost />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: 'mypage',
+        element: (
+          <ProtectedRoute>
+            <MyPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: 'teams/:teamId',
+        element: (
+          <ProtectedRoute>
+            <TeamDetail />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: 'teams/new',
+        element: (
+          <ProtectedRoute>
+            <NewTeam />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: 'teams/:teamId/admission',
+        element: (
+          <ProtectedRoute>
+            <ApplyList />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: 'myteam/:teamId/info',
+        element: (
+          <ProtectedRoute>
+            <TeamInfo />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: 'myteam/:teamId/leave',
+        element: (
+          <ProtectedRoute>
+            <LeaveTeam />
+          </ProtectedRoute>
+        ),
+      },
     ],
   },
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
-);
+root.render(<RouterProvider router={router} />);
 
 reportWebVitals();

@@ -1,9 +1,9 @@
 import React from 'react';
 import styles from './SubMenu.module.css';
 import { Link, useNavigate } from 'react-router-dom';
-import { logOut } from '../../API/TeamMon';
 import { useResetRecoilState } from 'recoil';
-import { userState } from '../../Recoil/state';
+import { userState } from 'Recoil/state';
+import { logOut } from 'api/TeamMon';
 
 export default function SubMenu({ onMouseEnter, onMouseLeave, user }) {
   const reset = useResetRecoilState(userState);
@@ -16,10 +16,11 @@ export default function SubMenu({ onMouseEnter, onMouseLeave, user }) {
         if (result.status === 200) {
           //front에 남아있던 인증토큰 삭제
           reset();
+          localStorage.removeItem('tokenTimer');
         }
       })
       .finally(() => {
-        nav('/');
+        nav('/', { replace: true });
       });
   };
 

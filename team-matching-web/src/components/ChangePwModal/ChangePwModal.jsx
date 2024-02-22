@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import styles from './ChangePwModal.module.css';
-import { changePassword, checkPassword } from '../../API/TeamMon';
+import { changePassword, checkPassword } from 'api/TeamMon';
 export default function ChangePwModal({ setModalOpen, user }) {
   const closeModal = () => {
     setModalOpen(false);

@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import styles from './TeamInfo.module.css';
-import RoundBtn from '../../../components/ui/RoundBtn/RoundBtn';
-import { useRecoilValue } from 'recoil';
 import { useQuery } from '@tanstack/react-query';
-import { getTeamDetail } from '../../../API/TeamMon';
-import { userState, myTeamState } from '../../../Recoil/state';
-import useCategory from '../../../hooks/useCategory';
-import Loading from '../../../components/ui/Loading/Loading';
-import NotFound from '../../NotFound/NotFound';
 import { useNavigate } from 'react-router-dom';
+import { userState, myTeamState } from 'Recoil/state';
+import { useRecoilValue } from 'recoil';
+import { getTeamDetail } from 'api/TeamMon';
+import useCategory from 'hooks/useCategory';
+import RoundBtn from 'ui/RoundBtn/RoundBtn';
+import Loading from 'ui/Loading/Loading';
+import NotFound from 'pages/NotFound/NotFound';
 
 export default function TeamInfo() {
   const myTeam = useRecoilValue(myTeamState);

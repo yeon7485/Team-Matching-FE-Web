@@ -1,21 +1,16 @@
 import React, { useState } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { deleteTeam, getTeamDetail } from '../../API/TeamMon';
 import styles from './TeamDetail.module.css';
-import classNames from 'classnames/bind';
-import ApplyModal from '../../components/ApplyModal/ApplyModal';
-import RoundBtn from '../../components/ui/RoundBtn/RoundBtn';
-import useCategory from '../../hooks/useCategory';
-import Loading from '../../components/ui/Loading/Loading';
-import NotFound from './../NotFound/NotFound';
-import { userState } from './../../Recoil/state';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useParams, useNavigate } from 'react-router-dom';
+import { userState } from 'Recoil/state';
 import { useRecoilValue } from 'recoil';
-import {
-  useQuery,
-  QueryClient,
-  useMutation,
-  useQueryClient,
-} from '@tanstack/react-query';
+import { deleteTeam, getTeamDetail } from 'api/TeamMon';
+import classNames from 'classnames/bind';
+import ApplyModal from 'components/ApplyModal/ApplyModal';
+import useCategory from 'hooks/useCategory';
+import RoundBtn from 'ui/RoundBtn/RoundBtn';
+import Loading from 'ui/Loading/Loading';
+import NotFound from 'pages/NotFound/NotFound';
 
 export default function TeamDetail() {
   const { teamId } = useParams();
@@ -34,7 +29,7 @@ export default function TeamDetail() {
     data: team,
   } = useQuery(['teamDetail', teamId], () => {
     return getTeamDetail(teamId).then((data) => {
-      if (data.adminUserAccountDto.userId == user.userId) {
+      if (data.adminUserAccountDto.userId === user.userId) {
         setIsMine(true);
       }
       if (data.capacity === data.total || today > new Date(data.deadline)) {
@@ -85,8 +80,8 @@ export default function TeamDetail() {
   if (isLoading || !team) return <Loading />;
   if (error) return <NotFound />;
   return (
-    <>
-      <div className={styles.root}>
+    <div className={styles.container}>
+      <div className={styles.team}>
         <div className={styles.top}>
           <div className={styles.left}>
             <p className={cn('category', cat)}>{cat}</p>
@@ -150,7 +145,7 @@ export default function TeamDetail() {
           />
         </div>
       )}
-    </>
+    </div>
   );
 }
 

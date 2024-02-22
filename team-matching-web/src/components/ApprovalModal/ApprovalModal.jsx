@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styles from './ApprovalModal.module.css';
-import Loading from '../ui/Loading/Loading';
-import RoundBtn from '../ui/RoundBtn/RoundBtn';
-import { approvalApply, getApplyDetail } from '../../API/TeamMon';
-import { AiOutlineClose } from 'react-icons/ai';
-import { rejectApply } from '../../API/TeamMon';
 import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query';
-import NotFound from '../../pages/NotFound/NotFound';
+import { approvalApply, rejectApply, getApplyDetail } from 'api/TeamMon';
+import { AiOutlineClose } from 'react-icons/ai';
+import NotFound from 'pages/NotFound/NotFound';
+import Loading from 'ui/Loading/Loading';
+import RoundBtn from 'ui/RoundBtn/RoundBtn';
 
 export default function ApprovalModal({
   setModalOpen,
@@ -39,7 +38,6 @@ export default function ApprovalModal({
       onSuccess: () => queryClient.invalidateQueries(['applyList', teamId]),
     }
   );
-  console.log(applyDetail);
 
   const closeModal = () => {
     window.location.reload();
@@ -63,7 +61,13 @@ export default function ApprovalModal({
       rejectItem.mutate(
         { teamId, applyId, token },
         {
-          onSuccess: () => closeModal(),
+          onSuccess: (result) => {
+            console.log(result.status);
+            result.status === 200
+              ? alert('가입 신청이 거절되었습니다.')
+              : alert('오류가 발생했습니다. 다시 시도해주세요.');
+            closeModal();
+          },
         }
       );
     }

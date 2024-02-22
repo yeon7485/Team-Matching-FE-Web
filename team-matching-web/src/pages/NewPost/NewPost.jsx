@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import styles from './NewPost.module.css';
-import RoundBtn from '../../components/ui/RoundBtn/RoundBtn';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { editPost, writePost } from '../../API/TeamMon';
 import { useRecoilValue } from 'recoil';
-import { userState } from '../../Recoil/state';
+import { userState } from 'Recoil/state';
+import { editPost, writePost } from 'api/TeamMon';
+import RoundBtn from 'ui/RoundBtn/RoundBtn';
 
 export default function NewPost() {
   const {
@@ -17,7 +17,7 @@ export default function NewPost() {
     team: '',
   });
   const user = useRecoilValue(userState);
-  const navigate = useNavigate();
+  const nav = useNavigate();
 
   const handleChange = (e) => {
     setPost((post) => ({ ...post, [e.target.name]: e.target.value }));
@@ -29,7 +29,7 @@ export default function NewPost() {
         '작성 중인 글을 취소하시겠습니까? \n확인 선택 시, 작성된 글은 저장되지 않습니다.'
       ) === true
     ) {
-      navigate(-1);
+      nav(-1);
     }
   };
 
@@ -45,7 +45,7 @@ export default function NewPost() {
     }
     writePost(post, user.token).then((result) => {
       if (result.status === 200) {
-        navigate('/board');
+        nav('/board', { replace: true });
       }
     });
   };
@@ -61,7 +61,7 @@ export default function NewPost() {
     }
     editPost(postInfo.id, post, user.token).then((result) => {
       if (result.status === 200) {
-        navigate('/board');
+        nav(-1, { replace: true });
       }
     });
   };
@@ -101,14 +101,6 @@ export default function NewPost() {
           placeholder='태그를 입력해주세요.'
           value={post.tag}
           required
-          onChange={handleChange}
-          className={styles.input}
-        ></input>
-        <p className={styles.subTitle}>참여 중인 팀 태그 (선택)</p>
-        <input
-          type='text'
-          name='team'
-          placeholder='내가 참여 중인 팀을 선택해주세요. (하나만 선택 가능)'
           onChange={handleChange}
           className={styles.input}
         ></input>

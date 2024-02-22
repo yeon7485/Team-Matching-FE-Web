@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from './TeamHeader.module.css';
-import { myTeamState } from '../../Recoil/state';
+import { myTeamState } from 'Recoil/state';
 import { useRecoilValue } from 'recoil';
 import { useNavigate } from 'react-router-dom';
 

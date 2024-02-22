@@ -1,26 +1,25 @@
 import React, { useState } from 'react';
 import styles from './FindTeam.module.css';
+import { useQuery } from '@tanstack/react-query';
 import { Link } from 'react-router-dom';
 import {
-  getSearchTeamList,
   getCategoryTeamList,
+  getSearchTeamList,
   getTeamList,
-} from '../../API/TeamMon';
-import TeamCard from '../../components/TeamCard/TeamCard';
+} from 'api/TeamMon';
+import TeamCard from 'components/TeamCard/TeamCard';
 import classNames from 'classnames/bind';
-import Paging from '../../components/ui/Paging/Paging';
-import Loading from '../../components/ui/Loading/Loading';
+import Paging from 'ui/Paging/Paging';
+import Loading from 'ui/Loading/Loading';
 import NotFound from '../NotFound/NotFound';
-import { useQuery } from '@tanstack/react-query';
+import useDebounce from 'hooks/useDebounce';
 
 export default function FindTeam() {
   const [isSearch, setIsSearch] = useState(false);
   const [search, setSearch] = useState();
   const [category, setCategory] = useState('ALL');
   const [page, setPage] = useState(1);
-  const [size, setSize] = useState(9);
   const [totalElements, setTotalElements] = useState(-1);
-
   const cn = classNames.bind(styles);
 
   const {
@@ -56,10 +55,11 @@ export default function FindTeam() {
     { enabled: category !== 'ALL' }
   );
 
+  const debounceKeyword = useDebounce(search, 500);
   const { data: searchTeams } = useQuery(
-    ['teams', 'search', search, page],
+    ['teams', 'search', debounceKeyword, page],
     () => {
-      return getSearchTeamList(search, page - 1, 9).then((data) => {
+      return getSearchTeamList(debounceKeyword, page - 1, 9).then((data) => {
         setTotalElements(data.totalElements);
         console.log(data);
         return data.content;
@@ -69,6 +69,7 @@ export default function FindTeam() {
       enabled: isSearch,
     }
   );
+
   const handleSearchChange = (e) => {
     setSearch(e.target.value);
 
@@ -81,7 +82,6 @@ export default function FindTeam() {
     e.preventDefault();
     setIsSearch(true);
   };
-  console.log(isSearch);
 
   const onCategoryClick = (e) => {
     const cat = e.target.value;
@@ -193,7 +193,7 @@ export default function FindTeam() {
           <Paging
             page={page}
             totalElements={totalElements}
-            size={size}
+            size={9}
             setPage={setPage}
           />
         )}
