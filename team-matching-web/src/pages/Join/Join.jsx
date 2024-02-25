@@ -5,6 +5,10 @@ import { signUp } from 'api/TeamMon';
 
 export default function Join() {
   const [user, setUser] = useState({});
+  const [pwType, setPwType] = useState({
+    type: 'password',
+    visible: false,
+  });
   const navigate = useNavigate();
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -15,6 +19,19 @@ export default function Join() {
     signUp({ user }).then((result) => {
       if (result === 200) {
         navigate('/login');
+      }
+    });
+  };
+
+  const handleShowPwChecked = (e) => {
+    setPwType(() => {
+      // 만약 현재 pwType.visible이 false 라면
+      if (!pwType.visible) {
+        return { type: 'text', visible: true };
+
+        //현재 pwType.visible이 true 라면
+      } else {
+        return { type: 'password', visible: false };
       }
     });
   };
@@ -30,7 +47,9 @@ export default function Join() {
           </Link>
         </p>
         <form className={styles.form} onSubmit={handleSubmit}>
-          <label htmlFor='id'>아이디</label>
+          <label htmlFor='id' className={styles.label}>
+            아이디
+          </label>
           <input
             className={styles.inputBox}
             type='text'
@@ -42,19 +61,31 @@ export default function Join() {
             onChange={handleChange}
           />
 
-          <label htmlFor='password'>비밀번호</label>
+          <label htmlFor='password' className={styles.label}>
+            비밀번호
+          </label>
           <input
             className={styles.inputBox}
             id='password'
-            type='password'
+            type={pwType.type}
             name='password'
             value={user.password}
             placeholder='비밀번호를 입력해주세요.'
             required
             onChange={handleChange}
           />
+          <div className={styles.pwCheckBox}>
+            <input
+              type='checkbox'
+              className={styles.checkBox}
+              onChange={handleShowPwChecked}
+            />
+            비밀번호 보기
+          </div>
 
-          <label htmlFor='email'>이메일</label>
+          <label htmlFor='email' className={styles.label}>
+            이메일
+          </label>
           <input
             className={styles.inputBox}
             type='email'
@@ -66,7 +97,9 @@ export default function Join() {
             onChange={handleChange}
           />
 
-          <label htmlFor='nickname'>닉네임</label>
+          <label htmlFor='nickname' className={styles.label}>
+            닉네임
+          </label>
           <input
             className={styles.inputBox}
             type='text'
@@ -84,7 +117,6 @@ export default function Join() {
               name='agree'
               className={styles.checkBox}
             />
-            <div className={styles.showCheckBox}></div>
             <span>개인정보처리방침 및 이용약관에 동의합니다.</span>
           </div>
 

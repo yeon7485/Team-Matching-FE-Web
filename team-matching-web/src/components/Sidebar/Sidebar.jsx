@@ -10,7 +10,6 @@ export default function Sidebar() {
   const nav = useNavigate();
   const location = useLocation().pathname;
   const cn = classNames.bind(styles);
-  console.log(admin);
 
   return (
     <div>
