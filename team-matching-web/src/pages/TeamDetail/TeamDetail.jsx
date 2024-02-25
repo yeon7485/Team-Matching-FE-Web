@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styles from './TeamDetail.module.css';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { useParams, useNavigate } from 'react-router-dom';
 import { userState } from 'Recoil/state';
 import { useRecoilValue } from 'recoil';
@@ -10,13 +11,6 @@ import useCategory from 'hooks/useCategory';
 import RoundBtn from 'ui/RoundBtn/RoundBtn';
 import Loading from 'ui/Loading/Loading';
 import NotFound from 'pages/NotFound/NotFound';
-
-import {
-  useQuery,
-  QueryClient,
-  useMutation,
-  useQueryClient,
-} from '@tanstack/react-query';
 
 export default function TeamDetail() {
   const { teamId } = useParams();
@@ -35,7 +29,7 @@ export default function TeamDetail() {
     data: team,
   } = useQuery(['teamDetail', teamId], () => {
     return getTeamDetail(teamId).then((data) => {
-      if (data.adminUserAccountDto.userId == user.userId) {
+      if (data.adminUserAccountDto.userId === user.userId) {
         setIsMine(true);
       }
       if (data.capacity === data.total || today > new Date(data.deadline)) {
@@ -86,8 +80,8 @@ export default function TeamDetail() {
   if (isLoading || !team) return <Loading />;
   if (error) return <NotFound />;
   return (
-    <>
-      <div className={styles.root}>
+    <div className={styles.container}>
+      <div className={styles.team}>
         <div className={styles.top}>
           <div className={styles.left}>
             <p className={cn('category', cat)}>{cat}</p>
@@ -151,7 +145,7 @@ export default function TeamDetail() {
           />
         </div>
       )}
-    </>
+    </div>
   );
 }
 

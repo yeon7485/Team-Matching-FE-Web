@@ -1,6 +1,7 @@
 import React from 'react';
 import styles from './MyComment.module.css';
 import { useNavigate } from 'react-router-dom';
+
 export default function MyComment({ comment, comment: { postDto } }) {
   const nav = useNavigate();
   const post = postDto;
@@ -13,7 +14,7 @@ export default function MyComment({ comment, comment: { postDto } }) {
       }}
     >
       <p className={styles.content}>{comment.content}</p>
-      <p className={styles.date}>{comment.createdAt}</p>
+      <p className={styles.date}>{formatDate(comment.createdAt)}</p>
       <p className={styles.postData}>
         {comment.postDto.title}
         <span
@@ -22,4 +23,9 @@ export default function MyComment({ comment, comment: { postDto } }) {
       </p>
     </li>
   );
+}
+
+function formatDate(date) {
+  return `${date.substr(2, 2)}.${date.substr(5, 2)}.${date.substr(8, 2)} 
+  ${date.substr(11, 5)}`;
 }

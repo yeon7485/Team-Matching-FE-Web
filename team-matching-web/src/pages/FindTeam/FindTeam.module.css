@@ -1,15 +1,15 @@
 .root {
 	display: flex;
 	flex-direction: column;
-	justify-content: center;
-	width: 80%;
-	margin: 2.5rem 9% 11%;
+	align-items: center;
+	padding: 3rem 10%;
 }
 
 .topBar {
 	display: flex;
 	justify-content: space-between;
-	align-items: center;
+	width: 100%;
+	max-width: 1200px;
 }
 
 .category {
@@ -50,14 +50,14 @@ form {
 }
 
 .inputSearch {
-	height: 27px;
-  width: 300px;
-  padding: 0.2rem 1rem;
-  border: #E9E9E9;
-  border-radius: 0.8rem;
-  background-color: #E9E9E9;
+	width: 300px;
 	min-width: 5rem;
-	
+	height: 27px;
+	padding: 0.2rem 1rem;
+	border: #E9E9E9;
+	border-radius: 0.8rem;
+	background-color: #E9E9E9;
+
 }
 
 .searchBtn {
@@ -74,6 +74,7 @@ form {
 .createBtn {
 	padding: 0.5rem 1.5rem;
 	margin-left: 1.5rem;
+	border-radius: 5px;
 	background-color: var(--main-color);
 	color: white;
 	text-decoration: none;
@@ -93,6 +94,11 @@ form {
 .empty {
 	margin: 2rem 0;
 	grid-column: 1 / span 4;
+}
+
+
+.empty {
+	margin: 3rem 2rem;
 }
 
 .black {
@@ -133,6 +139,10 @@ form {
 	.category {
 		margin-bottom: 1rem;
 	}
+
+	.teamList {
+		grid-template-columns: 1fr;
+	}
 }
 
 @media screen and (min-width: 750px) {
@@ -144,11 +154,5 @@ form {
 @media screen and (min-width: 1200px) {
 	.teamList {
 		grid-template-columns: repeat(3, 1fr);
-	}
-}
-
-@media screen and (min-width: 1650px) {
-	.teamList {
-		grid-template-columns: repeat(4, 1fr);
 	}
 }

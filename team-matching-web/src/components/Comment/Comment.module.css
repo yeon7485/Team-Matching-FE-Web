@@ -1,25 +1,41 @@
-.list{
+.list {
   list-style: none;
+  border-bottom: 1px solid var(--gray300);
+}
 
+.comment {
+  padding: 1.2rem 1.7rem 1rem;
 }
-.comment{
-  padding: 0.5rem;
-}
-.header{
+
+.header {
   display: flex;
   align-items: center;
 }
 
-.nickname{
-  font-weight: 700;
+.nickname {
+  font-weight: 600;
 }
 
-.date{
-  margin-left: 2rem;
-  font-weight: 300;
-  font-size: small;
+.date {
+  margin-left: 1rem;
+  font-size: 0.8rem;
+  color: var(--gray500);
 }
 
-.content{
-  margin-top: 1rem;
+.delBtn {
+  cursor: pointer;
+  font-size: 0.8rem;
+  color: var(--main-color-pink);
+  margin-left: 1rem;
+}
+
+.delBtn:hover {
+  text-decoration: underline;
+}
+
+.content {
+  margin-top: 0.3rem;
+  white-space: pre-wrap;
+  line-height: 1.7;
+  font-size: 0.9rem;
 }

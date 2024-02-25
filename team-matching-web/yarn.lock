@@ -2893,22 +2893,22 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/query-devtools@npm:5.13.3":
-  version: 5.13.3
-  resolution: "@tanstack/query-devtools@npm:5.13.3"
-  checksum: baa65db5f2755428b3c5f4e237ade7d873f92dbb2c0a78023865eb70aa9fa72a91cd314944d8b6c7e883eef24a835dcd5d6d1ceda5693f549e7e0792565c99bf
+"@tanstack/query-devtools@npm:5.24.0":
+  version: 5.24.0
+  resolution: "@tanstack/query-devtools@npm:5.24.0"
+  checksum: c557eb09316a95405a459638a00c43de3537c76bcf4c4045e71acf31c8449f8856138712304e9cfce8b54141e5f81b8657bd54d2a768baf26a67e84eea787df9
   languageName: node
   linkType: hard
 
-"@tanstack/react-query-devtools@npm:^5.13.3":
-  version: 5.13.3
-  resolution: "@tanstack/react-query-devtools@npm:5.13.3"
+"@tanstack/react-query-devtools@npm:^5.24.0":
+  version: 5.24.0
+  resolution: "@tanstack/react-query-devtools@npm:5.24.0"
   dependencies:
-    "@tanstack/query-devtools": 5.13.3
+    "@tanstack/query-devtools": 5.24.0
   peerDependencies:
-    "@tanstack/react-query": ^5.12.2
+    "@tanstack/react-query": ^5.22.2
     react: ^18.0.0
-  checksum: 754f3de8153604e7c78d8199912662380bafe3baee46a7428a3bda7deafa116923fb2cf8108b865b7e1cb96ca6151cf78055562bc952326447ab0cfca165b8a5
+  checksum: 231c009141b179538a052e3f983ed93f016d4533fe0c108ff00a6ca72309010508899cee99260f6b9936e4c6d24e43031639d924874870a6367ca94614e608ad
   languageName: node
   linkType: hard
 
@@ -14762,6 +14762,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"sweetalert2@npm:^11.10.3":
+  version: 11.10.3
+  resolution: "sweetalert2@npm:11.10.3"
+  checksum: db07199bb5069384db94d6d5075c7c9d2016d638037f85464f53d0993888cf45aaf2da9b4bd6bd14f2966316091e15528d4403e4cc2c21623ed2199fae74b5f4
+  languageName: node
+  linkType: hard
+
 "symbol-tree@npm:^3.2.4":
   version: 3.2.4
   resolution: "symbol-tree@npm:3.2.4"
@@ -14848,7 +14855,7 @@ __metadata:
   dependencies:
     "@craco/craco": ^7.1.0
     "@tanstack/react-query": ^4.35.3
-    "@tanstack/react-query-devtools": ^5.13.3
+    "@tanstack/react-query-devtools": ^5.24.0
     "@testing-library/jest-dom": ^5.14.1
     "@testing-library/react": ^13.0.0
     "@testing-library/user-event": ^13.2.1
@@ -14869,6 +14876,7 @@ __metadata:
     react-spinners: ^0.13.8
     recoil: ^0.7.7
     recoil-persist: ^5.1.0
+    sweetalert2: ^11.10.3
     web-vitals: ^2.1.0
   languageName: unknown
   linkType: soft

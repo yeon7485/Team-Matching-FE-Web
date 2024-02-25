@@ -47,7 +47,6 @@ export async function logOut(id, token) {
       accessToken: token,
     })
     .then((result) => {
-      alert('로그아웃 성공!!');
       return result;
     })
     .catch((error) => {
@@ -140,7 +139,7 @@ export async function myPageInfo(userId, token) {
 
 //마이페이지 정보 수정하기
 export function upDateMyPageInfo(userId, token, nickname, memo) {
-  axios
+  return axios
     .patch(
       `/my-page/${userId}/info`,
       {
@@ -152,7 +151,7 @@ export function upDateMyPageInfo(userId, token, nickname, memo) {
       }
     )
     .then((result) => {
-      console.log(result);
+      return result;
     });
 }
 
@@ -183,10 +182,10 @@ export async function getCategoryTeamList(page, category) {
     });
 }
 
-// 팀 상세조회
-export async function getTeamDetail(id) {
+//검색어를 포함한 팀 리스트 간단 조회
+export async function getSearchTeamList(keyword, page, size) {
   return axios
-    .get(`/teams/${id}`)
+    .get(`/teams/search?keyword=${keyword}&page=${page}&size=${size}`)
     .then((result) => {
       return result.data.resultData;
     })
@@ -196,10 +195,10 @@ export async function getTeamDetail(id) {
     });
 }
 
-//검색어를 포함한 팀 리스트 간단 조회
-export async function getSearchTeamList(keyword, page, size) {
+// 팀 상세조회
+export async function getTeamDetail(id) {
   return axios
-    .get(`/teams/search?keyword=${keyword}&page=${page}&size=${size}`)
+    .get(`/teams/${id}`)
     .then((result) => {
       return result.data.resultData;
     })
@@ -262,7 +261,7 @@ export async function getPosts(page, size) {
   return axios
     .get(`/posts?page=${page}&size=${size}`)
     .then((result) => {
-      return result;
+      return result.data.resultData;
     })
     .catch((error) => {
       console.log(error);
@@ -272,7 +271,22 @@ export async function getPosts(page, size) {
 
 //자세한 게시글 정보 받아오기
 export async function getPostsDetail(id) {
-  return axios.get(`/posts/${id}`);
+  return axios.get(`/posts/${id}`).then((result) => {
+    return result.data.resultData;
+  });
+}
+
+//검색어로 글 검색하기
+export async function getSearchPosts(keyword, page, size) {
+  return axios
+    .get(`/posts/search?keyword=${keyword}&page=${page}&size=${size}`)
+    .then((result) => {
+      return result.data.resultData;
+    })
+    .catch((error) => {
+      console.log(error);
+      return error.response;
+    });
 }
 
 //글 삭제하기
@@ -286,18 +300,6 @@ export async function deletePost(id, token) {
     });
 }
 
-//검색어로 글 검색하기
-export async function getSearchPost(keyword, page, size) {
-  return axios
-    .get(`/posts/search?keyword=${keyword}&page=${page}&size=${size}`)
-    .then((result) => {
-      return result;
-    })
-    .catch((error) => {
-      console.log(error);
-      return error.response;
-    });
-}
 //댓글 쓰기
 export async function writeComment(content, id, token) {
   return axios
@@ -311,7 +313,6 @@ export async function writeComment(content, id, token) {
       }
     )
     .then((result) => {
-      alert('댓글 쓰기 성공!!');
       return result;
     })
     .catch((error) => {
@@ -322,14 +323,25 @@ export async function writeComment(content, id, token) {
     });
 }
 
-//내가 쓴 게시글 조회
-export async function getMyPosts(id, token) {
+// 댓글 삭제
+export async function deleteComment(postId, commentId, token) {
   return axios
-    .get(`my-page/${id}/posts`, {
+    .delete(`/posts/${postId}/comments/${commentId}`, {
       headers: { Authorization: `Bearer ${token}` },
     })
     .then((result) => {
-      return result.data.resultData.content;
+      return result;
+    });
+}
+
+// [마이페이지] 내가 쓴 게시글 조회
+export async function getMyPosts(userId, token, page) {
+  return axios
+    .get(`my-page/${userId}/posts?page=${page}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    .then((result) => {
+      return result.data.resultData;
     })
     .catch((error) => {
       alert(error.response.data.error);
@@ -337,40 +349,40 @@ export async function getMyPosts(id, token) {
     });
 }
 
-//마이페이지 팀 조회
-export async function getMyTeamList(userId, token) {
+// [마이페이지] 내가 쓴 댓글 조회
+export async function getMyComments(userId, token, page) {
   return axios
-    .get(`/my-page/${userId}/teams`, {
+    .get(`/my-page/${userId}/comments?page=${page}`, {
       headers: { Authorization: `Bearer ${token}` },
     })
     .then((result) => {
       return result.data.resultData;
-    });
-}
-
-// 마이페이지 신청 중인 팀 조회
-export async function getMyJudging(userId, token) {
-  return axios
-    .get(`/my-page/${userId}/teams/judging`, {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-    .then((result) => {
-      return result.data.resultData;
-    });
-}
-
-//내가 쓴 댓글 조회
-export async function getMyComments(id, token) {
-  return axios
-    .get(`/my-page/${id}/comments`, {
-      headers: { Authorization: `Bearer ${token}` },
-    })
-    .then((result) => {
-      return result.data.resultData.content;
     })
     .catch((error) => {
       alert(error.response.data.error);
       return error.response;
+    });
+}
+
+// [마이페이지] 참여 중인 팀 조회
+export async function getMyTeamList(userId, token, page, size) {
+  return axios
+    .get(`/my-page/${userId}/teams?page=${page}&size=${size}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    .then((result) => {
+      return result.data.resultData;
+    });
+}
+
+// [마이페이지] 신청 중인 팀 조회
+export async function getMyJudging(userId, token, page) {
+  return axios
+    .get(`/my-page/${userId}/teams/judging?page=${page}`, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    .then((result) => {
+      return result.data.resultData;
     });
 }
 
@@ -468,7 +480,25 @@ export async function getApplyDetail(teamId, applyId, token) {
     });
 }
 
-// 팀 가입 거절/취소
+// 팀 가입 승인
+export async function approvalApply(teamId, applyId, token) {
+  return axios
+    .post(
+      `/teams/${teamId}/admission/approval/${applyId}`,
+      {},
+      {
+        headers: { Authorization: `Bearer ${token}` },
+      }
+    )
+    .then((result) => {
+      return result;
+    })
+    .catch((error) => {
+      return error.response;
+    });
+}
+
+// 팀 가입 거절
 export async function rejectApply(teamId, applyId, token) {
   return axios
     .post(
@@ -487,11 +517,11 @@ export async function rejectApply(teamId, applyId, token) {
     });
 }
 
-// 팀 가입 승인
-export async function approvalApply(teamId, applyId, token) {
+// 팀 가입 취소
+export async function cancelApply(teamId, applyId, token) {
   return axios
     .post(
-      `/teams/${teamId}/admission/approval/${applyId}`,
+      `/teams/${teamId}/admission/cancel/${applyId}`,
       {},
       {
         headers: { Authorization: `Bearer ${token}` },
@@ -501,6 +531,7 @@ export async function approvalApply(teamId, applyId, token) {
       return result;
     })
     .catch((error) => {
+      console.log(error);
       return error.response;
     });
 }

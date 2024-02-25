@@ -6,10 +6,12 @@ import { myTeamState } from 'Recoil/state';
 import classNames from 'classnames/bind';
 
 export default function Sidebar() {
-  const myTeam = useRecoilValue(myTeamState);
+  const { team: myTeam, admin } = useRecoilValue(myTeamState);
   const nav = useNavigate();
   const location = useLocation().pathname;
   const cn = classNames.bind(styles);
+  console.log(admin);
+
   return (
     <div>
       <aside className={styles.sidebar}>
@@ -17,10 +19,10 @@ export default function Sidebar() {
           <li
             className={cn(
               'listItem',
-              location === `/myteam/${myTeam.teamId}/info` && 'paint'
+              location === `/myteam/${myTeam.id}/info` && 'paint'
             )}
             onClick={() => {
-              nav(`/myteam/${myTeam.teamId}/info`);
+              nav(`/myteam/${myTeam.id}/info`, { replace: true });
             }}
           >
             팀 정보
@@ -28,13 +30,13 @@ export default function Sidebar() {
           <li
             className={cn(
               'listItem',
-              location === `/myteam/${myTeam.teamId}/leave` && 'paint'
+              location === `/myteam/${myTeam.id}/leave` && 'paint'
             )}
             onClick={() => {
-              nav(`/myteam/${myTeam.teamId}/leave`);
+              nav(`/myteam/${myTeam.id}/leave`, { replace: true });
             }}
           >
-            팀 탈퇴
+            {admin ? '팀 삭제' : '팀 탈퇴'}
           </li>
         </ul>
       </aside>
