@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styles from './TeamInfo.module.css';
 import { useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
-import { userState, myTeamState } from 'Recoil/state';
+import { myTeamState } from 'Recoil/state';
 import { useRecoilValue } from 'recoil';
 import { getTeamDetail } from 'api/TeamMon';
 import useCategory from 'hooks/useCategory';
@@ -11,9 +11,7 @@ import Loading from 'ui/Loading/Loading';
 import NotFound from 'pages/NotFound/NotFound';
 
 export default function TeamInfo() {
-  const myTeam = useRecoilValue(myTeamState);
-  const user = useRecoilValue(userState);
-  const [isMine, setIsMine] = useState(false);
+  const { team: myTeam, admin } = useRecoilValue(myTeamState);
   const [category, setCategory] = useState('');
 
   const nav = useNavigate();
@@ -22,17 +20,13 @@ export default function TeamInfo() {
     isLoading,
     error,
     data: team,
-  } = useQuery(['teamDetail', myTeam.teamId], () => {
-    return getTeamDetail(myTeam.teamId).then((data) => {
-      if (data.adminUserAccountDto.userId == user.userId) {
-        setIsMine(true);
-      }
+  } = useQuery(['teamDetail', myTeam.id], () => {
+    return getTeamDetail(myTeam.id).then((data) => {
       setCategory(data.category);
       return data;
     });
   });
 
-  console.log(team);
   const cat = useCategory(category);
 
   if (isLoading) return <Loading />;
@@ -69,7 +63,7 @@ export default function TeamInfo() {
           </p>
         </div>
       </div>
-      {isMine && (
+      {admin && (
         <div className={styles.saveBox}>
           <RoundBtn
             type={'button'}

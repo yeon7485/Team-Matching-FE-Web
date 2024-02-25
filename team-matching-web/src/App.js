@@ -24,7 +24,7 @@ function App() {
             <Footer />
           </div>
         </RecoilRoot>
-        <ReactQueryDevtools initialIsOpen={true} />
+        <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     );
 
@@ -44,7 +44,7 @@ function App() {
             <Footer />
           </div>
         </RecoilRoot>
-        <ReactQueryDevtools initialIsOpen={true} />
+        <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     );
   return (
@@ -58,7 +58,7 @@ function App() {
           <Footer />
         </div>
       </RecoilRoot>
-      <ReactQueryDevtools initialIsOpen={true} />
+      {/* <ReactQueryDevtools initialIsOpen={false} /> */}
     </QueryClientProvider>
   );
 }

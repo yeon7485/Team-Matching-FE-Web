@@ -5,14 +5,14 @@ import { useRecoilValue } from 'recoil';
 import { useNavigate } from 'react-router-dom';
 
 export default function TeamHeader() {
-  const myTeam = useRecoilValue(myTeamState);
-  const teamId = myTeam.teamId;
+  const myTeam = useRecoilValue(myTeamState).team;
+  const teamId = myTeam.id;
   const nav = useNavigate();
 
   return (
     <div className={styles.header}>
       <div className={styles.left}>
-        <p className={styles.name}>{myTeam && myTeam.teamName}</p>
+        <p className={styles.name}>{myTeam && myTeam.name}</p>
         <p
           className={styles.goDetail}
           onClick={() => {
