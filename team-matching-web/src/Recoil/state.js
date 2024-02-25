@@ -14,7 +14,8 @@ export const userState = atom({
 export const myTeamState = atom({
   key: 'myTeamState',
   default: {
-    teamId: 2,
+    team: {},
+    admin: false,
   },
   effects_UNSTABLE: [persistAtom],
 });

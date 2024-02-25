@@ -8,24 +8,17 @@ import { deleteTeam } from 'api/TeamMon';
 import RoundBtn from 'ui/RoundBtn/RoundBtn';
 
 export default function LeaveTeam() {
-  const myTeam = useRecoilValue(myTeamState);
-  const user = useRecoilValue(userState);
-  const [isMine, setIsMine] = useState(false);
-  const teamId = myTeam.teamId;
-  const userToken = user.token;
+  const { team: myTeam, admin } = useRecoilValue(myTeamState);
+  const teamId = myTeam.id;
+  const { userId, userToken } = useRecoilValue(userState);
   const queryClient = useQueryClient();
   const nav = useNavigate();
-
-  useEffect(() => {
-    if (myTeam.admin === user.userId) {
-      setIsMine(true);
-    }
-  }, []);
 
   const leaveTeam = useMutation(
     ({ teamId, userToken }) => deleteTeam(teamId, userToken),
     {
-      onSuccess: () => queryClient.invalidateQueries(['getMyTeamList', 0]),
+      onSuccess: () =>
+        queryClient.invalidateQueries(['getMyTeamList', userId, 0]),
     }
   );
 
@@ -34,7 +27,7 @@ export default function LeaveTeam() {
       { teamId, userToken },
       {
         onSuccess: () => {
-          alert(`${isMine ? '팀이 삭제되었습니다.' : '팀을 탈퇴하였습니다.'}`);
+          alert(`${admin ? '팀이 삭제되었습니다.' : '팀을 탈퇴하였습니다.'}`);
           nav('/mypage', { replace: true });
         },
       }
@@ -42,14 +35,13 @@ export default function LeaveTeam() {
   };
   return (
     <div className={styles.root}>
-      {console.log(isMine)}
-      {!isMine && (
+      {!admin && (
         <p className={styles.text}>
           팀을 탈퇴하시겠습니까? <br />팀 탈퇴 시 팀 전용 페이지에 접속할 수
           없으며, 내가 속한 팀에서 삭제됩니다.
         </p>
       )}
-      {isMine && (
+      {admin && (
         <p className={styles.text}>
           팀을 삭제하시겠습니까? <br />팀 삭제 시 팀 전용 페이지가 삭제되며 참여
           중인 팀원들의 게시글, 참여 기록 등이 모두 삭제됩니다.
@@ -57,7 +49,7 @@ export default function LeaveTeam() {
       )}
       <RoundBtn
         type={'button'}
-        text={isMine ? '팀 삭제' : '팀 탈퇴'}
+        text={admin ? '팀 삭제' : '팀 탈퇴'}
         fill
         onClick={handleClick}
       />
