@@ -1,11 +1,11 @@
 .container {
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	padding: 3rem 11%;
 }
 
 .team {
-	width: 100%;
 	min-width: 500px;
 	max-width: 1200px;
 	padding: 3.4rem 4rem;
@@ -102,9 +102,10 @@
 }
 
 .description {
-	margin: 1.3rem 0.5rem 3rem 0.5rem;
+	margin: 1.3rem 0.5rem 3rem;
 	white-space: pre-line;
 	font-size: 1rem;
+	line-height: 2;
 }
 
 .tag {
@@ -114,7 +115,7 @@
 .btnArea {
 	display: flex;
 	justify-content: center;
-	margin-bottom: 8%;
+	margin: 2rem 0;
 }
 
 .space {
