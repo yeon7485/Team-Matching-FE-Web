@@ -59,7 +59,6 @@ export default function NewTeam() {
   // input onChange
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log(name);
     if (name === 'date') {
       var date = new Date(e.target.value);
       date.setHours(date.getHours() + 23);
@@ -122,9 +121,6 @@ export default function NewTeam() {
         { newTeam, userToken },
         {
           onSuccess: () => {
-            alert('수정되었습니다.');
-            console.log(team.id);
-            console.log(myTeam);
             if (myTeam) nav(`/myteam/${team.id}/info`, { replace: true });
             else {
               nav(-1, { replace: true });
