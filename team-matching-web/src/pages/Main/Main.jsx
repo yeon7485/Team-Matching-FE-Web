@@ -55,7 +55,8 @@ export default function Main() {
 
   const handleClick = (team) => {
     setMyTeam({
-      teamId: team.id,
+      team: team,
+      admin: team.adminUserAccountDto.userId === userId ? true : false,
     });
     nav(`/myteam/${team.id}/info`);
   };
