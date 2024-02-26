@@ -62,7 +62,6 @@ export default function ApprovalModal({
         { teamId, applyId, token },
         {
           onSuccess: (result) => {
-            console.log(result.status);
             result.status === 200
               ? alert('가입 신청이 거절되었습니다.')
               : alert('오류가 발생했습니다. 다시 시도해주세요.');

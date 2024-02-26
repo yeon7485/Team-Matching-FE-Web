@@ -12,7 +12,6 @@ export default function ChangePwModal({ setModalOpen, user }) {
     e.preventDefault();
     checkPassword(user.userId, user.token, password)
       .then((result) => {
-        console.log(result);
         changePassword(user.userId, user.token, newPw, checkPw).then(
           (result) => {
             if (result.status === 200) {
