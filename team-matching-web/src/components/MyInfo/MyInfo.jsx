@@ -32,7 +32,7 @@ export default function MyInfo() {
     });
   };
 
-  const { isLoading, error, data } = useQuery(['myPageData'], () => {
+  const { isLoading, error } = useQuery(['myPageData'], () => {
     return myPageInfo(user.userId, user.token).then((result) => {
       setUserInfo({
         id: result.userId,

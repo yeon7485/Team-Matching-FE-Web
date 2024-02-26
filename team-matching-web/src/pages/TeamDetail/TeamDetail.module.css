@@ -6,8 +6,8 @@
 }
 
 .team {
-	min-width: 500px;
 	max-width: 1200px;
+	min-width: 500px;
 	padding: 3.4rem 4rem;
 	border: 1px solid var(--gray800);
 	border-radius: 20px;
@@ -56,7 +56,7 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	align-items: end;
+	align-items: flex-end;
 }
 
 .deadline {
@@ -80,8 +80,8 @@
 	font-weight: bold;
 	font-size: 1.3rem;
 	text-decoration: none;
-	cursor: pointer;
 	white-space: nowrap;
+	cursor: pointer;
 }
 
 .apply:hover {
@@ -103,9 +103,9 @@
 
 .description {
 	margin: 1.3rem 0.5rem 3rem;
-	white-space: pre-line;
 	font-size: 1rem;
 	line-height: 2;
+	white-space: pre-line;
 }
 
 .tag {

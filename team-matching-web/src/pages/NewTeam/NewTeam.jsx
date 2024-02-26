@@ -54,7 +54,7 @@ export default function NewTeam() {
         capacity: team.capacity,
       }));
     }
-  }, []);
+  }, [team]);
 
   // input onChange
   const handleChange = (e) => {

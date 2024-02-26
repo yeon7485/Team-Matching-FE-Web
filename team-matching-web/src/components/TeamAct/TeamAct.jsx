@@ -26,9 +26,9 @@ export default function TeamAct() {
       return getMyTeamList(userId, token, page - 1, 10).then((data) => {
         const list = data.content.filter((team) => {
           if (new Date(team.deadline) >= new Date()) return team;
+          return false;
         });
         setTotalTeams(list.length);
-        console.log(list);
         return list;
       });
     },
@@ -43,7 +43,7 @@ export default function TeamAct() {
     });
     nav(`/myteam/${team.id}/info`);
   };
-  console.log(totalTeams);
+
   if (isLoading || totalTeams === -1) return <Loading />;
   if (error) return <NotFound />;
 

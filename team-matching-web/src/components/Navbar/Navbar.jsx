@@ -11,14 +11,12 @@ import classNames from 'classnames/bind';
 export default function Navbar() {
   const user = useRecoilValue(userState);
   const reset = useResetRecoilState(userState);
-  const [nickname, setNickname] = useState(user.userId);
   const [isHover, setIsHover] = useState(false);
   const cn = classNames.bind(styles);
   const nav = useNavigate();
 
   const { data: userInfo } = useQuery(['myPageData'], () => {
     return myPageInfo(user.userId, user.token).then((result) => {
-      setNickname(result.nickname);
       return result;
     });
   });
@@ -95,7 +93,9 @@ export default function Navbar() {
               onMouseEnter={handleIsHover}
               onMouseLeave={handleIsNotHover}
             >
-              <p>{nickname}님, 반가워요!</p>
+              <p>
+                {(userInfo && userInfo.nickname) || user.userId}님, 반가워요!
+              </p>
               {isHover && <SubMenu user={user} />}
             </div>
           )}
