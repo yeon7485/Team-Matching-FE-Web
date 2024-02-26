@@ -30,7 +30,7 @@ export default function ChangeNickNameModal({ setModalOpen, userInfo }) {
           type='text'
           name='changeNn'
           className={styles.inputBox}
-          value={fixName}
+          value={fixName || ''}
           required
           onChange={(e) => [setFixName(e.target.value)]}
           placeholder='변경할 닉네임을 입력해주세요.'

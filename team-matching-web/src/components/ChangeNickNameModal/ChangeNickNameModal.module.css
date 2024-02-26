@@ -1,4 +1,4 @@
-.root{
+.root {
   display: flex;
   flex-direction: column;
   position: absolute;
@@ -10,10 +10,10 @@
   border-radius: 1rem;
   background-color: white;
   transform: translate(-50%, -50%);
-  box-shadow : rgba(0,0,0,0.5) 0 0 0 9999px;
+  box-shadow: rgba(0, 0, 0, 0.5) 0 0 0 9999px;
 }
 
-.header{
+.header {
   display: flex;
   padding: 1rem;
   font-weight: 500;
@@ -21,29 +21,29 @@
   border-bottom: 1px solid #bcbcbc;
 }
 
-.closeBtn{
+.closeBtn {
   margin-left: auto;
   border: none;
-  background-color: rgba(0,0,0,0);
+  background-color: rgba(0, 0, 0, 0);
   cursor: pointer;
 }
 
-.form{
+.form {
   display: flex;
   flex-direction: column;
   height: 100%;
   padding: 1.5rem;
 }
 
-.inputBox{
+.inputBox {
   width: 93%;
   padding: 1rem;
-  margin-bottom: 1rem;
+  margin: 0.5rem 0;
   border: 1px solid #bcbcbc;
   border-radius: 8px;
 }
 
-.saveBtn{
+.saveBtn {
   padding: 0.3rem 0.8rem;
   margin-left: auto;
   border: 1px solid var(--main-color);
@@ -54,6 +54,6 @@
   cursor: pointer;
 }
 
-.saveBtn:hover{
+.saveBtn:hover {
   background-color: rgba(0, 108, 140, 1.2);
 }

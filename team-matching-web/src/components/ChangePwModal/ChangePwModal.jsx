@@ -38,7 +38,7 @@ export default function ChangePwModal({ setModalOpen, user }) {
         <input
           type='password'
           name='nowPw'
-          value={password}
+          value={password || ''}
           onChange={(e) => {
             setPassword(e.target.value);
           }}
@@ -51,7 +51,7 @@ export default function ChangePwModal({ setModalOpen, user }) {
           type='password'
           name='newPw'
           className={styles.inputBox}
-          value={newPw}
+          value={newPw || ''}
           onChange={(e) => {
             setNewPw(e.target.value);
           }}
@@ -62,7 +62,7 @@ export default function ChangePwModal({ setModalOpen, user }) {
           type='password'
           name='newPw2'
           className={styles.inputBox}
-          value={checkPw}
+          value={checkPw || ''}
           onChange={(e) => {
             setCheckPw(e.target.value);
           }}
