@@ -3,11 +3,7 @@ import styles from './ChangeNickNameModal.module.css';
 import { userState } from 'Recoil/state';
 import { useRecoilValue } from 'recoil';
 import { upDateMyPageInfo } from 'api/TeamMon';
-export default function ChangeNickNameModal({
-  setModalOpen,
-  userInfo,
-  setUserInfo,
-}) {
+export default function ChangeNickNameModal({ setModalOpen, userInfo }) {
   const user = useRecoilValue(userState);
 
   const closeModal = () => {
@@ -16,7 +12,6 @@ export default function ChangeNickNameModal({
   const [fixName, setFixName] = useState();
   const handleSubmit = (e) => {
     e.preventDefault();
-    setUserInfo({ ...userInfo, nickname: fixName });
     upDateMyPageInfo(user.userId, user.token, fixName, userInfo.memo);
     alert('변경되었습니다.');
     closeModal();
@@ -33,9 +28,9 @@ export default function ChangeNickNameModal({
         <label htmlFor='changeNn'>변경할 닉네임</label>
         <input
           type='text'
-          name='chageNn'
+          name='changeNn'
           className={styles.inputBox}
-          value={fixName}
+          value={fixName || ''}
           required
           onChange={(e) => [setFixName(e.target.value)]}
           placeholder='변경할 닉네임을 입력해주세요.'

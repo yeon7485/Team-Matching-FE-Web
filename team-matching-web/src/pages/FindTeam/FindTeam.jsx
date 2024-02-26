@@ -61,7 +61,6 @@ export default function FindTeam() {
     () => {
       return getSearchTeamList(debounceKeyword, page - 1, 9).then((data) => {
         setTotalElements(data.totalElements);
-        console.log(data);
         return data.content;
       });
     },
@@ -93,7 +92,7 @@ export default function FindTeam() {
 
   if (isLoading || isLoadingCat) return <Loading />;
   if (error || errorCat) return <NotFound />;
-  console.log(totalElements);
+
   return (
     <div className={styles.root}>
       <section className={styles.topBar}>
@@ -170,8 +169,6 @@ export default function FindTeam() {
         </div>
       </section>
       <section className={styles.teamList}>
-        {console.log(isSearch, teams)}
-        {console.log(category, categoryTeams)}
         {teams &&
           !isSearch &&
           category === 'ALL' &&
@@ -188,7 +185,6 @@ export default function FindTeam() {
         )}
       </section>
       <div>
-        {console.log('total', totalElements)}
         {totalElements > 0 && (
           <Paging
             page={page}

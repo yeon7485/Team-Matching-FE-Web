@@ -35,7 +35,6 @@ export default function TeamDetail() {
       if (data.capacity === data.total || today > new Date(data.deadline)) {
         setClosed(true);
       }
-      console.log(data);
       return data;
     });
   });

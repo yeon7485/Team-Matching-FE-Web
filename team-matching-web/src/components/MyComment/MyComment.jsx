@@ -5,7 +5,6 @@ import { useNavigate } from 'react-router-dom';
 export default function MyComment({ comment, comment: { postDto } }) {
   const nav = useNavigate();
   const post = postDto;
-  console.log(post);
   return (
     <li
       className={styles.list}

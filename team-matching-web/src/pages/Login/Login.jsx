@@ -8,6 +8,10 @@ import { useSetRecoilState } from 'recoil';
 export default function Login() {
   const [id, setId] = useState();
   const [password, setPassword] = useState();
+  const [pwType, setPwType] = useState({
+    type: 'password',
+    visible: false,
+  });
   const setUser = useSetRecoilState(userState);
   //recoil 사용 선언부
 
@@ -16,10 +20,24 @@ export default function Login() {
     e.preventDefault();
     logIn(id, password).then((result) => {
       if (result.status === 200) {
+        console.log(result);
         setUser({ userId: id, token: result.headers.authorization });
         const timer = new Date(result.headers.date).getTime() + 60 * 1000 * 60;
         localStorage.setItem('tokenTimer', timer);
         nav('/', { replace: true });
+      }
+    });
+  };
+
+  const handleShowPwChecked = (e) => {
+    setPwType(() => {
+      // 만약 현재 pwType.visible이 false 라면
+      if (!pwType.visible) {
+        return { type: 'text', visible: true };
+
+        //현재 pwType.visible이 true 라면
+      } else {
+        return { type: 'password', visible: false };
       }
     });
   };
@@ -35,7 +53,9 @@ export default function Login() {
           TeamMon
         </h1>
         <form className={styles.form} onSubmit={handleSubmit}>
-          <label htmlFor='id'>아이디</label>
+          <label htmlFor='id' className={styles.label}>
+            아이디
+          </label>
           <input
             type='text'
             className={styles.inputBox}
@@ -48,9 +68,11 @@ export default function Login() {
               setId(e.target.value);
             }}
           />
-          <label htmlFor='password'>비밀번호</label>
+          <label htmlFor='password' className={styles.label}>
+            비밀번호
+          </label>
           <input
-            type='password'
+            type={pwType.type}
             name='password'
             className={styles.inputBox}
             id='password'
@@ -61,6 +83,14 @@ export default function Login() {
               setPassword(e.target.value);
             }}
           />
+          <div className={styles.pwCheckBox}>
+            <input
+              type='checkbox'
+              className={styles.checkBox}
+              onChange={handleShowPwChecked}
+            />
+            비밀번호 보기
+          </div>
 
           <button className={styles.loginButton}>로그인</button>
         </form>

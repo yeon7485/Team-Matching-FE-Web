@@ -16,7 +16,7 @@ export default function MyPage() {
     if (fromMain.index) {
       setIndex(fromMain.index);
     }
-  });
+  }, [fromMain.index]);
 
   const cn = classNames.bind(styles);
 

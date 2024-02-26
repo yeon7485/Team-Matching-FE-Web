@@ -14,7 +14,7 @@ export default function Comment({ comment, comment: { id, postId } }) {
     if (comment.createdBy === userId) {
       setIsMine(true);
     }
-  });
+  }, [comment, userId]);
 
   const removeComment = useMutation(
     ({ postId, id, token }) => deleteComment(postId, id, token),

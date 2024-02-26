@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import styles from './Navbar.module.css';
+import { Link, useNavigate } from 'react-router-dom';
+import { useQuery } from '@tanstack/react-query';
 import { useRecoilValue, useResetRecoilState } from 'recoil';
 import { userState } from 'Recoil/state';
-import { Link, useNavigate } from 'react-router-dom';
+import { logOut, myPageInfo } from 'api/TeamMon';
 import SubMenu from '../SubMenu/SubMenu';
 import classNames from 'classnames/bind';
-import { logOut } from 'api/TeamMon';
 
 export default function Navbar() {
   const user = useRecoilValue(userState);
@@ -14,13 +15,18 @@ export default function Navbar() {
   const cn = classNames.bind(styles);
   const nav = useNavigate();
 
+  const { data: userInfo } = useQuery(['myPageData'], () => {
+    return myPageInfo(user.userId, user.token).then((result) => {
+      return result;
+    });
+  });
+
   useEffect(() => {
     const timer = localStorage.getItem('tokenTimer');
     if (timer < new Date().getTime() && user.token !== '') {
       alert('로그인 시간이 만료되었습니다😭 다시 로그인해주세요');
       logOut(user.userId, user.token)
         .then((result) => {
-          console.log(user.userId);
           if (result.status === 200) {
             reset();
             localStorage.removeItem('tokenTimer');
@@ -87,7 +93,9 @@ export default function Navbar() {
               onMouseEnter={handleIsHover}
               onMouseLeave={handleIsNotHover}
             >
-              <p>{user.userId}님, 반가워요!</p>
+              <p>
+                {(userInfo && userInfo.nickname) || user.userId}님, 반가워요!
+              </p>
               {isHover && <SubMenu user={user} />}
             </div>
           )}

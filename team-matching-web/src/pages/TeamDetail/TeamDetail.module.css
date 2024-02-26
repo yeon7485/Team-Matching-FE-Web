@@ -1,13 +1,13 @@
 .container {
 	display: flex;
+	flex-direction: column;
 	justify-content: center;
-	padding: 3rem 11%;
+	padding: 3rem 15%;
 }
 
 .team {
-	width: 100%;
-	min-width: 500px;
 	max-width: 1200px;
+	min-width: 500px;
 	padding: 3.4rem 4rem;
 	border: 1px solid var(--gray800);
 	border-radius: 20px;
@@ -28,24 +28,26 @@
 }
 
 .category {
-	font-weight: bold;
+	font-weight: 600;
 	font-size: 1.2rem;
 }
 
 .title {
-	margin-bottom: 1.3rem;
-	font-weight: bold;
-	font-size: 1.7rem;
+	margin: 0.5rem 0 1.3rem;
+	font-weight: 700;
+	font-size: 1.6rem;
 }
 
 .nickname {
 	color: var(--gray800);
-	font-weight: bold;
+	font-weight: 500;
+	margin-bottom: 0.3rem;
 }
 
 .times {
 	display: flex;
 	color: var(--gray500);
+	font-size: 0.8rem;
 }
 
 .dot {
@@ -56,7 +58,7 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	align-items: end;
+	align-items: flex-end;
 }
 
 .deadline {
@@ -77,16 +79,18 @@
 	border: 2px solid var(--main-color);
 	border-radius: 40px;
 	color: var(--main-color);
-	font-weight: bold;
+	font-weight: 600;
 	font-size: 1.3rem;
 	text-decoration: none;
-	cursor: pointer;
 	white-space: nowrap;
+	cursor: pointer;
+	background-color: white;
 }
 
 .apply:hover {
-	background-color: var(--main-color);
-	color: white;
+	background-color: rgba(115, 115, 222, 0.2);
+	;
+
 
 }
 
@@ -102,9 +106,10 @@
 }
 
 .description {
-	margin: 1.3rem 0.5rem 3rem 0.5rem;
-	white-space: pre-line;
+	margin: 1.3rem 0.5rem 3rem;
 	font-size: 1rem;
+	line-height: 2;
+	white-space: pre-line;
 }
 
 .tag {
@@ -114,7 +119,7 @@
 .btnArea {
 	display: flex;
 	justify-content: center;
-	margin-bottom: 8%;
+	margin: 2rem 0;
 }
 
 .space {

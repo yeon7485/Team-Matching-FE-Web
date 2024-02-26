@@ -8,7 +8,6 @@ export default function ApplyModal({ setModalOpen, id, token }) {
   const [message, setMessage] = useState();
   const nav = useNavigate();
   const queryClient = useQueryClient();
-  console.log(id);
 
   const applyForTeam = useMutation(
     ({ id, message, token }) => admissionTeam(id, message, token),
@@ -44,7 +43,7 @@ export default function ApplyModal({ setModalOpen, id, token }) {
         onError: (err) => {
           console.log(err);
           alert('오류가 발생했습니다.');
-          nav('/teams');
+          nav('/teams', { replace: true });
           closeModal();
         },
       }

@@ -21,7 +21,6 @@ export default function Board() {
     ['getPosts', page - 1],
     () => {
       return getPosts(page - 1, 15).then((data) => {
-        console.log('getPost query');
         setPosts(data);
         setTotalElements(data.totalElements);
         return data;

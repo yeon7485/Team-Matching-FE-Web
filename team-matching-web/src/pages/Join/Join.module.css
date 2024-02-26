@@ -38,34 +38,45 @@
 .form {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  width: 70%;
   max-width: 500px;
   height: auto;
-  padding: 2rem;
+  padding: 2.5rem 3.5rem;
   margin-top: 1rem;
   border-radius: 15px;
   background-color: rgba(115, 115, 222, 0.08);
 }
 
-label {
-  margin-right: auto;
+.label {
   margin-bottom: 1rem;
 }
 
 .inputBox {
-  width: 93%;
+  align-self: center;
+  width: 27rem;
   padding: 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
   border: none;
   border-radius: 8px;
   outline: none;
 }
 
+.inputBox:nth-child(4) {
+  margin-bottom: 0.7rem;
+}
+
+.pwCheckBox {
+  display: flex;
+  font-size: 0.8rem;
+  color: var(--gray600);
+  align-self: self-start;
+  margin-bottom: 1.5rem;
+}
+
 .agreeBox {
   display: flex;
-  margin: 2rem auto 1rem 1rem;
-  color: var(--gray800);
+  align-self: self-start;
+  margin: 2rem 0 0.5rem;
+  color: var(--gray600);
   font-size: 0.8rem;
 }
 
@@ -74,7 +85,7 @@ label {
 }
 
 .joinButton {
-  width: 93%;
+  width: 100%;
   padding: 0.6rem 1.2rem;
   border: 1px solid var(--main-color);
   border-radius: 0.5rem;

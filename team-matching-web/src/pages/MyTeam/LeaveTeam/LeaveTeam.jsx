@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import styles from './LeaveTeam.module.css';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
@@ -10,12 +10,12 @@ import RoundBtn from 'ui/RoundBtn/RoundBtn';
 export default function LeaveTeam() {
   const { team: myTeam, admin } = useRecoilValue(myTeamState);
   const teamId = myTeam.id;
-  const { userId, userToken } = useRecoilValue(userState);
+  const { userId, token } = useRecoilValue(userState);
   const queryClient = useQueryClient();
   const nav = useNavigate();
 
   const leaveTeam = useMutation(
-    ({ teamId, userToken }) => deleteTeam(teamId, userToken),
+    ({ teamId, token }) => deleteTeam(teamId, token),
     {
       onSuccess: () =>
         queryClient.invalidateQueries(['getMyTeamList', userId, 0]),
@@ -24,7 +24,7 @@ export default function LeaveTeam() {
 
   const handleClick = () => {
     leaveTeam.mutate(
-      { teamId, userToken },
+      { teamId, token },
       {
         onSuccess: () => {
           alert(`${admin ? '팀이 삭제되었습니다.' : '팀을 탈퇴하였습니다.'}`);

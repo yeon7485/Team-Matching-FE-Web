@@ -10,11 +10,10 @@ export async function signUp({ user }) {
       nickname: user.nickname,
     })
     .then((result) => {
-      alert('회원가입 성공!!');
+      alert('회원가입 되었습니다.');
       return result.status;
     })
     .catch((error) => {
-      alert(error.response.data.resultMessage);
       console.log(error.response);
       return error.response.status;
     });
@@ -28,13 +27,11 @@ export async function logIn(id, password) {
       userPassword: password,
     })
     .then((result) => {
-      alert('로그인 성공!!');
+      alert('로그인 되었습니다.');
       return result;
     })
     .catch((error) => {
-      alert(error.response.data.resultMessage);
       console.log(error);
-      alert(error.response.data);
       return error.response;
     });
 }
@@ -47,10 +44,10 @@ export async function logOut(id, token) {
       accessToken: token,
     })
     .then((result) => {
+      alert('로그아웃 되었습니다.');
       return result;
     })
     .catch((error) => {
-      alert(error.response.data.resultMessage);
       console.log(error);
       alert(error.response.data);
       return error.response;
@@ -75,7 +72,7 @@ export async function createTeam(team, token) {
       }
     )
     .then((result) => {
-      console.log('팀 생성 성공');
+      alert('팀이 등록되었습니다.');
       return result;
     })
     .catch((error) => {
@@ -86,9 +83,6 @@ export async function createTeam(team, token) {
 
 // 팀 수정
 export async function updateTeam(id, team, token) {
-  console.log('id', id);
-  console.log('team', team);
-  console.log('token', token);
   return axios
     .patch(
       `/teams/${id}`,
@@ -105,11 +99,10 @@ export async function updateTeam(id, team, token) {
       }
     )
     .then((result) => {
-      console.log('팀 수정 성공');
+      alert('수정되었습니다.');
       return result;
     })
     .catch((error) => {
-      alert(error.response.data.error);
       console.log(error);
       return error.response;
     });
@@ -170,7 +163,6 @@ export async function getTeamList(page, size) {
 
 // 카테고리별 팀 리스트 간단 조회
 export async function getCategoryTeamList(page, category) {
-  console.log(category);
   return axios
     .get(`/teams/category?category=${category}&page=${page}`)
     .then((result) => {
@@ -245,13 +237,11 @@ export async function writePost(post, token) {
       }
     )
     .then((result) => {
-      alert('글쓰기 성공!!');
+      alert('게시글이 등록되었습니다.');
       return result;
     })
     .catch((error) => {
-      alert(error.response.data.resultMessage);
       console.log(error);
-      alert(error.response.data);
       return error.response;
     });
 }
@@ -316,9 +306,7 @@ export async function writeComment(content, id, token) {
       return result;
     })
     .catch((error) => {
-      alert(error.response.data.resultMessage);
       console.log(error);
-      alert(error.response.data);
       return error.response;
     });
 }
@@ -401,13 +389,11 @@ export async function editPost(id, post, token) {
       }
     )
     .then((result) => {
-      alert('글 수정 성공!!');
+      alert('수정되었습니다.');
       return result;
     })
     .catch((error) => {
-      alert(error.response.data.resultMessage);
       console.log(error);
-      alert(error.response.data);
       return error.response;
     });
 }
@@ -426,13 +412,11 @@ export async function changePassword(userId, token, password, checkPw) {
       }
     )
     .then((result) => {
-      alert('비번 수정 성공!');
+      alert('비밀번호가 변경되었습니다.');
       return result;
     })
     .catch((error) => {
-      alert(error.response.data.resultMessage);
       console.log(error);
-      alert(error.response.data);
       return error.response;
     });
 }
