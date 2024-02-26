@@ -5,44 +5,40 @@ import ChangeNickNameModal from '../ChangeNickNameModal/ChangeNickNameModal';
 import { useRecoilValue } from 'recoil';
 import { userState } from 'Recoil/state';
 import { myPageInfo, upDateMyPageInfo } from 'api/TeamMon';
-import { useQuery } from '@tanstack/react-query';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
 import Loading from 'ui/Loading/Loading';
 import NotFound from 'pages/NotFound/NotFound';
 
 export default function MyInfo() {
-  const [userInfo, setUserInfo] = useState({
-    id: '',
-    nickname: '',
-    email: '',
-    memo: '',
+  const [memo, setMemo] = useState('');
+  const user = useRecoilValue(userState);
+  const queryClient = useQueryClient();
+
+  const {
+    isLoading,
+    error,
+    data: userInfo,
+  } = useQuery(['myPageData'], () => {
+    return myPageInfo(user.userId, user.token).then((result) => {
+      setMemo(result.memo);
+      return result;
+    });
   });
 
-  const user = useRecoilValue(userState);
   const handleSubmit = (e) => {
     e.preventDefault();
     upDateMyPageInfo(
       user.userId,
       user.token,
       userInfo.nickname,
-      userInfo.memo
+      memo.trim()
     ).then((result) => {
       if (result.status === 200) {
         alert('수정 성공');
+        queryClient.invalidateQueries(['myPageData']);
       }
     });
   };
-
-  const { isLoading, error } = useQuery(['myPageData'], () => {
-    return myPageInfo(user.userId, user.token).then((result) => {
-      setUserInfo({
-        id: result.userId,
-        nickname: result.nickname,
-        email: result.email,
-        memo: result.memo,
-      });
-      return result;
-    });
-  });
 
   //비밀번호 변경 팝업창 관리
   const [pwModalOpen, setPwModalOpen] = useState(false);
@@ -64,7 +60,7 @@ export default function MyInfo() {
       <div className={styles.infoBox}>
         <div className={styles.idBox}>
           <p className={styles.title}>아이디</p>
-          <p className={styles.content}>{userInfo.id}</p>
+          <p className={styles.content}>{userInfo.userId}</p>
         </div>
         <div className={styles.pwBox}>
           <p className={styles.title}>비밀번호</p>
@@ -85,7 +81,6 @@ export default function MyInfo() {
             <ChangeNickNameModal
               setModalOpen={setNnModalOpen}
               userInfo={userInfo}
-              setUserInfo={setUserInfo}
             />
           )}
         </div>
@@ -98,18 +93,15 @@ export default function MyInfo() {
         <p className={styles.selfTitle}>소개글</p>
         <form className={styles.selfForm} onSubmit={handleSubmit}>
           <textarea
-            name=''
-            id=''
+            name='memo'
             cols='70'
             rows='10'
-            value={userInfo.memo || ''}
+            value={memo || ''}
             className={styles.textarea}
             onChange={(e) => {
-              setUserInfo({ ...userInfo, memo: e.target.value });
+              setMemo(e.target.value);
             }}
-          >
-            {userInfo.memo}
-          </textarea>
+          />
           <button className={styles.saveBtn}>저장</button>
         </form>
       </article>
