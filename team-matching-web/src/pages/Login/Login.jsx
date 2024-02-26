@@ -20,6 +20,7 @@ export default function Login() {
     e.preventDefault();
     logIn(id, password).then((result) => {
       if (result.status === 200) {
+        console.log(result);
         setUser({ userId: id, token: result.headers.authorization });
         const timer = new Date(result.headers.date).getTime() + 60 * 1000 * 60;
         localStorage.setItem('tokenTimer', timer);
