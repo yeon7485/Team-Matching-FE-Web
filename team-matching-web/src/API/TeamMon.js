@@ -10,7 +10,7 @@ export async function signUp({ user }) {
       nickname: user.nickname,
     })
     .then((result) => {
-      alert('회원가입 성공!!');
+      alert('회원가입 되었습니다.');
       return result.status;
     })
     .catch((error) => {
@@ -28,11 +28,10 @@ export async function logIn(id, password) {
       userPassword: password,
     })
     .then((result) => {
-      alert('로그인 성공!!');
+      alert('로그인 되었습니다.');
       return result;
     })
     .catch((error) => {
-      alert(error.response.data.resultMessage);
       console.log(error);
       alert(error.response.data);
       return error.response;
@@ -47,10 +46,10 @@ export async function logOut(id, token) {
       accessToken: token,
     })
     .then((result) => {
+      alert('로그아웃 되었습니다.');
       return result;
     })
     .catch((error) => {
-      alert(error.response.data.resultMessage);
       console.log(error);
       alert(error.response.data);
       return error.response;
@@ -105,7 +104,7 @@ export async function updateTeam(id, team, token) {
       }
     )
     .then((result) => {
-      console.log('팀 수정 성공');
+      console.log('수정되었습니다.');
       return result;
     })
     .catch((error) => {
@@ -245,7 +244,7 @@ export async function writePost(post, token) {
       }
     )
     .then((result) => {
-      alert('글쓰기 성공!!');
+      alert('게시글이 등록되었습니다.');
       return result;
     })
     .catch((error) => {
@@ -316,7 +315,6 @@ export async function writeComment(content, id, token) {
       return result;
     })
     .catch((error) => {
-      alert(error.response.data.resultMessage);
       console.log(error);
       alert(error.response.data);
       return error.response;
@@ -401,11 +399,10 @@ export async function editPost(id, post, token) {
       }
     )
     .then((result) => {
-      alert('글 수정 성공!!');
+      alert('수정되었습니다.');
       return result;
     })
     .catch((error) => {
-      alert(error.response.data.resultMessage);
       console.log(error);
       alert(error.response.data);
       return error.response;
@@ -426,11 +423,10 @@ export async function changePassword(userId, token, password, checkPw) {
       }
     )
     .then((result) => {
-      alert('비번 수정 성공!');
+      alert('비밀번호가 변경되었습니다.');
       return result;
     })
     .catch((error) => {
-      alert(error.response.data.resultMessage);
       console.log(error);
       alert(error.response.data);
       return error.response;
