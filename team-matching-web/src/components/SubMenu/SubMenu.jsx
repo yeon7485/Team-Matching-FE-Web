@@ -5,7 +5,7 @@ import { useResetRecoilState } from 'recoil';
 import { userState } from 'Recoil/state';
 import { logOut } from 'api/TeamMon';
 
-export default function SubMenu({ onMouseEnter, onMouseLeave, user }) {
+export default function SubMenu({ user }) {
   const reset = useResetRecoilState(userState);
   const nav = useNavigate();
   const handleClick = () => {
@@ -25,11 +25,7 @@ export default function SubMenu({ onMouseEnter, onMouseLeave, user }) {
   };
 
   return (
-    <ul
-      className={styles.submenu}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
-    >
+    <ul className={styles.submenu}>
       <li className={styles.item}>
         <Link to='mypage' className={styles.link}>
           마이페이지
