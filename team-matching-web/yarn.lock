@@ -2893,25 +2893,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/query-devtools@npm:5.24.0":
-  version: 5.24.0
-  resolution: "@tanstack/query-devtools@npm:5.24.0"
-  checksum: c557eb09316a95405a459638a00c43de3537c76bcf4c4045e71acf31c8449f8856138712304e9cfce8b54141e5f81b8657bd54d2a768baf26a67e84eea787df9
-  languageName: node
-  linkType: hard
-
-"@tanstack/react-query-devtools@npm:^5.24.0":
-  version: 5.24.0
-  resolution: "@tanstack/react-query-devtools@npm:5.24.0"
-  dependencies:
-    "@tanstack/query-devtools": 5.24.0
-  peerDependencies:
-    "@tanstack/react-query": ^5.22.2
-    react: ^18.0.0
-  checksum: 231c009141b179538a052e3f983ed93f016d4533fe0c108ff00a6ca72309010508899cee99260f6b9936e4c6d24e43031639d924874870a6367ca94614e608ad
-  languageName: node
-  linkType: hard
-
 "@tanstack/react-query@npm:^4.35.3":
   version: 4.35.3
   resolution: "@tanstack/react-query@npm:4.35.3"
@@ -14855,7 +14836,6 @@ __metadata:
   dependencies:
     "@craco/craco": ^7.1.0
     "@tanstack/react-query": ^4.35.3
-    "@tanstack/react-query-devtools": ^5.24.0
     "@testing-library/jest-dom": ^5.14.1
     "@testing-library/react": ^13.0.0
     "@testing-library/user-event": ^13.2.1

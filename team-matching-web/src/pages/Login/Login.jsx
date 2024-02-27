@@ -24,6 +24,8 @@ export default function Login() {
         const timer = new Date(result.headers.date).getTime() + 60 * 1000 * 60;
         localStorage.setItem('tokenTimer', timer);
         nav('/', { replace: true });
+      } else {
+        alert('아이디 또는 비밀번호를 확인해주세요.');
       }
     });
   };

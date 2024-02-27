@@ -19,6 +19,8 @@ export default function Join() {
     signUp({ user }).then((result) => {
       if (result === 200) {
         navigate('/login');
+      } else if (result === 409) {
+        alert('이미 존재하는 아이디입니다.');
       }
     });
   };
@@ -115,6 +117,7 @@ export default function Join() {
               type='checkbox'
               id='agree'
               name='agree'
+              required
               className={styles.checkBox}
             />
             <span>개인정보처리방침 및 이용약관에 동의합니다.</span>

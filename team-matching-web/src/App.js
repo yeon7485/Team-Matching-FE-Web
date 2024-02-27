@@ -1,7 +1,6 @@
 import './App.css';
 import { Outlet, useLocation } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { RecoilRoot } from 'recoil';
 import Sidebar from 'components/Sidebar/Sidebar';
 import TeamHeader from 'components/TeamHeader/TeamHeader';
@@ -24,7 +23,6 @@ function App() {
             <Footer />
           </div>
         </RecoilRoot>
-        <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     );
 
@@ -44,7 +42,6 @@ function App() {
             <Footer />
           </div>
         </RecoilRoot>
-        <ReactQueryDevtools initialIsOpen={false} />
       </QueryClientProvider>
     );
   return (
@@ -58,7 +55,6 @@ function App() {
           <Footer />
         </div>
       </RecoilRoot>
-      {/* <ReactQueryDevtools initialIsOpen={false} /> */}
     </QueryClientProvider>
   );
 }
