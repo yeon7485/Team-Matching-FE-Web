@@ -95,6 +95,8 @@
 }
 
 .user {
+	display: flex;
+	flex-direction: column;
 	font-size: 1rem;
 	padding: 1.8rem 0;
 	cursor: pointer;
