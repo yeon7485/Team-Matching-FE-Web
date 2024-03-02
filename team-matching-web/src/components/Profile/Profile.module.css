@@ -1,12 +1,12 @@
 .container {
-	min-width: 7rem;
-	padding: 2rem;
-	border: 1px solid black;
-	border-radius: 1rem;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+	min-width: 7rem;
+	padding: 2rem;
+	border: 1px solid black;
+	border-radius: 1rem;
 	cursor: pointer;
 }
 
@@ -21,6 +21,6 @@
 
 .memo {
 	margin-top: 1rem;
-	font-size: 0.8rem;
 	color: var(--gray500);
+	font-size: 0.8rem;
 }

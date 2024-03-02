@@ -135,7 +135,7 @@ export default function NewTeam() {
     <div className={styles.container}>
       <div className={styles.top}>
         <h1 className={styles.title}>
-          {team ? '팀 새로 만들기' : '팀 수정하기'}
+          {team ? '팀 수정하기' : '팀 새로 만들기'}
         </h1>
         {!team && (
           <button

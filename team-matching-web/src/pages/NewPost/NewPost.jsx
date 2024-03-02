@@ -69,7 +69,7 @@ export default function NewPost() {
   return (
     <div className={styles.container}>
       <div className={styles.top}>
-        <h1 className={styles.title}>자유게시판</h1>
+        <h1 className={styles.title}>글 작성</h1>
         <button className={styles.list}>목록</button>
       </div>
       <hr />

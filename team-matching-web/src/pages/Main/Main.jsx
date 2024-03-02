@@ -36,8 +36,12 @@ export default function Main() {
     ['getMyTeamList', userId, 0],
     () => {
       return getMyTeamList(userId, token, 0, 3).then((data) => {
-        setTotalMyTeam(data.totalElements);
-        return data.content;
+        const list = data.content.filter((team) => {
+          if (new Date(team.deadline) >= new Date()) return team;
+          return false;
+        });
+        setTotalMyTeam(list.length);
+        return list;
       });
     },
     { enabled: !!userId }

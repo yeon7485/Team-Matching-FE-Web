@@ -35,12 +35,16 @@ export default function Post({
 
       <div className={styles.item}>
         {(today_date === createdAt.substr(0, 10) && createdAt.substr(11, 5)) ||
-          formatDate(createdAt)}
+          formatDate(createdAt, year)}
       </div>
     </li>
   );
 }
 
-function formatDate(date) {
-  return `${date.substr(2, 2)}.${date.substr(5, 2)}.${date.substr(8, 2)}`;
+function formatDate(date, year) {
+  if (date.substr(0, 4) === year) {
+    return `${date.substr(5, 2)}.${date.substr(8, 2)}`;
+  } else {
+    return `${date.substr(2, 2)}.${date.substr(5, 2)}.${date.substr(8, 2)}`;
+  }
 }

@@ -46,7 +46,7 @@ export default function TeamAct() {
 
   if (isLoading || totalTeams === -1) return <Loading />;
   if (error) return <NotFound />;
-
+  console.log(teamList);
   return (
     <div className={styles.container}>
       <h3 className={styles.index}>참여 중인 팀</h3>
